@@ -1,0 +1,221 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent">
+
+        <!-- Drawer -->
+        <mat-drawer
+            class="w-2/3 sm:w-72 lg:w-56 border-r-0 bg-default"
+            [mode]="drawerMode"
+            [opened]="drawerOpened"
+            #drawer>
+            <div class="p-6 lg:py-8 lg:pl-4 lg:pr-0">
+                <!-- Filters -->
+                <div class="space-y-2">
+                    <!-- Notes -->
+                    <div
+                        class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer"
+                        [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-primary dark:text-primary-400': filterStatus === 'notes',
+                                'text-hint hover:bg-hover': filterStatus !== 'notes'}"
+                        (click)="resetFilter()"
+                        matRipple
+                        [matRippleDisabled]="filterStatus === 'notes'">
+                        <mat-icon
+                            class="text-current"
+                            [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
+                        <div class="ml-3 leading-5 select-none text-default">Notes</div>
+                    </div>
+                    <!-- Archive -->
+                    <div
+                        class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer"
+                        [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-primary dark:text-primary-400': filterStatus === 'archived',
+                                'text-hint hover:bg-hover': filterStatus !== 'archived'}"
+                        (click)="filterByArchived()"
+                        matRipple
+                        [matRippleDisabled]="filterStatus === 'archived'">
+                        <mat-icon
+                            class="text-current"
+                            [svgIcon]="'heroicons_outline:archive'"></mat-icon>
+                        <div class="ml-3 leading-5 select-none text-default">Archive</div>
+                    </div>
+                    <!-- Labels -->
+                    <ng-container *ngIf="(labels$ | async) as labels">
+                        <ng-container *ngFor="let label of labels; trackBy: trackByFn">
+                            <div
+                                class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer"
+                                [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-primary dark:text-primary-400': 'label:' + label.id === filterStatus,
+                                    'text-hint hover:bg-hover': 'label:' + label.id !== filterStatus}"
+                                (click)="filterByLabel(label.id)"
+                                matRipple
+                                [matRippleDisabled]="'label:' + label.id === filterStatus">
+                                <mat-icon
+                                    class="text-current"
+                                    [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                                <div class="ml-3 leading-5 select-none text-default">{{label.title}}</div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <!-- Edit Labels -->
+                    <div
+                        class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer hover:bg-hover"
+                        (click)="openEditLabelsDialog()"
+                        matRipple>
+                        <mat-icon
+                            class="text-hint"
+                            [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                        <div class="ml-3 leading-5 select-none">Edit labels</div>
+                    </div>
+                </div>
+            </div>
+        </mat-drawer>
+
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
+
+            <!-- Main -->
+            <div class="flex flex-col flex-auto p-6 md:p-8">
+
+                <!-- Header -->
+                <div class="flex items-center">
+                    <div class="flex items-center flex-auto">
+                        <button
+                            class="flex lg:hidden -ml-2"
+                            mat-icon-button
+                            (click)="drawer.toggle()">
+                            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+                        </button>
+                        <mat-form-field class="fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript flex-auto ml-4 lg:ml-0">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:search'"
+                                matPrefix></mat-icon>
+                            <input
+                                matInput
+                                [autocomplete]="'off'"
+                                [placeholder]="'Search notes'"
+                                (input)="filterByQuery(searchInput.value)"
+                                #searchInput>
+                        </mat-form-field>
+                    </div>
+                    <!-- New note -->
+                    <button
+                        class="ml-4 px-1 sm:px-4 min-w-10"
+                        mat-flat-button
+                        [color]="'primary'"
+                        (click)="addNewNote()">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                        <span class="hidden sm:inline-block ml-2">New note</span>
+                    </button>
+                </div>
+
+                <!-- Notes -->
+                <ng-container *ngIf="(notes$ | async) as notes; else loading">
+                    <ng-container *ngIf="notes.length; else noNotes">
+
+                        <!-- Masonry layout -->
+                        <fuse-masonry
+                            class="-mx-2 mt-8"
+                            [items]="notes"
+                            [columns]="masonryColumns"
+                            [columnsTemplate]="columnsTemplate">
+                            <!-- Columns template -->
+                            <ng-template
+                                #columnsTemplate
+                                let-columns>
+                                <!-- Columns -->
+                                <ng-container *ngFor="let column of columns; trackBy: trackByFn">
+                                    <!-- Column -->
+                                    <div class="flex-1 px-2 space-y-4">
+                                        <ng-container *ngFor="let note of column.items; trackBy: trackByFn">
+                                            <!-- Note -->
+                                            <div
+                                                class="flex flex-col shadow rounded-2xl overflow-hidden cursor-pointer bg-card"
+                                                (click)="openNoteDialog(note)">
+                                                <!-- Image -->
+                                                <ng-container *ngIf="note.image">
+                                                    <img
+                                                        class="w-full object-cover"
+                                                        [src]="note.image">
+                                                </ng-container>
+                                                <div class="flex flex-auto flex-col p-6 space-y-4">
+                                                    <!-- Title -->
+                                                    <ng-container *ngIf="note.title">
+                                                        <div class="font-semibold line-clamp-3">
+                                                            {{note.title}}
+                                                        </div>
+                                                    </ng-container>
+                                                    <!-- Content -->
+                                                    <ng-container *ngIf="note.content">
+                                                        <div [class.text-xl]="note.content.length < 70">
+                                                            {{note.content}}
+                                                        </div>
+                                                    </ng-container>
+                                                    <!-- Tasks -->
+                                                    <ng-container *ngIf="note.tasks">
+                                                        <div class="space-y-1.5">
+                                                            <ng-container *ngFor="let task of note.tasks; trackBy: trackByFn">
+                                                                <div class="flex items-center">
+                                                                    <ng-container *ngIf="!task.completed">
+                                                                        <div class="flex items-center justify-center w-5 h-5">
+                                                                            <div class="w-4 h-4 rounded-full border-2"></div>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="task.completed">
+                                                                        <mat-icon
+                                                                            class="text-hint icon-size-5"
+                                                                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                                                    </ng-container>
+                                                                    <div
+                                                                        class="ml-1.5 leading-5"
+                                                                        [ngClass]="{'text-secondary line-through': task.completed}">
+                                                                        {{task.content}}
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                    <!-- Labels -->
+                                                    <ng-container *ngIf="note.labels">
+                                                        <div class="flex flex-wrap items-center -m-1">
+                                                            <ng-container *ngFor="let label of note.labels; trackBy: trackByFn">
+                                                                <div class="m-1 py-0.5 px-3 rounded-full text-sm font-medium text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                                                                    {{label.title}}
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+                            </ng-template>
+                        </fuse-masonry>
+
+                    </ng-container>
+                </ng-container>
+
+                <!-- Loading template -->
+                <ng-template #loading>
+                    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                        <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Loading...</div>
+                    </div>
+                </ng-template>
+
+                <!-- No notes template -->
+                <ng-template #noNotes>
+                    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                        <mat-icon
+                            class="icon-size-24"
+                            [svgIcon]="'iconsmind:file_hide'"></mat-icon>
+                        <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">There are no notes!</div>
+                    </div>
+                </ng-template>
+
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>

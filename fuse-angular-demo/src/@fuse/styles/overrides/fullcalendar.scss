@@ -1,0 +1,680 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ FullCalendar overrides
+/* ----------------------------------------------------------------------------------------------------- */
+.fc {
+
+    .fc-view-container {
+
+        /* Day Grid - Month view */
+        .fc-view.fc-dayGridMonth-view {
+
+            .fc-head {
+
+                > tr > .fc-head-container {
+                    border: none;
+
+                    .fc-row {
+
+                        .fc-day-header {
+                            border-color: var(--fuse-divider);
+
+                            span {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding-top: 8px;
+                                font-size: 12px;
+                                font-weight: 500;
+                                text-transform: uppercase;
+                                @apply text-secondary;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .fc-body {
+
+                > tr > .fc-widget-content {
+                    border: none;
+
+                    .fc-day-grid {
+
+                        .fc-week {
+
+                            .fc-bg {
+
+                                .fc-day {
+                                    border-color: var(--fuse-divider);
+
+                                    &.fc-today {
+                                        background: none;
+                                    }
+                                }
+                            }
+
+                            .fc-content-skeleton {
+
+                                .fc-day-top {
+                                    text-align: center;
+
+                                    &.fc-other-month {
+                                        opacity: 1;
+
+                                        .fc-day-number {
+                                            @apply text-hint;
+                                        }
+                                    }
+
+                                    &.fc-today {
+
+                                        .fc-day-number {
+                                            @apply bg-primary text-on-primary;
+                                        }
+                                    }
+
+                                    .fc-day-number {
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        width: 22px;
+                                        height: 21px;
+                                        margin: 4px 0;
+                                        font-size: 12px;
+                                        border-radius: 50%;
+                                        float: none;
+                                    }
+                                }
+
+                                .fc-event-container {
+
+                                    .fc-day-grid-event {
+                                        display: flex;
+                                        align-items: center;
+                                        height: 22px;
+                                        min-height: 22px;
+                                        max-height: 22px;
+                                        margin: 0 6px 4px 6px;
+                                        padding: 0 5px;
+                                        font-size: 12px;
+                                        border-radius: 4px;
+                                        border: none;
+                                        cursor: pointer;
+
+                                        @screen sm {
+                                            padding: 0 8px;
+                                        }
+                                    }
+                                }
+
+                                .fc-more {
+                                    padding: 0 3px;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    white-space: nowrap;
+                                    @apply text-secondary;
+
+                                    @screen sm {
+                                        padding: 0 6px;
+                                    }
+                                }
+                            }
+
+                            .fc-highlight-skeleton {
+
+                                .fc-highlight {
+                                    position: relative;
+                                    opacity: 1;
+                                    @apply bg-gray-100;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .fc-popover {
+                @apply bg-card;
+
+                &.fc-more-popover {
+                    border: none;
+                    border-radius: 4px;
+                    @apply shadow-2xl;
+
+                    .fc-header {
+                        height: 32px;
+                        min-height: 32px;
+                        max-height: 32px;
+                        padding: 0 8px;
+                        @apply bg-hover;
+
+                        .fc-title {
+                            margin: 0;
+                            padding: 0;
+                            font-size: 12px;
+                        }
+                    }
+
+                    .fc-body {
+                        max-height: 160px;
+                        overflow: hidden auto;
+
+                        .fc-event-container {
+                            padding: 8px;
+
+                            .fc-day-grid-event {
+                                display: flex;
+                                align-items: center;
+                                height: 22px;
+                                min-height: 22px;
+                                max-height: 22px;
+                                margin: 0 0 6px 0;
+                                padding: 0 8px;
+                                font-size: 12px;
+                                line-height: 1;
+                                border-radius: 4px;
+                                border: none;
+                                cursor: pointer;
+
+                                &:last-child {
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Time Grid - Week view */
+        .fc-view.fc-timeGridWeek-view {
+
+            .fc-head {
+
+                > tr > .fc-head-container {
+                    border: none;
+
+                    .fc-row {
+
+                        .fc-axis {
+                            width: 48px !important;
+                            border-color: var(--fuse-divider);
+                        }
+
+                        .fc-day-header {
+                            border-color: var(--fuse-divider);
+
+                            span {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                width: 100%;
+                                @apply text-secondary;
+
+                                &.fc-weekday {
+                                    padding-top: 16px;
+                                    font-size: 12px;
+                                    letter-spacing: 0.055em;
+                                    text-transform: uppercase;
+                                    font-weight: 400;
+                                }
+
+                                &.fc-date {
+                                    padding-bottom: 12px;
+                                    font-size: 26px;
+                                    font-weight: 300;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .fc-body {
+
+                > tr > .fc-widget-content {
+                    border: none;
+
+                    .fc-day-grid {
+
+                        .fc-row {
+                            min-height: 0;
+
+                            .fc-bg {
+
+                                .fc-axis {
+                                    width: 48px !important;
+                                    border-color: var(--fuse-divider);
+                                }
+
+                                .fc-day {
+                                    border-color: var(--fuse-divider);
+
+                                    &.fc-today {
+                                        background: none;
+                                    }
+                                }
+                            }
+
+                            .fc-content-skeleton {
+                                padding-bottom: 0;
+
+                                .fc-axis {
+                                    width: 48px !important;
+                                }
+
+                                .fc-event-container {
+
+                                    .fc-day-grid-event {
+                                        display: flex;
+                                        align-items: center;
+                                        height: 22px;
+                                        min-height: 22px;
+                                        max-height: 22px;
+                                        margin: 0 6px 6px 6px;
+                                        padding: 0 8px;
+                                        font-size: 12px;
+                                        line-height: 1;
+                                        border-radius: 4px;
+                                        border: none;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .fc-divider {
+                        border: none;
+                        background: var(--fuse-divider);
+                    }
+
+                    .fc-time-grid {
+
+                        .fc-bg {
+
+                            .fc-axis {
+                                border: none;
+                                width: 48px !important;
+
+                                + .fc-day {
+                                    border: none;
+                                }
+                            }
+
+                            .fc-day {
+                                border-color: var(--fuse-divider);
+
+                                &.fc-today {
+                                    background: none;
+                                }
+                            }
+                        }
+
+                        .fc-slats {
+
+                            .fc-axis {
+                                width: 48px !important;
+                                height: 48px;
+                                text-align: center;
+
+                                span {
+                                    font-size: 12px;
+                                    width: 48px;
+                                    min-width: 48px;
+                                }
+                            }
+
+                            .fc-time {
+                                border-color: var(--fuse-divider);
+                            }
+
+                            .fc-widget-content {
+                                border-color: var(--fuse-divider);
+                            }
+                        }
+
+                        .fc-content-skeleton {
+
+                            .fc-axis {
+                                width: 48px !important;
+                            }
+
+                            .fc-event-container {
+                                margin: 0 12px 0 0;
+
+                                .fc-time-grid-event {
+                                    display: flex;
+                                    padding: 8px;
+                                    border-radius: 4px;
+                                    border: none;
+                                    cursor: pointer;
+
+                                    .fc-time,
+                                    .fc-title {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Time Grid - Day view */
+        .fc-view.fc-timeGridDay-view {
+
+            .fc-head {
+
+                > tr > .fc-head-container {
+                    border: none;
+
+                    .fc-row {
+
+                        .fc-axis {
+                            width: 48px !important;
+                            border-color: var(--fuse-divider);
+                        }
+
+                        .fc-day-header {
+                            border-color: var(--fuse-divider);
+
+                            span {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                width: 100%;
+                                @apply text-secondary;
+
+                                &.fc-weekday {
+                                    padding-top: 16px;
+                                    font-size: 12px;
+                                    letter-spacing: 0.055em;
+                                    text-transform: uppercase;
+                                    font-weight: 400;
+                                }
+
+                                &.fc-date {
+                                    padding-bottom: 12px;
+                                    font-size: 26px;
+                                    font-weight: 300;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .fc-body {
+
+                > tr > .fc-widget-content {
+                    border: none;
+
+                    .fc-day-grid {
+
+                        .fc-bg {
+
+                            .fc-axis {
+                                border-color: var(--fuse-divider);
+                            }
+
+                            .fc-day {
+                                border-color: var(--fuse-divider);
+
+                                &.fc-today {
+                                    background: none;
+                                }
+                            }
+                        }
+
+                        .fc-row {
+                            min-height: 0;
+
+                            .fc-bg {
+
+                                .fc-axis {
+                                    width: 48px !important;
+                                }
+                            }
+
+                            .fc-content-skeleton {
+                                padding-bottom: 0;
+
+                                .fc-axis {
+                                    width: 48px !important;
+                                }
+
+                                .fc-event-container {
+
+                                    .fc-day-grid-event {
+                                        display: flex;
+                                        align-items: center;
+                                        height: 22px;
+                                        min-height: 22px;
+                                        max-height: 22px;
+                                        margin: 0 6px 6px 6px;
+                                        padding: 0 8px;
+                                        font-size: 12px;
+                                        line-height: 1;
+                                        border-radius: 4px;
+                                        border: none;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .fc-divider {
+                        border: none;
+                        border-color: var(--fuse-divider);
+                    }
+
+                    .fc-time-grid {
+
+                        .fc-bg {
+
+                            .fc-day {
+                                border-color: var(--fuse-divider);
+
+                                &.fc-today {
+                                    background: none;
+                                }
+                            }
+
+                            .fc-axis {
+                                border: none;
+                                width: 48px !important;
+
+                                + .fc-day {
+                                    border: none;
+                                }
+                            }
+                        }
+
+                        .fc-slats {
+
+                            .fc-axis {
+                                width: 48px !important;
+                                height: 48px;
+                                text-align: center;
+
+                                span {
+                                    font-size: 12px;
+                                    width: 48px;
+                                    min-width: 48px;
+                                }
+                            }
+
+                            .fc-time {
+                                border-color: var(--fuse-divider);
+                            }
+
+                            .fc-widget-content {
+                                border-color: var(--fuse-divider);
+                            }
+                        }
+
+                        .fc-content-skeleton {
+
+                            .fc-axis {
+                                width: 48px !important;
+                            }
+
+                            .fc-event-container {
+                                margin: 0 12px 0 0;
+
+                                .fc-time-grid-event {
+                                    display: flex;
+                                    padding: 8px;
+                                    border-radius: 4px;
+                                    border: none;
+                                    cursor: pointer;
+
+                                    .fc-time,
+                                    .fc-title {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* List - Year view */
+        .fc-view.fc-listYear-view {
+            border: none;
+
+            .fc-list-table {
+
+                .fc-list-heading {
+                    display: none;
+                }
+
+                .fc-list-item {
+                    display: flex;
+                    cursor: pointer;
+
+                    &:hover {
+
+                        td {
+                            @apply bg-hover;
+                        }
+                    }
+
+                    td {
+                        display: flex;
+                        align-items: center;
+                        width: auto;
+                        height: 48px;
+                        min-height: 48px;
+                        padding: 0 8px;
+                        border-width: 0 0 1px 0;
+                        border-color: var(--fuse-divider);
+
+                        &.fc-list-item-date {
+                            order: 1;
+                            padding-left: 16px;
+                            width: 100px;
+                            min-width: 100px;
+                            max-width: 100px;
+
+                            @screen sm {
+                                width: 120px;
+                                min-width: 120px;
+                                max-width: 120px;
+                            }
+
+                            > span {
+                                display: flex;
+                                align-items: baseline;
+
+                                span {
+
+                                    &:first-child {
+                                        display: flex;
+                                        justify-content: center;
+                                        padding-right: 2px;
+                                        width: 32px;
+                                        min-width: 32px;
+                                        max-width: 32px;
+                                        font-size: 18px;
+
+                                        @screen sm {
+                                            padding-right: 8px;
+                                        }
+
+                                        + span {
+                                            display: flex;
+                                            font-size: 11px;
+                                            font-weight: 500;
+                                            letter-spacing: 0.055em;
+                                            text-transform: uppercase;
+                                            @apply text-secondary;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        &.fc-list-item-time {
+                            flex: 0 0 auto;
+                            order: 3;
+                            width: 120px;
+                            min-width: 120px;
+                            max-width: 120px;
+
+                            @screen sm {
+                                width: 160px;
+                                min-width: 160px;
+                                max-width: 160px;
+                            }
+                        }
+
+                        &.fc-list-item-marker {
+                            flex: 0 0 auto;
+                            order: 2;
+
+                            .fc-event-dot {
+                                width: 12px;
+                                height: 12px;
+                                border-radius: 50%;
+                            }
+                        }
+
+                        &.fc-list-item-title {
+                            flex: 1 1 auto;
+                            order: 4;
+                            padding-right: 24px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* Day grid event - Dragging */
+    .fc-day-grid-event {
+
+        &.fc-dragging,
+        &.fc-resizing {
+            display: flex;
+            align-items: center;
+            height: 22px;
+            min-height: 22px;
+            max-height: 22px;
+            margin: 0 6px 4px 6px;
+            padding: 0 8px;
+            font-size: 12px;
+            line-height: 1;
+            border-radius: 4px;
+            border: none;
+        }
+    }
+}

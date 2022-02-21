@@ -1,0 +1,121 @@
+calendar {
+
+    /* Tweak: FullCalendar CSS only height to improve resize performance */
+    /* With this tweak, we can disable "handleWindowResize" option of FullCalendar */
+    /* which disables the height calculations on window resize and increases the */
+    /* overall performance. */
+    /* This tweak only affects the Calendar app's FullCalendar. */
+    full-calendar {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        width: 100%;
+        height: 100%;
+
+        .fc-view-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+            width: 100%;
+            height: 100%;
+
+            .fc-view {
+
+                /* Day grid - Month view */
+                /* Time grid - Week view */
+                /* Time grid - Day view */
+                &.fc-dayGridMonth-view,
+                &.fc-timeGridWeek-view,
+                &.fc-timeGridDay-view {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1 0 auto;
+                    width: 100%;
+                    height: 100%;
+
+                    > table {
+                        display: flex;
+                        flex-direction: column;
+                        flex: 1 0 auto;
+                        height: 100%;
+
+                        > thead {
+                            display: flex;
+                        }
+
+                        > tbody {
+                            display: flex;
+                            flex: 1 1 auto;
+                            overflow: hidden;
+
+                            > tr {
+                                display: flex;
+
+                                > td {
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    .fc-scroller {
+                                        flex: 1 1 auto;
+                                        overflow: hidden scroll !important;
+                                        height: auto !important;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /* Day grid - Month view */
+                &.fc-dayGridMonth-view {
+
+                    > table {
+
+                        > tbody {
+
+                            > tr {
+
+                                > td {
+
+                                    .fc-scroller {
+                                        display: flex;
+
+                                        > .fc-day-grid {
+                                            display: flex;
+                                            flex-direction: column;
+                                            min-height: 580px;
+
+                                            > .fc-row {
+                                                flex: 1 0 0;
+                                                height: auto !important;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /* List - Year view */
+                &.fc-listYear-view {
+                    width: 100%;
+                    height: 100%;
+
+                    .fc-scroller {
+                        width: 100%;
+                        height: 100% !important;
+                        overflow: hidden !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Event panel */
+.calendar-event-panel {
+    border-radius: 8px;
+    @apply shadow-2xl bg-card;
+}

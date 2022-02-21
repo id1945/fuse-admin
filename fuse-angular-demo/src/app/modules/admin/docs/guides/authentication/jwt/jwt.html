@@ -1,0 +1,114 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Authentication</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    JWT
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Fuse provides an implementation for JWT authorization. You can immediately hook up your backend API where you generate a JWT token and send it back and start
+            using Fuse's JWT implementation.
+        </p>
+        <p>
+            This implementation of JWT can be found within <code>app/core/auth/</code> directory. Here's the quick overview of provided files:
+        </p>
+        <ul>
+            <li>
+                <p><strong>Guards:</strong></p>
+                <p><em>auth</em> and <em>noAuth</em> guards to protect the routes.</p>
+            </li>
+            <li>
+                <p><strong>AuthInterceptor</strong></p>
+                <p>An interceptor to attach the <em>access token</em> to the header of the requests and catching 401 responses.</p>
+            </li>
+            <li>
+                <p><strong>AuthService</strong></p>
+                <p>A service for signing in and out as well as checking the authenticated status of the user.</p>
+            </li>
+            <li>
+                <p><strong>AuthUtils</strong></p>
+                <p>Set of utilities to decode the JWT token.</p>
+            </li>
+        </ul>
+
+        <h2>Setting up</h2>
+        <h3>1. Set up your backend API</h3>
+        <p>
+            Before start doing anything within Fuse, prepare your backend API. You will need API endpoints for <strong>signing in</strong>, <strong>signing out</strong> and
+            <strong>refreshing the token</strong>. These will usually be provided with your choice of JWT backend implementation by default so you don't have to do too much
+            work.
+        </p>
+
+        <h3>2. Configure the AuthService</h3>
+        <p>
+            <strong>AuthService</strong> includes methods for signing in and out as well as refreshing the token. Edit the <strong>AuthService</strong> file and change the API
+            endpoints so the requests can go through.
+        </p>
+        <p>
+            And that's pretty much it! You can now sign in, sign out and refresh the access token.
+        </p>
+
+        <h2>A note about storing the access token</h2>
+        <p>
+            Fuse stores the access token in the <strong>local storage</strong>. There are a lot of debates going on about whether it is safe or not to store it in the local
+            storage. We believe it doesn't matter. Javascript always going to be executed in the browser, it doesn't matter where you store the JWT token, whether in the local
+            storage or in the memory as a variable, it can always be accessed and read!
+        </p>
+        <p>
+            The only thing you have to be careful about is to protect your app against attacks like XSS, CSRF or XSRF. Angular does an amazingly good job to protect you against
+            these attacks by default but still, you have to be careful what to include into your app. And if you happen to have a security hole that can cause these attacks and
+            allows attackers to run their own Javascript code on your app, local JWT token is going to be the least of your worries.
+        </p>
+
+        <h2>Refresh token</h2>
+        <p>
+            <em>Refresh token</em> is another type of token that usually sent with the <em>access token</em> when you first login and it allows refreshing the <em>access
+            token</em>.
+        </p>
+        <p>
+            We are not going to go into any details about it since you can do your own research, but the premise is, you store the <em>refresh token</em> in an
+            <strong>HTTPOnly</strong> cookie which will be automatically added into the header of any request and can be used to sending back a fresh <em>access token</em>
+            from your backend API if needed.
+        </p>
+        <p>
+            Since Javascript cannot read or write <strong>HTTPOnly</strong> cookies, <em>refresh tokens</em> can only be accessed and set via the requests and responses by
+            your backend implementation. Basically, the <em>refresh token</em> implementation needs to be done in your backend, there is nothing that can be done in Fuse or
+            in Javascript.
+        </p>
+
+    </div>
+
+</div>

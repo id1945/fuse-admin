@@ -1,0 +1,76 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Customization</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Multi Language
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Fuse uses <strong>Transloco</strong> library for the multi language support.
+        </p>
+
+        <h2>Official documentation</h2>
+        <p>
+            You can access the official documentation of <strong>Transloco</strong> over here: https://ngneat.github.io/transloco/docs/installation
+        </p>
+        <p>
+            Other than the initial setup, Fuse doesn't introduce anything to <strong>Transloco</strong> or change any of its functionality. You can follow the official
+            documentation to get started.
+        </p>
+
+        <h2>Translating the navigation</h2>
+        <p>
+            Since <code>FuseNavigation</code> supports runtime data swapping, you can replace the navigation data either partially or completely when the language changes.
+            The <strong>LanguageComponent</strong> is a suitable place to do this and it's located at <code>src/app/layout/common/language</code>.
+        </p>
+
+        <h2>Removing Transloco</h2>
+        <p>
+            If you don't need multi language support in your project, you may remove the <strong>Transloco</strong> support. Here's a step by step guide to remove
+            the <strong>Transloco</strong> from Fuse:
+        </p>
+        <ol>
+            <li>Navigate to <code>src/app/core/core.module.ts</code> file and remove imports of <code>TranslocoCoreModule</code></li>
+            <li>Remove the <code>src/app/core/transloco</code> directory</li>
+            <li>Do a project wide search for <code>&lt;languages&gt;&lt;/languages&gt;</code> and remove all instances</li>
+            <li>Do a project wide search for <code>LanguageModule</code> and remove all imports</li>
+            <li>Remove the <code>src/app/layout/common/language</code> directory</li>
+            <li>Finally navigate to the <code>package.json</code> file, remove the <strong>"@ngneat/transloco"</strong> from dependencies list and run <code>npm install</code> command</li>
+        </ol>
+
+    </div>
+
+</div>

@@ -1,0 +1,161 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Customization</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Component Theming
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Normally, Angular Material requires a separate .scss file for theming and that file must be included into a mixin where the defined Angular Material themes can be
+            applied. This approach not only forces you to create another .scss file for component theming, but it also forces you to import that file from another place just so
+            you can use the Angular Material mixin to apply the theme.
+        </p>
+        <p>
+            This brakes the modularity because now you have a reference to your component's theming file from who knows where and you also have to remember to do all this again
+            and again every time you want to use the theme colors from your components.
+        </p>
+        <p>
+            Fuse, on the other hand, provides a way easier method to add theming to your components: Tailwind utilities!
+        </p>
+
+        <h3>Color palette utilities</h3>
+        <p>
+            As mentioned before, Angular Material uses 3 main palettes to generate themes; "Primary", "Accent" and "Warn". Being able to access these palettes and use their colors
+            with your components is a must have feature, otherwise you wouldn't be able to create components, apps or pages that "belong" to your app.
+        </p>
+        <p>
+            All palette colors are available as Tailwind utility classes, and since these palettes are no more than Tailwind color palettes, they are processed as one by Tailwind,
+            therefore, every single color related utility you have in Tailwind also have <strong>primary</strong>, <strong>accent</strong> and <strong>warn</strong> colors and you
+            can use them just like any other color utility:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="html">
+            <!-- Default primary color as the text color -->
+            <h1 class="text-primary">I'm a Title</h1>
+
+            <!-- accent-300 as the text color -->
+            <h1 class="text-accent-300">I'm a Title</h1>
+
+            <!-- warn-800 as the text color -->
+            <h1 class="text-warn-800">I'm a Title</h1>
+        </textarea>
+        <!-- @formatter:on -->
+
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="html">
+            <!-- Default primary color as the bg color -->
+            <div class="bg-primary"></div>
+
+            <!-- accent-300 as the bg color -->
+            <div class="bg-accent-300"></div>
+
+            <!-- warn-800 as the bg color -->
+            <div class="bg-warn-800"></div>
+        </textarea>
+        <!-- @formatter:on -->
+
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="html">
+            <!-- primary-600 as the bg and the contrasting color as the text color -->
+            <div class="bg-primary-600 text-on-primary-600"></div>
+
+            <!-- accent-300 as the bg and the contrasting color as the text color -->
+            <div class="bg-accent-300 text-on-accent-300"></div>
+
+            <!-- warn-800 as the bg and the contrasting color as the text color -->
+            <div class="bg-warn-800 text-on-warn-800"></div>
+        </textarea>
+        <!-- @formatter:on -->
+
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="html">
+            <!-- Some more examples -->
+            <div class="text-primary bg-primary-100 border-accent ring-warn-400 ..."></div>
+
+            <!-- Some more examples -->
+            <div class="text-primary text-opacity-50"></div>
+
+            <!-- Some more examples -->
+            <div class="bg-accent-900 bg-opacity-5"></div>
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>Other color utilities</h3>
+        <p>
+            There are also other color utilities to quickly set the background or the text color of an element. These special utilities
+            have different values on different schemes. For example, "bg-card" will have different colors depending on the selected
+            scheme so you don't have to set the background color explicitly for "Dark" themes.
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="html">
+            <!-- Default text color -->
+            .text-default
+
+            <!-- Secondary text color -->
+            .text-secondary
+
+            <!-- Hint text color -->
+            .text-hint
+
+            <!-- Disabled text color -->
+            .text-disabled
+
+            <!-- Default border color -->
+            .divider
+
+            <!-- Card background color -->
+            .bg-card
+
+            <!-- Faded background color for hovered states -->
+            .bg-hover
+
+            <!-- Default background color -->
+            .bg-default
+
+            <!-- Default dialog background color -->
+            .bg-dialog'
+
+            <!-- Default background color as the ring color -->
+            .ring-bg-default
+
+            <!-- Default card background color as the ring color -->
+            .ring-bg-card
+        </textarea>
+        <!-- @formatter:on -->
+
+    </div>
+
+</div>

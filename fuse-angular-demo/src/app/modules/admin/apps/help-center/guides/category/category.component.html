@@ -1,0 +1,30 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Main -->
+    <div class="flex flex-col items-center p-6 sm:p-10">
+        <div class="flex flex-col w-full max-w-4xl">
+            <div class="-ml-4 sm:mt-8">
+                <a
+                    mat-button
+                    [routerLink]="['../']"
+                    [color]="'primary'">
+                    <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                    <span class="ml-2">Back to Guides & Resources</span>
+                </a>
+            </div>
+            <div class="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
+                {{guideCategory.title}}
+            </div>
+            <!-- Guides -->
+            <div class="flex flex-col items-start mt-8 sm:mt-12 space-y-2">
+                <ng-container *ngFor="let guide of guideCategory.guides; trackBy: trackByFn">
+                    <a
+                        class="font-medium hover:underline text-primary-500"
+                        [routerLink]="[guide.slug]">
+                        {{guide.title}}
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

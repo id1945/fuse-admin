@@ -1,0 +1,484 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Loading Bar
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-loading-bar</strong> is a small component to show the loading status at the top of the page. It can be configured to the
+            <strong>Auto Mode</strong> to show/hide automatically on each HTTP request. It can also be toggled manually using its service.
+        </p>
+        <p>
+            <strong>Exported as: </strong><code>fuseLoadingBar</code>
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseLoadingBarModule } from '@fuse/components/loading-bar';
+        </textarea>
+
+        <h2>Usage</h2>
+        <p>
+            Here's the basic usage of the <code>fuse-loading-bar</code>. We already placed the component to the
+            layout templates for you but you can always move it!
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="html">
+            &lt;fuse-loading-bar&gt;&lt;/fuse-loading-bar&gt;
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>autoMode: boolean</div>
+                        </td>
+                        <td>
+                            Turn on or off the Auto Mode.
+                        </td>
+                        <td>
+                            <code>true</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Service</h2>
+        <p>
+            <code>FuseLoadingBarService</code> can be injected to control the loading bar from anywhere.
+        </p>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                show(): void;
+            </div>
+            <div class="p-6">
+                Shows the loading bar
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                hide(): void;
+            </div>
+            <div class="p-6">
+                Hides the loading bar
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                setAutoMode(value: boolean): void;
+            </div>
+            <div class="p-6">
+                Sets the Auto Mode. In Auto mode, loading bar will show when there is an HTTP request and it will
+                hide when all HTTP requests are completed or failed.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                setMode(value: 'determinate' | 'indeterminate'): void;
+            </div>
+            <div class="p-6">
+                Sets the mode of the underlying <code>MatProgressBar</code> component.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                setProgress(value: number): void;
+            </div>
+            <div class="p-6">
+                Sets the progress manually. Only available on <code>determinate</code> mode.
+            </div>
+        </div>
+
+        <h2>Examples</h2>
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Show / hide the loading bar manually</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="flex mx-auto max-w-80 space-x-4">
+
+                                <button
+                                    mat-flat-button
+                                    [color]="'primary'"
+                                    (click)="showLoadingBar()">
+                                    Show loading bar
+                                </button>
+
+                                <button
+                                    mat-flat-button
+                                    [color]="'primary'"
+                                    (click)="hideLoadingBar()">
+                                    Hide loading bar
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="showLoadingBar()">
+                            Show loading bar
+                        </button>
+
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="hideLoadingBar()">
+                            Hide loading bar
+                        </button>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+                <mat-tab label="Typescript">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'ts'">
+                        /**
+                         * Constructor
+                         */
+                        constructor( private _fuseLoadingBarService: FuseLoadingBarService ) { }
+
+                        ...
+
+                        /**
+                         * Show the loading bar
+                         */
+                        showLoadingBar(): void
+                        {
+                            this._fuseLoadingBarService.show();
+                        }
+
+                        /**
+                         * Hide the loading bar
+                         */
+                        hideLoadingBar(): void
+                        {
+                            this._fuseLoadingBarService.hide();
+                        }
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Toggle the Auto Mode</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="flex flex-col items-center mx-auto max-w-80">
+
+                                <mat-slide-toggle
+                                    [checked]="true"
+                                    [color]="'primary'"
+                                    (change)="setAutoMode($event)">
+                                    Auto Mode
+                                </mat-slide-toggle>
+
+                                <div class="w-24 pt-6 mb-6 border-b"></div>
+
+                                <button
+                                    mat-flat-button
+                                    [color]="'primary'"
+                                    (click)="makeAPICall()">
+                                    Make an API call (2000ms delay)
+                                </button>
+
+                                <div class="mt-2">API call status: {{apiCallStatus}}</div>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <mat-slide-toggle
+                            [checked]="true"
+                            [color]="'primary'"
+                            (change)="setAutoMode($event)">
+                            Auto Mode
+                        </mat-slide-toggle>
+
+                        <div class="w-24 pt-6 mb-6 border-b"></div>
+
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="makeAPICall()">
+                            Make an API call (2000ms delay)
+                        </button>
+
+                        <div class="mt-2">API call status: {{apiCallStatus}}</div>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+                <mat-tab label="Typescript">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'ts'">
+                        apiCallStatus: string = '-';
+
+                        /**
+                         * Constructor
+                         */
+                        constructor(
+                            private _httpClient: HttpClient,
+                            private _fuseLoadingBarService: FuseLoadingBarService
+                        )
+                        { }
+
+                        ...
+
+                        /**
+                         * Set the auto mode
+                         *
+                         * @param change
+                         */
+                        setAutoMode(change: MatSlideToggleChange): void
+                        {
+                            this._fuseLoadingBarService.setAutoMode(change.checked);
+                        }
+
+                        /**
+                         * Make a fake API call
+                         */
+                        makeAPICall(): void
+                        {
+                            this.apiCallStatus = 'Waiting...';
+
+                            this._httpClient.get('https://jsonplaceholder.typicode.com/posts?_delay=2000')
+                                .pipe(finalize(() => { this.apiCallStatus = 'Finished!'; }))
+                                .subscribe((response) => {
+                                    console.log(response);
+                                });
+                        }
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Manually set the progress</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="flex flex-col items-center mx-auto max-w-80 space-y-8">
+
+                                <div class="flex items-center space-x-4">
+                                    <button
+                                        mat-flat-button
+                                        [color]="'primary'"
+                                        (click)="showLoadingBar()">
+                                        Show loading bar
+                                    </button>
+
+                                    <button
+                                        mat-flat-button
+                                        [color]="'primary'"
+                                        (click)="hideLoadingBar()">
+                                        Hide loading bar
+                                    </button>
+                                </div>
+
+                                <mat-slide-toggle
+                                    [checked]="false"
+                                    [color]="'primary'"
+                                    (change)="toggleMode()">
+                                    Toggle determinate mode
+                                </mat-slide-toggle>
+
+                                <mat-slider
+                                    [color]="'primary'"
+                                    (change)="setProgress($event)">
+                                    Progress value
+                                </mat-slider>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <mat-slide-toggle
+                            [checked]="false"
+                            [color]="'primary'"
+                            (change)="toggleMode()">
+                            Toggle determinate mode
+                        </mat-slide-toggle>
+
+                        <mat-slider
+                            [color]="'primary'"
+                            (change)="setProgress($event)">
+                            Progress value
+                        </mat-slider>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+                <mat-tab label="Typescript">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'ts'">
+                        mode: 'determinate' | 'indeterminate' = 'indeterminate';
+
+                        /**
+                         * Constructor
+                         */
+                        constructor( private _fuseLoadingBarService: FuseLoadingBarService ) { }
+
+                        ...
+
+                        /**
+                         * Toggle the mode
+                         */
+                        toggleMode(): void
+                        {
+                            // Show the loading bar
+                            this._fuseLoadingBarService.show();
+
+                            // Turn off the auto mode
+                            this._fuseLoadingBarService.setAutoMode(false);
+
+                            // Set the mode
+                            this.mode = this.mode === 'indeterminate' ? 'determinate' : 'indeterminate';
+                            this._fuseLoadingBarService.setMode(this.mode);
+                        }
+
+                        /**
+                         * Set the progress
+                         *
+                         * @param change
+                         */
+                        setProgress(change: MatSliderChange): void
+                        {
+                            this._fuseLoadingBarService.setProgress(change.value);
+                        }
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+
+    </div>
+
+</div>

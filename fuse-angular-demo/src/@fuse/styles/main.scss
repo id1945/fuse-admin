@@ -1,0 +1,13 @@
+/* 1. Core */
+@import 'core/tailwind-config';
+
+/* 2. Components */
+@import 'components/example-viewer';
+@import 'components/input';
+
+/* 3. Overrides */
+@import 'overrides/angular-material';
+@import 'overrides/fullcalendar';
+@import 'overrides/highlightjs';
+@import 'overrides/perfect-scrollbar';
+@import 'overrides/quill';

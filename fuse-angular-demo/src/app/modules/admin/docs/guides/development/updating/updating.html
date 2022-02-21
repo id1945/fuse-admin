@@ -1,0 +1,68 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Development</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Updating
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Since Fuse is built as a <em>Starter kit</em> and an <em>Admin template</em>, there is no easy or a set way of updating it like a normal library. Though
+            it's completely up to you to keep the Fuse updated, there are two key points that might help you with the task:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    Do <strong>NOT</strong> touch the <strong>@fuse</strong> folder unless you absolutely have to. Keeping that folder intact is the key to have easier
+                    upgrades.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Fork the original Fuse repo from its Github and build on top of that. That way, you can merge the changes from the origin repo as updates released.
+                </p>
+            </li>
+        </ul>
+        <p>
+            If you follow these two rules, it will make the updating process a little bit more easier.
+        </p>
+        <p>
+            The best way of updating Fuse is to compare the latest version with your version using Github's compare feature. After that, you can either manually patch your
+            setup or merge (and resolve conflicts) through Github. Every release is tagged and available under the <strong>Releases</strong> tab of Fuse's Github repo.
+        </p>
+
+    </div>
+
+</div>

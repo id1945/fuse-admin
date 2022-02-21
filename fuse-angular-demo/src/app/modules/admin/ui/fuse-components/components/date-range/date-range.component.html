@@ -1,0 +1,171 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Date Range
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-date-range</strong> is a date-time range selector component. It can be programmed to provide date or date-time ranges. It has full
+            <strong>ngModel</strong> and <strong>reactive form</strong> support and built to works with <strong>moment.js</strong>.
+        </p>
+        <p>
+            <strong>Exported as: </strong><code>fuseDateRange</code>
+        </p>
+
+        <h2>Module</h2>
+        <!-- @formatter:off -->
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseDateRangeModule } from '@fuse/components/date-range';
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Usage</h2>
+        <p>
+            Here's the basic usage of the <code>fuse-date-range</code>:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="html">
+            <fuse-date-range [formControlName]="'range'"
+                             [dateFormat]="settings.dateFormat"
+                             [timeRange]="!eventForm.get('allDay').value"
+                             [timeFormat]="settings.timeFormat"></fuse-date-range>
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>dateFormat: string</div>
+                        </td>
+                        <td>
+                            Moment.js date format string to format output date.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">DD/MM/YYYY</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>timeFormat: string</div>
+                        </td>
+                        <td>
+                            <strong>12</strong> for 12-hour, <strong>24</strong> for 24-hour format.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">12</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>timeRange: boolean</div>
+                        </td>
+                        <td>
+                            Whether to enable time range.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">true</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>range: any</div>
+                        </td>
+                        <td>
+                            Date range input <code>{{'{'}} start: string, end: string {{'}'}}</code>. If you are using <strong>ngModel</strong> or <strong>Reactive
+                            forms</strong>, you shouldn't use this input!
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">true</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Range</h2>
+        <p>
+            The input of the range must be in the following format. The <strong>start</strong> and <strong>end</strong> date strings must be moment compatible strings as they
+            will be immediately parsed with MomentJS.
+
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            // Input format
+            {
+                start: string,
+                end  : string
+            }
+        </textarea>
+        <!-- @formatter:on -->
+        <p>
+            The outputted range object will be in the following format. The <strong>date</strong> and <strong>time</strong> fields will be formatted based on the
+            <em>dateFormat</em> and <em>timeFormat</em> inputs.
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            // Output format
+            {
+                startDate: string,
+                startTime: null | string,
+                endDate  : string,
+                endTime  : null | string
+            }
+        </textarea>
+        <!-- @formatter:on -->
+
+    </div>
+
+</div>

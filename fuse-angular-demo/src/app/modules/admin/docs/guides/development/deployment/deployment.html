@@ -1,0 +1,74 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Development</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Deployment
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            To deploy your application, you have to compile it, and then host the JavaScript, CSS, and HTML on a web server. Built Angular applications are very portable and
+            can live in any environment or served by any technology, such as Node, Java, .NET, PHP, and many others.
+        </p>
+        <p>
+            To build your application for production, run the following command:
+        </p>
+        <textarea
+            fuse-highlight
+            lang="bash">
+            ng build
+        </textarea>
+
+        <h2>Alternate command</h2>
+        <textarea
+            fuse-highlight
+            lang="bash">
+            npm run build
+        </textarea>
+        <p class="mb-12">
+            Alias for <code>ng build</code>.
+        </p>
+
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            If you are getting error messages that includes keywords like <strong>HEAP</strong>, <strong>JS stack tree</strong>,
+            <strong>out of memory</strong> while trying to run <code>ng build --prod</code> or <code>npm run build:prod</code> commands,
+            you may have an older Node.js version, try updating your Node.js to the latest LTS version and then try again.
+        </fuse-alert>
+
+    </div>
+
+</div>

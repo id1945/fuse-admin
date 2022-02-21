@@ -1,0 +1,48 @@
+<div
+    class="mt-11 w-64 py-2.5 px-2"
+    [class.h-15]="!formVisible">
+    <div class="relative flex w-full h-full overflow-hidden rounded-xl bg-gray-200 dark:bg-gray-700">
+        <button
+            class="absolute inset-0 justify-start w-full px-3 rounded-xl bg-transparent"
+            [ngClass]="{'opacity-0 pointer-events-none': formVisible}"
+            mat-button
+            (click)="toggleFormVisibility()"
+            disableRipple>
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+            <span class="ml-2 text-secondary">{{buttonTitle}}</span>
+        </button>
+        <form
+            class="flex flex-col items-start w-full p-3"
+            [ngClass]="{'opacity-0': !formVisible}"
+            [formGroup]="form">
+            <input
+                class="w-full py-2 px-3 leading-5 rounded-md shadow-sm border border-gray-300 bg-white focus:border-primary dark:border-gray-500 dark:focus:border-primary dark:bg-black dark:bg-opacity-5"
+                [autocomplete]="'off'"
+                [formControlName]="'title'"
+                [placeholder]="'Enter list title...'"
+                (keydown.enter)="save()"
+                #titleInput>
+            <div class="flex items-center mt-2">
+                <button
+                    class="h-8 min-h-8"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [type]="'button'"
+                    (click)="save()">
+                    Add list
+                </button>
+                <button
+                    class="ml-1 w-8 h-8 min-h-8"
+                    mat-icon-button
+                    [type]="'button'"
+                    (click)="toggleFormVisibility()">
+                    <mat-icon
+                        class="icon-size-4"
+                        [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

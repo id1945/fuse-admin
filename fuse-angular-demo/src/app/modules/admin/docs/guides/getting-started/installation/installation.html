@@ -1,0 +1,126 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Getting Started</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Installation
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Before you begin installing Fuse, prepare a folder where you can unzip the downloaded .zip file.
+        </p>
+
+        <h2>1. Choose which version you want to install</h2>
+        <p>
+            When you unzip the .zip file you have downloaded from Themeforest, you will find 2 additional .zip files along with other files. One of those .zip files is the
+            <strong>Demo</strong> version, and the other one is the <strong>Starter</strong> version:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    <strong>Demo <code>fuse-demo-vX.X.X.zip</code></strong>
+                </p>
+                <p>
+                    This .zip file includes the Demo version which includes all the applications, pages and UI sections from the Demo application. This version is for referencing
+                    purposes only and it should be only used for copying code/modules from it.
+                </p>
+                <p>
+                    Do <strong>NOT</strong> use the Demo version to build your app, otherwise you will have a lot of unnecessary weight to your app right from the start and it
+                    will provide a poor development experience.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Starter <code>fuse-starter-vX.X.X.zip</code></strong>
+                </p>
+                <p>
+                    This .zip file includes the Starter version which includes all the core components and functionality of Fuse <em>without</em> the Demo applications,
+                    pages and UI sections. <strong>DO</strong> use the Starter version to build your app on top.
+                </p>
+            </li>
+        </ul>
+
+        <h2>2. Unzip</h2>
+        <p>
+            After choosing the version you want to install, unzip the .zip file of that version into your workspace directory.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            <div class="prose prose-sm max-w-none text-current">
+                <p>
+                    You can completely skip the steps #1 and #2 and instead fork the project from Fuse's Github repo directly. This will not only
+                    make things simpler, but it will also make any future updates easier as you can merge the changes from the original repo into your fork.
+                </p>
+                <p>
+                    For more information and to access Fuse's Github repo, check out the Fuse's Themeforest description page.
+                </p>
+            </div>
+        </fuse-alert>
+
+        <h2>3. Run the installation command</h2>
+        <p>
+            Open a console/terminal window and navigate into your workspace directory. You must be at the same folder with the <code>package.json</code> file in order to run
+            the commands.
+        </p>
+        <p>
+            To complete the installation, enter the following command:
+        </p>
+        <textarea
+            fuse-highlight
+            lang="bash">
+            npm install
+        </textarea>
+        <p>
+            This command will take some time and install all the required libraries into the <strong>node_modules</strong> directory in order for you to start developing.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            <div class="prose prose-sm max-w-none text-current">
+                <p>
+                    After the installation completes, you may see warnings about deprecated packages and security risks. You can safely ignore those messages as Fuse (and other
+                    Angular apps) use Node.js for only development environment.
+                </p>
+                <p>
+                    Unless you explicitly add a package to your <strong>dependencies</strong> list in <em>package.json</em> file, they won't be included into the final application
+                    therefore they are not going cause any security risks.
+                </p>
+            </div>
+        </fuse-alert>
+
+    </div>
+
+</div>

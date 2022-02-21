@@ -1,0 +1,52 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Main -->
+    <div class="flex flex-col items-center p-6 sm:p-10">
+        <div class="flex flex-col w-full max-w-4xl">
+            <div class="-ml-4 sm:mt-8">
+                <a
+                    mat-button
+                    [routerLink]="['../']"
+                    [color]="'primary'">
+                    <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                    <span class="ml-2">Back to {{guideCategory.title}}</span>
+                </a>
+            </div>
+            <div class="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">{{guideCategory.guides[0].title}}</div>
+            <div class="mt-1 sm:text-2xl tracking-tight text-secondary">{{guideCategory.guides[0].subtitle}}</div>
+
+            <!-- Guide -->
+            <div
+                class="mt-8 sm:mt-12 max-w-none prose prose-sm"
+                [innerHTML]="guideCategory.guides[0].content"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-10 pt-8 border-t">
+                <div class="text-sm font-medium text-secondary">Last updated 2 months ago</div>
+                <div class="flex items-center mt-2 sm:mt-0">
+                    <div class="font-medium text-secondary">Was this page helpful?</div>
+                    <div class="ml-4">
+                        <button mat-icon-button>
+                            <mat-icon [svgIcon]="'heroicons_outline:thumb-up'"></mat-icon>
+                        </button>
+                        <button mat-icon-button>
+                            <mat-icon [svgIcon]="'heroicons_outline:thumb-down'"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next -->
+            <a
+                class="mt-8 flex items-center justify-between p-6 sm:px-10 rounded-2xl shadow hover:shadow-lg bg-card transform transition-shadow ease-in-out duration-150"
+                [routerLink]="'.'">
+                <div>
+                    <div class="text-secondary">Next</div>
+                    <div class="text-lg font-semibold">Removing a media from a project</div>
+                </div>
+                <mat-icon
+                    class="ml-3"
+                    [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+            </a>
+        </div>
+    </div>
+</div>

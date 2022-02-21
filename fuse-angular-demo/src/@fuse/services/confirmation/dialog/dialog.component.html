@@ -1,0 +1,85 @@
+<div class="relative flex flex-col w-full h-full">
+
+    <!-- Dismiss button -->
+    <ng-container *ngIf="data.dismissible">
+        <div class="absolute top-0 right-0 pt-4 pr-4">
+            <button
+                mat-icon-button
+                [matDialogClose]="undefined">
+                <mat-icon
+                    class="text-secondary"
+                    [svgIcon]="'heroicons_outline:x'"></mat-icon>
+            </button>
+        </div>
+    </ng-container>
+
+    <!-- Content -->
+    <div class="flex flex-col sm:flex-row flex-auto items-center sm:items-start p-8 pb-6 sm:pb-8">
+
+        <!-- Icon -->
+        <ng-container *ngIf="data.icon.show">
+            <div
+                class="flex flex-0 items-center justify-center w-10 h-10 sm:mr-4 rounded-full"
+                [ngClass]="{'text-primary-600 bg-primary-100 dark:text-primary-50 dark:bg-primary-600': data.icon.color === 'primary',
+                            'text-accent-600 bg-accent-100 dark:text-accent-50 dark:bg-accent-600': data.icon.color === 'accent',
+                            'text-warn-600 bg-warn-100 dark:text-warn-50 dark:bg-warn-600': data.icon.color === 'warn',
+                            'text-gray-600 bg-gray-100 dark:text-gray-50 dark:bg-gray-600': data.icon.color === 'basic',
+                            'text-blue-600 bg-blue-100 dark:text-blue-50 dark:bg-blue-600': data.icon.color === 'info',
+                            'text-green-500 bg-green-100 dark:text-green-50 dark:bg-green-500': data.icon.color === 'success',
+                            'text-amber-500 bg-amber-100 dark:text-amber-50 dark:bg-amber-500': data.icon.color === 'warning',
+                            'text-red-600 bg-red-100 dark:text-red-50 dark:bg-red-600': data.icon.color === 'error'
+                            }">
+                <mat-icon
+                    class="text-current"
+                    [svgIcon]="data.icon.name"></mat-icon>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="data.title || data.message">
+            <div class="flex flex-col items-center sm:items-start mt-4 sm:mt-0 sm:pr-8 space-y-1 text-center sm:text-left">
+
+                <!-- Title -->
+                <ng-container *ngIf="data.title">
+                    <div
+                        class="text-xl leading-6 font-medium"
+                        [innerHTML]="data.title"></div>
+                </ng-container>
+
+                <!-- Message -->
+                <ng-container *ngIf="data.message">
+                    <div
+                        class="text-secondary"
+                        [innerHTML]="data.message"></div>
+                </ng-container>
+            </div>
+        </ng-container>
+
+    </div>
+
+    <!-- Actions -->
+    <ng-container *ngIf="data.actions.confirm.show || data.actions.cancel.show">
+        <div class="flex items-center justify-center sm:justify-end px-6 py-4 space-x-3 bg-gray-50 dark:bg-black dark:bg-opacity-10">
+
+            <!-- Cancel -->
+            <ng-container *ngIf="data.actions.cancel.show">
+                <button
+                    mat-stroked-button
+                    [matDialogClose]="'cancelled'">
+                    {{data.actions.cancel.label}}
+                </button>
+            </ng-container>
+
+            <!-- Confirm -->
+            <ng-container *ngIf="data.actions.confirm.show">
+                <button
+                    mat-flat-button
+                    [color]="data.actions.confirm.color"
+                    [matDialogClose]="'confirmed'">
+                    {{data.actions.confirm.label}}
+                </button>
+            </ng-container>
+
+        </div>
+    </ng-container>
+
+</div>

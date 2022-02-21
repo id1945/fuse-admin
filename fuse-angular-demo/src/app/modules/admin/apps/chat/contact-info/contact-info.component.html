@@ -1,0 +1,86 @@
+<div class="flex flex-col flex-auto h-full bg-card dark:bg-default">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center h-18 px-4 border-b bg-gray-50 dark:bg-transparent">
+        <button
+            mat-icon-button
+            (click)="drawer.close()">
+            <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+        <div class="ml-2 text-lg font-medium">Contact info</div>
+    </div>
+
+    <div class="overflow-y-auto">
+        <!-- Contact avatar & info -->
+        <div class="flex flex-col items-center mt-8">
+            <div class="w-40 h-40 rounded-full">
+                <ng-container *ngIf="chat.contact.avatar">
+                    <img
+                        class="w-full h-full rounded-full object-cover"
+                        [src]="chat.contact.avatar"
+                        [alt]="'Contact avatar'">
+                </ng-container>
+                <ng-container *ngIf="!chat.contact.avatar">
+                    <div class="flex items-center justify-center w-full h-full rounded-full text-8xl font-semibold uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        {{chat.contact.name.charAt(0)}}
+                    </div>
+                </ng-container>
+            </div>
+            <div class="mt-4 text-lg font-medium">{{chat.contact.name}}</div>
+            <div class="mt-0.5 text-md text-secondary">{{chat.contact.about}}</div>
+        </div>
+
+        <div class="py-10 px-7">
+            <!-- Media -->
+            <div class="text-lg font-medium">Media</div>
+            <div class="grid grid-cols-4 gap-1 mt-4">
+                <ng-container *ngFor="let media of chat.contact.attachments.media">
+                    <img
+                        class="h-20 rounded object-cover"
+                        [src]="media"/>
+                </ng-container>
+            </div>
+            <!-- Details -->
+            <div class="mt-10 space-y-4">
+                <div class="text-lg font-medium mb-3">Details</div>
+                <ng-container *ngIf="chat.contact.details.emails.length">
+                    <div>
+                        <div class="font-medium text-secondary">Email</div>
+                        <div class="">{{chat.contact.details.emails[0].email}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chat.contact.details.phoneNumbers.length">
+                    <div>
+                        <div class="font-medium text-secondary">Phone number</div>
+                        <div class="">{{chat.contact.details.phoneNumbers[0].phoneNumber}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chat.contact.details.title">
+                    <div>
+                        <div class="font-medium text-secondary">Title</div>
+                        <div class="">{{chat.contact.details.title}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chat.contact.details.company">
+                    <div>
+                        <div class="font-medium text-secondary">Company</div>
+                        <div class="">{{chat.contact.details.company}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chat.contact.details.birthday">
+                    <div>
+                        <div class="font-medium text-secondary">Birthday</div>
+                        <div class="">{{chat.contact.details.birthday}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chat.contact.details.address">
+                    <div>
+                        <div class="font-medium text-secondary">Address</div>
+                        <div class="">{{chat.contact.details.address}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+</div>

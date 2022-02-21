@@ -1,0 +1,48 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Main -->
+    <div class="flex flex-col items-center p-6 sm:p-10">
+        <div class="flex flex-col w-full max-w-4xl">
+            <div class="-ml-4 sm:mt-8">
+                <a
+                    mat-button
+                    [routerLink]="['../']"
+                    [color]="'primary'">
+                    <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                    <span class="ml-2">Back to Help Center</span>
+                </a>
+            </div>
+            <div class="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
+                Guides & Resources
+            </div>
+            <!-- Guides -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-y-12 sm:gap-x-4 mt-8 sm:mt-12">
+                <ng-container *ngFor="let guideCategory of guideCategories; trackBy: trackByFn">
+                    <div class="flex flex-col items-start">
+                        <a
+                            class="flex items-center mb-1 text-2xl font-semibold"
+                            [routerLink]="[guideCategory.slug]">
+                            {{guideCategory.title}}
+                        </a>
+                        <ng-container *ngFor="let guide of guideCategory.guides; trackBy: trackByFn">
+                            <a
+                                class="mt-3 font-medium hover:underline text-primary-500"
+                                [routerLink]="[guideCategory.slug, guide.slug]">
+                                {{guide.title}}
+                            </a>
+                        </ng-container>
+                        <a
+                            class="flex items-center mt-5 pl-4 pr-3 py-0.5 rounded-full cursor-pointer bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
+                            *ngIf="guideCategory.totalGuides > guideCategory.visibleGuides"
+                            [routerLink]="guideCategory.slug">
+                            <span class="text-sm font-medium text-secondary">View All</span>
+                            <mat-icon
+                                class="ml-2 icon-size-5"
+                                [svgIcon]="'heroicons_solid:arrow-narrow-right'"></mat-icon>
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

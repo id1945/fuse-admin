@@ -1,0 +1,60 @@
+<div
+    class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto"
+    cdkScrollable>
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto">
+
+        <!-- Header -->
+        <div class="flex items-center h-16 px-4 sm:px-6 py-2 border-b">
+            <a
+                [routerLink]="['..']"
+                mat-icon-button>
+                <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+            </a>
+            <div class="ml-1 text-lg font-medium">Settings</div>
+        </div>
+
+        <div class="flex flex-auto p-6 sm:p-8">
+            <form
+                class="flex flex-col w-full max-w-xs"
+                [formGroup]="settingsForm">
+                <mat-form-field class="w-full">
+                    <mat-label>Date format</mat-label>
+                    <mat-select [formControlName]="'dateFormat'">
+                        <mat-option [value]="'ll'">Aug 20, {{year}}</mat-option>
+                        <mat-option [value]="'MM/DD/YYYY'">12/31/{{year}}</mat-option>
+                        <mat-option [value]="'DD/MM/YYYY'">31/12/{{year}}</mat-option>
+                        <mat-option [value]="'YYYY-MM-DD'">{{year}}-12-31</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                    <mat-label>Time format</mat-label>
+                    <mat-select [formControlName]="'timeFormat'">
+                        <mat-option [value]="'12'">1:00pm</mat-option>
+                        <mat-option [value]="'24'">13:30</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                    <mat-label>Start week on</mat-label>
+                    <mat-select [formControlName]="'startWeekOn'">
+                        <mat-option [value]="6">Saturday</mat-option>
+                        <mat-option [value]="0">Sunday</mat-option>
+                        <mat-option [value]="1">Monday</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button
+                    class="mt-4"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [disabled]="settingsForm.invalid || settingsForm.pristine"
+                    (click)="updateSettings()">
+                    Save
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

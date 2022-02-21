@@ -1,0 +1,476 @@
+<div class="relative flex flex-col flex-auto min-w-0 overflow-hidden">
+
+    <!-- Header & Cards -->
+    <div class="relative pt-8 pb-12 sm:pt-20 sm:pb-24 px-6 sm:px-16 overflow-hidden">
+        <!-- Background - @formatter:off -->
+        <svg class="-z-1 absolute inset-0"
+             viewBox="0 0 960 540" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="opacity-40 text-gray-200 dark:text-gray-800" fill="none" stroke="currentColor" stroke-width="100">
+                <circle r="234" cx="196" cy="23"></circle>
+                <circle r="234" cx="790" cy="491"></circle>
+            </g>
+        </svg>
+        <!-- @formatter:on -->
+        <!-- Header -->
+        <div class="flex flex-col items-center">
+            <h2 class="text-xl font-semibold">PRICING</h2>
+            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                Take control of your productivity
+            </div>
+            <div class="mt-3 sm:text-2xl text-center tracking-tight text-secondary">
+                <div class="">Start small and free, upgrade as you go.</div>
+                <div class="">Take control of everything.</div>
+            </div>
+            <!-- Recurring selector -->
+            <div class="flex items-center mt-8 sm:mt-16 p-0.5 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <button
+                    class="px-6"
+                    [ngClass]="{'bg-card pointer-events-none shadow': yearlyBilling,
+                                'bg-transparent': !yearlyBilling}"
+                    mat-flat-button
+                    (click)="yearlyBilling = true"
+                    disableRipple>
+                    Yearly billing
+                </button>
+                <button
+                    class="px-6"
+                    [ngClass]="{'bg-card pointer-events-none shadow': !yearlyBilling,
+                                'bg-transparent': yearlyBilling}"
+                    mat-flat-button
+                    (click)="yearlyBilling = false"
+                    disableRipple>
+                    Monthly billing
+                </button>
+            </div>
+        </div>
+        <!-- Card -->
+        <div class="flex flex-col items-center mt-10 sm:mt-20">
+            <fuse-card class="flex-col lg:flex-row w-full lg:max-w-7xl overflow-x-auto overflow-y-hidden">
+                <div class="grid grid-flow-col lg:grid-flow-row min-w-max lg:min-w-0 divide-x lg:divide-x-0 lg:divide-y">
+                    <!-- TIERS -->
+                    <div class="sticky left-0 grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr lg:max-w-none divide-y lg:divide-y-0 lg:divide-x shadow-lg lg:shadow-none border-r lg:border-r-0 bg-card rounded-l lg:rounded-l-none">
+                        <div class="py-8 px-4"></div>
+                        <div class="flex flex-col">
+                            <div class="flex flex-col justify-center p-4 pt-3 lg:py-8">
+                                <div class="text-xl lg:text-2xl font-medium">Personal</div>
+                                <div class="flex items-baseline lg:mt-4 whitespace-nowrap">
+                                    <div class="hidden lg:block text-lg text-secondary">USD</div>
+                                    <div class="lg:ml-2 text-2xl lg:text-4xl font-bold tracking-tight">
+                                        <ng-container *ngIf="yearlyBilling">$6</ng-container>
+                                        <ng-container *ngIf="!yearlyBilling">$9</ng-container>
+                                    </div>
+                                    <div class="ml-2 text-lg text-secondary">/ mo</div>
+                                </div>
+                                <div class="mt-1 lg:mt-3 text-sm lg:text-base text-secondary">
+                                    <ng-container *ngIf="yearlyBilling">
+                                        <div>billed yearly</div>
+                                        <div><b>$9.00</b> billed monthly</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="!yearlyBilling">
+                                        <div>billed monthly</div>
+                                        <div><b>$6.00</b> billed yearly</div>
+                                    </ng-container>
+                                </div>
+                                <button
+                                    class="w-full min-h-8 h-8 lg:min-h-10 lg:h-10 mt-3 lg:mt-6"
+                                    mat-stroked-button
+                                    [color]="'primary'">
+                                    <span class="lg:hidden">Buy</span>
+                                    <span class="hidden lg:inline-flex">Buy Personal</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex flex-col justify-center p-4 pt-3 lg:py-8">
+                                <div class="flex items-center">
+                                    <div class="text-xl lg:text-2xl font-medium">Premium</div>
+                                    <div class="hidden lg:flex items-center h-6 px-3 ml-3 rounded-full text-sm font-semibold leading-6 tracking-wide bg-primary-100 text-primary-600">POPULAR</div>
+                                </div>
+                                <div class="flex items-baseline lg:mt-4 whitespace-nowrap">
+                                    <div class="hidden lg:block text-lg text-secondary">USD</div>
+                                    <div class="lg:ml-2 text-2xl lg:text-4xl font-bold tracking-tight">
+                                        <ng-container *ngIf="yearlyBilling">$12</ng-container>
+                                        <ng-container *ngIf="!yearlyBilling">$15</ng-container>
+                                    </div>
+                                    <div class="ml-2 text-lg text-secondary">/ mo</div>
+                                </div>
+                                <div class="mt-1 lg:mt-3 text-sm lg:text-base text-secondary">
+                                    <ng-container *ngIf="yearlyBilling">
+                                        <div>billed yearly</div>
+                                        <div><b>$15.00</b> billed monthly</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="!yearlyBilling">
+                                        <div>billed monthly</div>
+                                        <div><b>$12.00</b> billed yearly</div>
+                                    </ng-container>
+                                </div>
+                                <button
+                                    class="w-full min-h-8 h-8 lg:min-h-10 lg:h-10 mt-3 lg:mt-6"
+                                    mat-flat-button
+                                    [color]="'primary'">
+                                    <span class="lg:hidden">Buy</span>
+                                    <span class="hidden lg:inline-flex">Buy Premium</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex flex-col justify-center p-4 pt-3 lg:py-8">
+                                <div class="text-xl lg:text-2xl font-medium">Enterprise</div>
+                                <div class="flex items-baseline lg:mt-4 whitespace-nowrap">
+                                    <div class="hidden lg:block text-lg text-secondary">USD</div>
+                                    <div class="lg:ml-2 text-2xl lg:text-4xl font-bold tracking-tight">
+                                        <ng-container *ngIf="yearlyBilling">$49</ng-container>
+                                        <ng-container *ngIf="!yearlyBilling">$69</ng-container>
+                                    </div>
+                                    <div class="ml-2 text-lg text-secondary">/ mo</div>
+                                </div>
+                                <div class="mt-1 lg:mt-3 text-sm lg:text-base text-secondary">
+                                    <ng-container *ngIf="yearlyBilling">
+                                        <div>billed yearly</div>
+                                        <div><b>$69.00</b> billed monthly</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="!yearlyBilling">
+                                        <div>billed monthly</div>
+                                        <div><b>$49.00</b> billed yearly</div>
+                                    </ng-container>
+                                </div>
+                                <button
+                                    class="w-full min-h-8 h-8 lg:min-h-10 lg:h-10 mt-3 lg:mt-6"
+                                    mat-stroked-button
+                                    [color]="'primary'">
+                                    <span class="lg:hidden">Buy</span>
+                                    <span class="hidden lg:inline-flex">Buy Enterprise</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FEATURES -->
+                    <div class="hidden lg:block p-4 col-span-full bg-gray-100 dark:bg-transparent">
+                        <div class="text-md font-semibold">FEATURES</div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Unlimited projects</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Unlimited storage</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Custom domain support</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:minus'"></mat-icon>
+                        </div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Dedicated hardware</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:minus'"></mat-icon>
+                        </div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:minus'"></mat-icon>
+                        </div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                    </div>
+
+                    <!-- PAYMENTS -->
+                    <div class="hidden lg:block p-4 col-span-full bg-gray-100 dark:bg-transparent">
+                        <div class="text-md font-semibold">PAYMENTS</div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Fraud analysis</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">
+                            <mat-icon
+                                class="icon-size-5 text-green-600"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Rates for in-house payment systems</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">2.9% + 30¢</div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">2.6% + 30¢</div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">2.4% + 30¢</div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Rates for other payment systems</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">4.9% + 30¢</div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">4.6% + 30¢</div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">4.4% + 30¢</div>
+                    </div>
+
+                    <div class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x">
+                        <div class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left">Additional fees using other payment systems</div>
+                        <!-- Personal -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">2%</div>
+                        <!-- Premium -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">1%</div>
+                        <!-- Enterprise -->
+                        <div class="flex items-center justify-center lg:justify-start p-4">0.5%</div>
+                    </div>
+                </div>
+            </fuse-card>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="flex flex-col items-center px-6 py-10 sm:px-16 sm:pt-18 sm:pb-20 bg-white dark:bg-gray-800">
+        <div class="w-full max-w-7xl">
+            <div>
+                <div class="text-4xl font-extrabold tracking-tight leading-tight">
+                    Everything you need to build efficiently
+                </div>
+                <div class="max-w-xl mt-2 text-xl text-secondary">
+                    Start building your app using our tools, be efficient, spend less time with details more time with your business
+                </div>
+            </div>
+            <!-- Features grid -->
+            <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16 w-full mt-12 sm:mt-16">
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon
+                            class="text-white"
+                            [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">Create and Edit Projects</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        Create and edit projects, upload images via drag drop, add categories, add custom fields, create interactive forms and more.
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon
+                            class="text-white"
+                            [svgIcon]="'heroicons_outline:filter'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">Search and Filter</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        Search and filter within the projects, categories and custom fields. Save search and filter details for easy access.
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon
+                            class="text-white"
+                            [svgIcon]="'heroicons_outline:refresh'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">Real Time Updates</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        Real time updates that doesn't require page reload. Lean back and watch the changes happen in real time.
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon
+                            class="text-white"
+                            [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">Meta Information</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        Add and remove meta information to custom fields to differentiate them in reports and analytics results, use them for detailed reports.
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon
+                            class="text-white"
+                            [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">Pre-rendered Results</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        Pre-render results to make reports and analytics more accessible by screen readers and other accessibility tools.
+                    </div>
+                </div>
+                <div>
+                    <span class="flex items-center justify-center w-12 h-12 rounded bg-primary">
+                        <mat-icon
+                            class="text-white"
+                            [svgIcon]="'heroicons_outline:chart-square-bar'"></mat-icon>
+                    </span>
+                    <div class="mt-4 text-xl font-medium">Simple Analytics</div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        Simple analytics with no unnecessary data flow or weight. More readable results with less data consumption.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="px-6 py-10 sm:py-12 sm:px-16 bg-primary-600 text-on-primary-600">
+        <div class="flex flex-col items-center w-full max-w-7xl mx-auto text-center">
+            <div class="text-3xl sm:text-4xl sm:text-5xl font-extrabold leading-6 sm:leading-10">Boost your productivity.</div>
+            <div class="mt-2 text-3xl sm:text-4xl sm:text-5xl font-extrabold leading-6 sm:leading-10 text-black text-opacity-70">Start using Fuse today.</div>
+            <button
+                mat-flat-button
+                class="fuse-mat-button-large mt-8 px-12 bg-white text-primary-800">
+                <span class="text-lg">Sign up for free</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Frequently asked questions -->
+    <div class="flex flex-col items-center pt-12 sm:pt-18 pb-8 sm:pb-20 px-6 sm:px-16 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full max-w-7xl">
+            <div>
+                <div class="text-4xl font-extrabold tracking-tight leading-tight">
+                    Frequently asked questions
+                </div>
+                <div class="max-w-xl mt-2 text-xl text-secondary">
+                    Here are the most frequently asked questions you may check before getting started
+                </div>
+            </div>
+            <!-- FAQs grid -->
+            <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:gap-x-16 w-full mt-12 sm:mt-16">
+                <div>
+                    <div class="text-xl font-semibold">
+                        What is the duration of the free trial?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            Our app is free to try for 14 days, if you want more, you can provide
+                            payment details which will extend your trial to 30 days providing you
+                            an extra 16 more days to try our app.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xl font-semibold">
+                        Are there discounts for non-profits or educational use?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            Yes, our Personal and Premium packages are free for non-profits and
+                            educational use. E-mail your details to us after starting your Free
+                            Trial and we will upgrade your account if you qualify.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xl font-semibold">
+                        What is the storage is for?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            Since we provide an extremely detailed reporting and analytics
+                            tool, they require quite a bit storage space. For average use, you
+                            don’t have to worry about running out of space since the
+                            Personal package limits the projects you can have.
+                        </p>
+                        <p class="mt-2">
+                            For some reason if you run out of space, contact us and we will
+                            see what can be done about it and make sure you are not
+                            generating unnecessary reports and/or analytics data.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xl font-semibold">
+                        What happens if I’m not satisfied?
+                    </div>
+                    <div class="mt-2 leading-6 text-secondary">
+                        <p>
+                            If you are still in your free trial period, you can cancel your
+                            account at anytime with a single click of a button. If you already
+                            paid for your first month, we also offer 30-day money-back
+                            guarantee with no questions asked.
+                        </p>
+                        <p class="mt-2">
+                            After first month, you can still cancel your account at any time
+                            but we will calculate the amount that corresponds to days you
+                            have been using our app for that month and refund only the
+                            remaining amount.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

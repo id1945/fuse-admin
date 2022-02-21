@@ -1,0 +1,96 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Icons</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    <ng-container *ngIf="(icons$ | async) as icons">
+                        <h1>{{icons.name}}</h1>
+                    </ng-container>
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="prose prose-sm max-w-5xl">
+
+            <h2>Usage</h2>
+            <ng-container *ngIf="(filteredIcons$ | async) as icons">
+                <textarea
+                    fuse-highlight
+                    lang="html"
+                    [code]="'<mat-icon svgIcon=&#34;' + calcSvgIconAttr() + '&#34;></mat-icon>'"></textarea>
+            </ng-container>
+
+            <h2>Icons</h2>
+            <div class="flex my-6 xs:flex-col">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Search an icon</mat-label>
+                    <input
+                        matInput
+                        [attr.autocomplete]="'off'"
+                        (input)="filterIcons($event)">
+                </mat-form-field>
+                <mat-form-field class="min-w-40 ml-8 xs:ml-0">
+                    <mat-label>Icon size</mat-label>
+                    <mat-select [(ngModel)]="iconSize">
+                        <mat-option [value]="4">16</mat-option>
+                        <mat-option [value]="5">20</mat-option>
+                        <mat-option [value]="6">24</mat-option>
+                        <mat-option [value]="8">32</mat-option>
+                        <mat-option [value]="10">40</mat-option>
+                        <mat-option [value]="12">48</mat-option>
+                        <mat-option [value]="16">64</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-wrap -mx-4">
+
+                <ng-container *ngIf="(filteredIcons$ | async) as icons">
+
+                    <ng-container *ngFor="let icon of icons.list">
+
+                        <div
+                            class="flex flex-col items-center justify-center m-4 p-4 min-w-36 max-w-36 min-h-30 max-h-30 rounded border-2 cursor-pointer bg-card"
+                            [class.border-primary]="selectedIcon[1] === icon"
+                            (click)="selectIcon(icons.namespace, icon)">
+
+                            <div class="flex items-center justify-center mb-3">
+                                <mat-icon
+                                    [ngClass]="'icon-size-' + iconSize"
+                                    [svgIcon]="icons.namespace + ':' + icon"></mat-icon>
+                            </div>
+
+                            <div class="text-sm text-center break-all text-secondary">{{icon}}</div>
+
+                        </div>
+
+                    </ng-container>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

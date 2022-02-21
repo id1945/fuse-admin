@@ -1,0 +1,770 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Forms</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Fields
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl">
+
+            <div class="prose prose-sm max-w-3xl">
+                <p>
+                    By default, Fuse changes the default form field appearance to <em>fill</em> and heavily modifies it to provide a more unique and consistent look. We
+                    <strong>DO NOT</strong> recommend using any other form field styles as they are not optimized for Fuse.
+                </p>
+                <h2>Appearance</h2>
+                <p>
+                    Here's a very simple form layout to showcase the form fields.
+                </p>
+            </div>
+
+            <form class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pr-3">
+                        <mat-label>First name</mat-label>
+                        <input matInput>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pl-3">
+                        <mat-label>Last name</mat-label>
+                        <input matInput>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <mat-label>Address</mat-label>
+                        <textarea
+                            matInput
+                            [rows]="3"
+                            matTextareaAutosize></textarea>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-md:flex-row">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-md:pr-3">
+                        <mat-label>City</mat-label>
+                        <input matInput>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-md:pl-3">
+                        <mat-label>State</mat-label>
+                        <input matInput>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Postal code</mat-label>
+                        <input
+                            matInput
+                            maxlength="5"
+                            #postalCode>
+                        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                    </mat-form-field>
+                </div>
+            </form>
+
+            <div class="prose prose-sm max-w-3xl">
+                <h2 class="mt-12">Labels and Placeholders</h2>
+                <p>
+                    Following form contains examples to showcase different label and placeholder styles. All fields in this example are standard text <em>inputs</em> but everything
+                    you see here can also be applied to other input types such as <em>textarea</em>, <em>select</em>, <em>chips</em> etc.
+                </p>
+            </div>
+
+            <form class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+                <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="w-full">
+                    <input
+                        matInput
+                        [placeholder]="'Placeholder only'">
+                </mat-form-field>
+                <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="w-full">
+                    <mat-label>Label</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="w-full"
+                    [floatLabel]="'always'">
+                    <mat-label>Label and Placeholder</mat-label>
+                    <input
+                        matInput
+                        [placeholder]="'Placeholder'">
+                </mat-form-field>
+                <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="w-full">
+                    <mat-label>Label and Placeholder on focus</mat-label>
+                    <input
+                        matInput
+                        [placeholder]="'Placeholder'">
+                </mat-form-field>
+            </form>
+
+            <div class="prose prose-sm max-w-3xl">
+                <h2 class="mt-12">Field variations</h2>
+                <p>
+                    Following form contains examples to showcase form field variations. In addition to the heavy modifications,
+                    Fuse also provides set of helper classes to further modify the style of the form fields.
+                </p>
+                <h3>Required classes</h3>
+                <ul>
+                    <li>
+                        <p><code>.fuse-mat-textarea</code></p>
+                        <p>
+                            This helper class is required if you are using a textarea as your input. Since Angular Material doesn't differentiate a textarea from a
+                            normal input while using them with <strong>mat-form-field</strong>, this helper class is required for <strong>textarea</strong> inputs to look good and
+                            consistent.
+                        </p>
+                    </li>
+                </ul>
+                <!-- @formatter:off -->
+                <textarea
+                    fuse-highlight
+                    lang="html">
+                    <mat-form-field class="fuse-mat-textarea">
+                        <mat-label>Note</mat-label>
+                        &lt;textarea matInput&gt;&lt;/textarea&gt;
+                    </mat-form-field>
+                </textarea>
+                <!-- @formatter:on -->
+                <h3>Optional classes</h3>
+                <ul>
+                    <li>
+                        <p><code>.fuse-mat-dense</code></p>
+                        <p>
+                            Provides set of adjustments to make the fields denser. Dense fields are suitable for non-form usages and places where there isn't much space to work with such
+                            as small dialogs, menus, popovers and etc.
+                        </p>
+                    </li>
+                    <li>
+                        <p><code>.fuse-mat-rounded</code></p>
+                        <p>Provides set of adjustments to make the fields look fully rounded.</p>
+                    </li>
+                    <li>
+                        <p><code>.fuse-mat-no-subscript</code></p>
+                        <p>
+                            Provides set of adjustments to remove the bottom spacing where <em>hint</em> and <em>error</em> messages placed. This helper is particularly useful to align the
+                            field easily if you don't need to show error messages or hint text. For example a search bar in the toolbar uses this helper to fit the field to the toolbar
+                            without having an extra bottom spacing.
+                        </p>
+                    </li>
+                    <li>
+                        <p><code>.fuse-mat-emphasized-affix</code></p>
+                        <p>
+                            Provides set of adjustments to emphasize the field prefix and suffix by changing their background color and adding a border around them.
+                        </p>
+                    </li>
+                </ul>
+
+                <h3>Usage</h3>
+                <p>
+                    <code>&lt;mat-form-field class="{{getFormFieldHelpersAsString()}}"&gt;...&lt;mat-form-field&gt;</code>
+                </p>
+                <p>
+                    <mat-button-toggle-group
+                        [(ngModel)]="formFieldHelpers"
+                        multiple>
+                        <mat-button-toggle [value]="'fuse-mat-dense'">Dense</mat-button-toggle>
+                        <mat-button-toggle [value]="'fuse-mat-rounded'">Rounded</mat-button-toggle>
+                        <mat-button-toggle [value]="'fuse-mat-no-subscript'">No subscript</mat-button-toggle>
+                        <mat-button-toggle [value]="'fuse-mat-emphasized-affix'">Emphasized affix</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </p>
+
+                <h3>With mat-label</h3>
+            </div>
+
+            <form class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Input</mat-label>
+                        <input
+                            matInput
+                            [placeholder]="'This is a placeholder'">
+                        <mat-hint>This is a hint text</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Input with mat-icon as prefix & suffix</mat-label>
+                        <input matInput>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Input with mat-icon-button as prefix & suffix</mat-label>
+                        <input matInput>
+                        <button
+                            mat-icon-button
+                            matPrefix>
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                        </button>
+                        <button
+                            mat-icon-button
+                            matSuffix>
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Input with text prefix & suffix</mat-label>
+                        <input matInput>
+                        <span matPrefix>$</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Right aligned input with text prefix & suffix</mat-label>
+                        <input
+                            class="text-right"
+                            matInput>
+                        <span matPrefix>$</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Input with mat-select as prefix & suffix</mat-label>
+                        <input matInput>
+                        <mat-select
+                            [value]="'EU'"
+                            matPrefix>
+                            <mat-option [value]="'EU'">EU</mat-option>
+                            <mat-option [value]="'US'">US</mat-option>
+                        </mat-select>
+                        <mat-select
+                            [value]="'kg'"
+                            matSuffix>
+                            <mat-option [value]="'kg'">kg</mat-option>
+                            <mat-option [value]="'gr'">gr</mat-option>
+                            <mat-option [value]="'oz'">oz</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <mat-label>Textarea</mat-label>
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <mat-label>Textarea with prefix & suffix</mat-label>
+                        <textarea matInput></textarea>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <mat-label>Textarea with autosize</mat-label>
+                        <textarea
+                            matInput
+                            matTextareaAutosize></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <mat-label>Textarea with autosize, prefix & suffix</mat-label>
+                        <textarea
+                            matInput
+                            matTextareaAutosize></textarea>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pr-3">
+                        <mat-label>Select with prefix</mat-label>
+                        <mat-select>
+                            <mat-option value="select1-1">Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1</mat-option>
+                            <mat-option value="select1-2">Select 1-2</mat-option>
+                            <mat-option value="select1-3">Select 1-3</mat-option>
+                        </mat-select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pl-3">
+                        <mat-label>Select with suffix</mat-label>
+                        <mat-select>
+                            <mat-option value="select2-1">Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1</mat-option>
+                            <mat-option value="select2-2">Select 2-2</mat-option>
+                            <mat-option value="select2-3">Select 2-3</mat-option>
+                        </mat-select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pr-3">
+                        <mat-label>Native select with prefix</mat-label>
+                        <select matNativeControl>
+                            <option value=""></option>
+                            <option value="select1-1">Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1</option>
+                            <option value="select1-2">Select 1-2</option>
+                            <option value="select1-3">Select 1-3</option>
+                        </select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pl-3">
+                        <mat-label>Native select with suffix</mat-label>
+                        <select matNativeControl>
+                            <option value=""></option>
+                            <option value="select2-1">Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1</option>
+                            <option value="select2-2">Select 2-2</option>
+                            <option value="select2-3">Select 2-3</option>
+                        </select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-chip-list #chipList01>
+                            <mat-chip
+                                [removable]="true"
+                                [selectable]="true">
+                                Lemon
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matChipRemove
+                                    [svgIcon]="'heroicons_solid:minus-circle'"></mat-icon>
+                            </mat-chip>
+                            <mat-chip
+                                [removable]="true"
+                                [selectable]="true">
+                                Lime
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matChipRemove
+                                    [svgIcon]="'heroicons_solid:minus-circle'"></mat-icon>
+                            </mat-chip>
+                            <mat-chip
+                                [removable]="true"
+                                [selectable]="true">
+                                Apple
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matChipRemove
+                                    [svgIcon]="'heroicons_solid:minus-circle'"></mat-icon>
+                            </mat-chip>
+                            <input
+                                [placeholder]="'New fruit...'"
+                                [matChipInputFor]="chipList01">
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-label>Choose a date</mat-label>
+                        <input
+                            matInput
+                            [matDatepicker]="picker1">
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </form>
+
+            <div class="prose prose-sm max-w-3xl">
+                <h3 class="mt-12">Without mat-label</h3>
+            </div>
+
+            <form class="flex flex-col mt-8 p-8 bg-card rounded-2xl shadow overflow-hidden">
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'Input'">
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'Input with mat-icon as prefix & suffix'">
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'Input with mat-icon-button as prefix & suffix'">
+                        <button
+                            mat-icon-button
+                            matPrefix>
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:badge-check'"></mat-icon>
+                        </button>
+                        <button
+                            mat-icon-button
+                            matSuffix>
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'Input with text prefix Suffix'">
+                        <span matPrefix>$</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            class="text-right"
+                            matInput
+                            [placeholder]="'Right aligned input with text prefix & suffix'">
+                        <span matPrefix>$</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'Input with mat-select as prefix & suffix'">
+                        <mat-select
+                            [value]="'EU'"
+                            matPrefix>
+                            <mat-option [value]="'EU'">EU</mat-option>
+                            <mat-option [value]="'US'">US</mat-option>
+                        </mat-select>
+                        <mat-select
+                            [value]="'kg'"
+                            matSuffix>
+                            <mat-option [value]="'kg'">kg</mat-option>
+                            <mat-option [value]="'gr'">gr</mat-option>
+                            <mat-option [value]="'oz'">oz</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <textarea
+                            matInput
+                            [placeholder]="'Textarea'"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <textarea
+                            matInput
+                            [placeholder]="'Textarea with prefix & suffix'"></textarea>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <textarea
+                            matInput
+                            [placeholder]="'Textarea with autosize'"
+                            matTextareaAutosize></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <textarea
+                            matInput
+                            [placeholder]="'Textarea with autosize, prefix & suffix'"
+                            matTextareaAutosize></textarea>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pr-3">
+                        <mat-select [placeholder]="'Select with prefix'">
+                            <mat-option value="select1-1">Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1</mat-option>
+                            <mat-option value="select1-2">Select 1-2</mat-option>
+                            <mat-option value="select1-3">Select 1-3</mat-option>
+                        </mat-select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pl-3">
+                        <mat-select [placeholder]="'Select with suffix'">
+                            <mat-option value="select2-1">Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1</mat-option>
+                            <mat-option value="select2-2">Select 2-2</mat-option>
+                            <mat-option value="select2-3">Select 2-3</mat-option>
+                        </mat-select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pr-3">
+                        <select
+                            matNativeControl
+                            [placeholder]="'Native select with prefix'">
+                            <option value=""></option>
+                            <option value="select1-1">Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1 Select 1-1</option>
+                            <option value="select1-2">Select 1-2</option>
+                            <option value="select1-3">Select 1-3</option>
+                        </select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto gt-xs:pl-3">
+                        <select
+                            matNativeControl
+                            [placeholder]="'Native select with suffix'">
+                            <option value=""></option>
+                            <option value="select2-1">Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1</option>
+                            <option value="select2-2">Select 2-2</option>
+                            <option value="select2-3">Select 2-3</option>
+                        </select>
+                        <mat-icon
+                            class="icon-size-5"
+                            matSuffix
+                            [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <mat-chip-list #chipList02>
+                            <mat-chip
+                                [removable]="true"
+                                [selectable]="true">
+                                Lemon
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matChipRemove
+                                    [svgIcon]="'heroicons_solid:minus-circle'"></mat-icon>
+                            </mat-chip>
+                            <mat-chip
+                                [removable]="true"
+                                [selectable]="true">
+                                Lime
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matChipRemove
+                                    [svgIcon]="'heroicons_solid:minus-circle'"></mat-icon>
+                            </mat-chip>
+                            <mat-chip
+                                [removable]="true"
+                                [selectable]="true">
+                                Apple
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matChipRemove
+                                    [svgIcon]="'heroicons_solid:minus-circle'"></mat-icon>
+                            </mat-chip>
+                            <input
+                                [placeholder]="'New fruit...'"
+                                [matChipInputFor]="chipList02">
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="flex-auto">
+                        <input
+                            matInput
+                            [matDatepicker]="picker2"
+                            [placeholder]="'Choose a date'">
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

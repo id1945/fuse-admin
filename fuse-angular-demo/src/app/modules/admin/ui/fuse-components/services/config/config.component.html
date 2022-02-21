@@ -1,0 +1,153 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Services</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Config
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>FuseConfigService</strong> is a singleton service to store and access an application wide configuration object. It can be used to store any kind of data and
+            can be accessed from anywhere within your application.
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseConfigModule } from '@fuse/services/config';
+        </textarea>
+
+        <h2>Default configuration</h2>
+        <p>
+            By default, the application wide configuration is stored in <code>src/app/core/config/app.config.ts</code> file and it includes the <strong>layout style</strong> as
+            well as the <strong>color theme</strong> configurations:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { Layout } from 'app/layout/layout.types';
+
+            // Types
+            export type Scheme = 'auto' | 'dark' | 'light';
+            export type Theme = 'default' | string;
+
+            /**
+             * AppConfig interface. Update this interface to strictly type your config
+             * object.
+             */
+            export interface AppConfig
+            {
+                layout: Layout;
+                scheme: Scheme;
+                theme: Theme;
+            }
+
+            /**
+             * Default configuration for the entire application. This object is used by
+             * FuseConfigService to set the default configuration.
+             *
+             * If you need to store global configuration for your app, you can use this
+             * object to set the defaults. To access, update and reset the config, use
+             * FuseConfigService and its methods.
+             */
+            export const appConfig: AppConfig = {
+                layout: 'classy',
+                scheme: 'light',
+                theme : 'default'
+            };
+        </textarea>
+        <!-- @formatter:on -->
+        <p>
+            The default configuration is supplied to the <strong>FuseConfigService</strong> using the <code>FuseConfigModule.forRoot()</code> in <strong>AppModule</strong>:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { appConfig } from 'app/core/config/app.config';
+
+            ...
+
+            imports: [
+                FuseConfigModule.forRoot(appConfig)
+            ...
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Methods</h2>
+        <p>
+            To set a configuration use <code>config</code> setter on <strong>FuseConfigService</strong>. The setter will intelligently merge the configuration by replacing only
+            the given options if they exist while preserving others. If the supplied option does not exist on the configuration, it will be added:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="typescript">
+            import { FuseConfigService } from '@fuse/services/config';
+
+            /**
+             * Constructor
+             */
+            constructor(private _fuseConfigService: FuseConfigService)
+            {
+                this._fuseConfigService.config = {layout: 'classy'};
+            }
+        </textarea>
+        <!-- @formatter:on -->
+        <p>
+            To get the configuration use <code>config$</code> getter on <strong>FuseConfigService</strong> which returns an <code>Observable</code> of the configuration object:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight lang="typescript">
+            import { FuseConfigService } from '@fuse/services/config';
+            import { AppConfig } from 'app/core/config/app.config';
+
+            config: AppConfig;
+
+            /**
+             * Constructor
+             */
+            constructor(private _fuseConfigService: FuseConfigService)
+            {
+                this._fuseConfigService.config$
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe((config: AppConfig) => {
+                        this.config = config;
+                    }
+            });
+        </textarea>
+        <!-- @formatter:on -->
+
+    </div>
+
+</div>

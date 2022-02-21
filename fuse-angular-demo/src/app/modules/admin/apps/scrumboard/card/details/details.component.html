@@ -1,0 +1,122 @@
+<div class="flex flex-col flex-auto md:w-160 md:min-w-160 max-h-160 -m-6 overflow-y-auto">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium">Card</div>
+        <button
+            mat-icon-button
+            (click)="matDialogRef.close()"
+            [tabIndex]="-1">
+            <mat-icon
+                class="text-current"
+                [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+    <!-- Card form -->
+    <form
+        class="flex flex-col flex-0 items-start w-full p-6 sm:p-8 space-y-6 overflow-y-auto"
+        [formGroup]="cardForm">
+
+        <!-- Title -->
+        <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+            <mat-label>Title</mat-label>
+            <textarea
+                matInput
+                [formControlName]="'title'"
+                [rows]="1"
+                matTextareaAutosize
+                [matAutosizeMinRows]="1">
+            </textarea>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+            <mat-label>Description</mat-label>
+            <textarea
+                matInput
+                [formControlName]="'description'"
+                [rows]="1"
+                matTextareaAutosize
+                [matAutosizeMinRows]="1">
+            </textarea>
+        </mat-form-field>
+
+        <!-- Due date -->
+        <div>
+            <div class="font-medium">Due date</div>
+            <div
+                class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer"
+                [ngClass]="{'text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700': !card.dueDate,
+                                'text-green-800 bg-green-200 dark:text-green-100 dark:bg-green-500': card.dueDate && !isOverdue(card.dueDate),
+                                'text-red-800 bg-red-200 dark:text-red-100 dark:bg-red-500': card.dueDate && isOverdue(card.dueDate)}"
+                (click)="dueDatePicker.open()">
+                <mat-icon
+                    class="icon-size-5 text-current"
+                    [svgIcon]="'heroicons_solid:calendar'"></mat-icon>
+                <span class="ml-2 text-md font-medium">
+                    <ng-container *ngIf="card.dueDate">{{card.dueDate | date:'longDate'}}</ng-container>
+                    <ng-container *ngIf="!card.dueDate">Not set</ng-container>
+                </span>
+                <mat-form-field class="fuse-mat-no-subscript fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none">
+                    <input
+                        matInput
+                        [formControlName]="'dueDate'"
+                        [matDatepicker]="dueDatePicker">
+                    <mat-datepicker #dueDatePicker>
+                        <mat-datepicker-actions>
+                            <button
+                                mat-button
+                                (click)="cardForm.get('dueDate').setValue(null)"
+                                matDatepickerCancel>
+                                Clear
+                            </button>
+                            <button
+                                mat-flat-button
+                                [color]="'primary'"
+                                matDatepickerApply>
+                                Select
+                            </button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Labels -->
+        <div class="w-full">
+            <div class="font-medium">Labels</div>
+            <div class="mt-1 rounded-md border border-gray-300 shadow-sm overflow-hidden">
+                <!-- Header -->
+                <div class="flex items-center my-2 mx-3">
+                    <div class="flex items-center flex-auto min-w-0">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                        <input
+                            class="min-w-0 ml-2 py-1 border-0"
+                            type="text"
+                            placeholder="Enter label name"
+                            (input)="filterLabels($event)"
+                            (keydown)="filterLabelsInputKeyDown($event)"
+                            [maxLength]="50">
+                    </div>
+                </div>
+                <!-- Available labels -->
+                <div class="max-h-40 leading-none overflow-y-auto border-t">
+                    <!-- Labels -->
+                    <ng-container *ngFor="let label of filteredLabels; trackBy: trackByFn">
+                        <mat-checkbox
+                            class="flex items-center h-10 min-h-10 px-4"
+                            [color]="'primary'"
+                            [checked]="hasLabel(label)"
+                            (change)="toggleProductTag(label, $event)">
+                            {{label.title}}
+                        </mat-checkbox>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

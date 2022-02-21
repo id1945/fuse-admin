@@ -1,0 +1,83 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+
+    <mat-drawer-container class="flex-auto h-full">
+
+        <!-- Drawer -->
+        <mat-drawer
+            class="w-72 dark:bg-gray-900"
+            [autoFocus]="false"
+            [mode]="'over'"
+            [position]="'end'"
+            #matDrawer>
+            <!-- Demo sidebar -->
+            <demo-sidebar></demo-sidebar>
+        </mat-drawer>
+
+        <!-- Drawer content -->
+        <mat-drawer-content class="flex flex-col">
+
+            <!-- Header -->
+            <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 pb-22 sm:pt-12 sm:pb-28 sm:px-10 bg-default dark:bg-transparent">
+                <div class="flex-1 min-w-0">
+                    <!-- Breadcrumbs -->
+                    <div>
+                        <div class="hidden sm:flex flex-wrap items-center font-medium">
+                            <div>
+                                <a class="whitespace-nowrap text-primary-500">Projects</a>
+                            </div>
+                            <div class="flex items-center ml-1 whitespace-nowrap">
+                                <mat-icon
+                                    class="icon-size-5 text-secondary"
+                                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                                <a class="ml-1 text-primary-500">Weekend Project</a>
+                            </div>
+                            <div class="flex items-center ml-1 whitespace-nowrap">
+                                <mat-icon
+                                    class="icon-size-5 text-secondary"
+                                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                                <span class="ml-1 text-secondary">Overview</span>
+                            </div>
+                        </div>
+                        <div class="flex sm:hidden">
+                            <a
+                                class="inline-flex items-center -ml-1.5 text-secondary font-medium"
+                                [routerLink]="'./..'">
+                                <mat-icon
+                                    class="icon-size-5 text-secondary"
+                                    [svgIcon]="'heroicons_solid:chevron-left'"></mat-icon>
+                                <span class="ml-1">Back</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Title -->
+                    <div class="mt-2">
+                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                            Page heading
+                        </h2>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                    <button
+                        mat-icon-button
+                        (click)="matDrawer.toggle()">
+                        <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main -->
+            <div
+                class="flex-auto -mt-16 p-6 sm:p-10 rounded-t-2xl shadow overflow-y-auto bg-card"
+                cdkScrollable>
+
+                <!-- CONTENT GOES HERE -->
+                <div class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"></div>
+
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>

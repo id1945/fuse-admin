@@ -1,0 +1,153 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Development</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Component Structure
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            <span>
+                Fuse uses route based component loading strategy. There are componentless and empty-path routes specifically structured to load components without hard
+                coding them into templates. This provides great extensibility and scalability to the app and we strongly suggest you to follow the same path.
+            </span>
+        </fuse-alert>
+        <p>
+            Here's the diagram of the Fuse's default component structure for the reference:
+        </p>
+
+        <!-- Component diagram -->
+        <div class="my-8 p-8 rounded bg-card shadow">
+            <!-- AppComponent -->
+            <div class="relative border-2 border-gray-400 rounded h-120 p-6 pt-12">
+                <span class="absolute left-0 top-0 ml-3 -mt-px px-2 transform -translate-y-1/2 bg-card text-gray-500 font-medium">AppComponent</span>
+                <!-- LayoutComponent -->
+                <div class="relative border-2 border-purple-400 rounded w-full h-full p-6 pt-12">
+                    <span class="absolute left-0 top-0 ml-3 -mt-px px-2 transform -translate-y-1/2 bg-card text-purple-500 font-medium">LayoutComponent</span>
+                    <!-- xxxLayoutComponent -->
+                    <div class="relative border-2 border-green-400 rounded w-full h-full">
+                        <span class="absolute left-0 top-0 ml-3 -mt-px px-2 transform -translate-y-1/2 bg-card text-green-500 font-medium">Layout</span>
+
+                        <div class="flex w-full h-full">
+                            <!-- Navigation -->
+                            <div class="relative w-1/4 border-r-2 border-green-400">
+                                <span class="absolute left-0 top-0 p-3 pl-6 text-green-700 font-medium">Navigation</span>
+                            </div>
+                            <!-- Wrapper -->
+                            <div class="flex flex-col w-3/4">
+                                <!-- Header -->
+                                <div class="relative border-b-2 border-green-400 w-full h-12">
+                                    <span class="absolute left-0 top-0 p-3 pl-6 text-green-700 font-medium">Header</span>
+                                </div>
+                                <!-- Content -->
+                                <div class="relative flex flex-auto w-full">
+                                    <span class="absolute left-0 top-0 p-3 pl-6 text-green-700 font-medium">&lt;router-outlet&gt;</span>
+                                </div>
+                                <!-- Footer -->
+                                <div class="relative border-t-2 border-green-400 w-full h-12">
+                                    <span class="absolute left-0 top-0 p-3 pl-6 text-green-700 font-medium">Footer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>AppComponent</h2>
+        <p>
+            This is the entry point of the application. It imports all the necessary modules in order for Fuse and your app to work. All 3rd party modules also imported
+            and configured here.
+        </p>
+
+        <h2>LayoutComponent</h2>
+        <p>
+            This component makes the layout switching easier. Fuse provides variety of different layouts like <strong>ClassicLayout</strong> or
+            <strong>EnterpriseLayout</strong> and this component can load or switch those layouts at any time.
+        </p>
+        <p>
+            To understand how <strong>LayoutComponent</strong> works, look at this portion of the <code>app.routing.ts</code> file:
+        </p>
+        <!-- @formatter:off -->
+            <textarea fuse-highlight
+                      lang="typescript">
+                // Admin routes
+                {
+                    path       : '',
+                    canActivate: [AuthGuard],
+                    canActivateChild: [AuthGuard],
+                    component  : LayoutComponent,
+                    resolve    : {
+                        initialData: InitialDataResolver,
+                    },
+                    children   : [
+
+                        // Apps
+                        {path: 'apps', children: [
+
+                        // Dashboards
+                        {path: 'dashboard', children: [
+
+                        ...
+                    ]
+                }
+            </textarea>
+            <!-- @formatter:on -->
+        <p>
+            As you can see, there is an empty-path route at the beginning of the <strong>Admin</strong> routes which essentially loads the <code>LayoutComponent</code> into the
+            <code>&lt;router-outlet&gt;</code> of the <em>AppComponent</em>.
+        </p>
+        <p>
+            After that, <code>LayoutComponent</code> loads the selected layout. All layouts includes a <code>&lt;router-outlet&gt;</code> in their templates which then loads
+            the actual component that's being requested depending on the active route.
+        </p>
+        <p>
+            More detailed information about layouts can be found in the
+            <a [routerLink]="['../../customization/theme-layouts']">Customization > Theme layouts</a>
+            section of this
+            documentation.
+        </p>
+
+        <h2>Layout</h2>
+        <p>
+            This is the selected layout that's being loaded by the <code>LayoutComponent</code>. All layouts located at the <code>app/layout/layouts/</code> directory and these
+            layouts include common components like <strong>Navigation</strong>, <strong>Header</strong> and <strong>Footer</strong>.
+        </p>
+
+    </div>
+
+</div>

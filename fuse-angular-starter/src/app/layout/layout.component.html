@@ -1,0 +1,47 @@
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- Empty layout -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<empty-layout *ngIf="layout === 'empty'"></empty-layout>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- Layouts with horizontal navigation -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<!-- Centered -->
+<centered-layout *ngIf="layout === 'centered'"></centered-layout>
+
+<!-- Enterprise -->
+<enterprise-layout *ngIf="layout === 'enterprise'"></enterprise-layout>
+
+<!-- Material -->
+<material-layout *ngIf="layout === 'material'"></material-layout>
+
+<!-- Modern -->
+<modern-layout *ngIf="layout === 'modern'"></modern-layout>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- Layouts with vertical navigation -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+
+<!-- Classic -->
+<classic-layout *ngIf="layout === 'classic'"></classic-layout>
+
+<!-- Classy -->
+<classy-layout *ngIf="layout === 'classy'"></classy-layout>
+
+<!-- Compact -->
+<compact-layout *ngIf="layout === 'compact'"></compact-layout>
+
+<!-- Dense -->
+<dense-layout *ngIf="layout === 'dense'"></dense-layout>
+
+<!-- Futuristic -->
+<futuristic-layout *ngIf="layout === 'futuristic'"></futuristic-layout>
+
+<!-- Thin -->
+<thin-layout *ngIf="layout === 'thin'"></thin-layout>
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- Settings drawer - Remove this to remove the drawer and its button -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<settings></settings>

@@ -1,0 +1,1207 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Alert
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-alert</strong> is a customizable component for displaying all kinds of alerts across your app. They can be controlled from your components as well
+            as from the <code>FuseAlertService</code>.
+        </p>
+        <p>
+            <strong>Exported as: </strong><code>fuseAlert</code>
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseAlertModule } from '@fuse/components/alert';
+        </textarea>
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>name: string</div>
+                        </td>
+                        <td>
+                            A unique name for the alert box to access it from <code>FuseAlertService</code>.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">Auto generated</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>appearance: FuseAlertAppearance</div>
+                        </td>
+                        <td>
+                            Appearance of the alert box.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">soft</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>dismissed: boolean</div>
+                        </td>
+                        <td>
+                            Whether the alert box is dismissed.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">false</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>dismissible: boolean</div>
+                        </td>
+                        <td>
+                            Whether the alert box is dismissible. This must be <code>true</code> for <code>dismissed</code> to work.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">false</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>showIcon: boolean</div>
+                        </td>
+                        <td>
+                            Whether the icon is shown.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">true</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>type: FuseAlertType</div>
+                        </td>
+                        <td>
+                            The type of the alert box.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">primary</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Output()</div>
+                            <div>afterDismissed: true</div>
+                        </td>
+                        <td>
+                            An event emitted after the alert box dismissed.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Output()</div>
+                            <div>afterShown: true</div>
+                        </td>
+                        <td>
+                            An event emitted after the alert box shown.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Type aliases</h2>
+        <!-- @formatter:off -->
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            export type FuseAlertAppearance =
+                | 'border'
+                | 'fill'
+                | 'outline'
+                | 'soft';
+        </textarea>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            export type FuseAlertType =
+                | 'primary'
+                | 'accent'
+                | 'warn'
+                | 'basic'
+                | 'info'
+                | 'success'
+                | 'warning'
+                | 'error';
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Appearance</h2>
+        <p>
+            Alert component comes with 3 different built-in appearances to choose from:
+        </p>
+
+        <div class="example-viewer">
+
+            <!-- Soft -->
+            <div class="title">
+                <h6>Soft (default)</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab
+                    label="Preview"
+                    class="bg-gray-200">
+
+                    <ng-template matTabContent>
+
+                        <!-- Primary -->
+                        <fuse-alert [type]="'primary'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert [type]="'accent'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert [type]="'warn'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert [type]="'basic'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert [type]="'info'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert [type]="'success'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert [type]="'warning'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert [type]="'error'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+
+                        <!-- Primary -->
+                        <fuse-alert [type]="'primary'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert [type]="'accent'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert [type]="'warn'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert [type]="'basic'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert [type]="'info'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert [type]="'success'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert [type]="'warning'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert [type]="'error'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+
+                    </textarea>
+                    <!-- @formatter:on-->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <div class="example-viewer">
+
+            <!-- Outline -->
+            <div class="title">
+                <h6>Outline</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <!-- Primary -->
+                        <fuse-alert
+                            [type]="'primary'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert
+                            [type]="'accent'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert
+                            [type]="'warn'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert
+                            [type]="'basic'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert
+                            [type]="'info'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert
+                            [type]="'success'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert
+                            [type]="'warning'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert
+                            [type]="'error'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+
+                        <!-- Primary -->
+                        <fuse-alert
+                            [type]="'primary'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert [type]="'accent'"
+                                    [appearance]="'outline'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert
+                            [type]="'warn'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert
+                            [type]="'basic'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert
+                            [type]="'info'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert
+                            [type]="'success'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert
+                            [type]="'warning'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert
+                            [type]="'error'"
+                            [appearance]="'outline'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <div class="example-viewer">
+
+            <!-- Fill -->
+            <div class="title">
+                <h6>Fill</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <!-- Primary -->
+                        <fuse-alert
+                            [type]="'primary'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert
+                            [type]="'accent'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert
+                            [type]="'warn'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert
+                            [type]="'basic'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert
+                            [type]="'info'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert
+                            [type]="'success'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert
+                            [type]="'warning'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert
+                            [type]="'error'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+
+                        <!-- Primary -->
+                        <fuse-alert
+                            [type]="'primary'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert
+                            [type]="'accent'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert [type]="'warn'"
+                        [appearance]="'fill'">
+                        <span fuseAlertTitle>Warn alert</span>
+                        Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert
+                            [type]="'basic'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert
+                            [type]="'info'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert
+                            [type]="'success'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert
+                            [type]="'warning'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert
+                            [type]="'error'"
+                            [appearance]="'fill'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <div class="example-viewer">
+
+            <!-- Border -->
+            <div class="title">
+                <h6>Border</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <!-- Primary -->
+                        <fuse-alert
+                            [type]="'primary'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert
+                            [type]="'accent'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert
+                            [type]="'warn'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert
+                            [type]="'basic'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert
+                            [type]="'info'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert
+                            [type]="'success'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert
+                            [type]="'warning'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert
+                            [type]="'error'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <!-- Primary -->
+                        <fuse-alert
+                            [type]="'primary'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Primary alert</span>
+                            Thank you for joining our newsletter
+                        </fuse-alert>
+
+                        <!-- Accent -->
+                        <fuse-alert
+                            [type]="'accent'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Accent alert</span>
+                            Your changes has been saved
+                        </fuse-alert>
+
+                        <!-- Warn -->
+                        <fuse-alert
+                            [type]="'warn'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Warn alert</span>
+                            Fill all required fields to proceed next step
+                        </fuse-alert>
+
+                        <!-- Basic -->
+                        <fuse-alert
+                            [type]="'basic'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Basic alert</span>
+                            You have 3 new notifications
+                        </fuse-alert>
+
+                        <!-- Info -->
+                        <fuse-alert
+                            [type]="'info'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Info alert</span>
+                            This is a alert with an 'info' level severity
+                        </fuse-alert>
+
+                        <!-- Success -->
+                        <fuse-alert
+                            [type]="'success'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Success alert</span>
+                            This is a alert with a 'success' level severity
+                        </fuse-alert>
+
+                        <!-- Warning -->
+                        <fuse-alert
+                            [type]="'warning'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Warning alert</span>
+                            This is a alert with a 'warning' level severity
+                        </fuse-alert>
+
+                        <!-- Error -->
+                        <fuse-alert
+                            [type]="'error'"
+                            [appearance]="'border'">
+                            <span fuseAlertTitle>Error alert</span>
+                            This is a alert with an 'error' level severity
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h2>Title and alert</h2>
+        <p>
+            All alert boxes have <strong>title</strong> and <strong>alert</strong> content that can be customized.
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            <span fuseAlertTitle>Alert title</span>
+                            This is the alert content
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            <span fuseAlertTitle>Alert title without any content</span>
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            Simple alert without a title
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            <span fuseAlertTitle>Alert title</span>
+                            This is the alert content
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            <span fuseAlertTitle>Alert title without any content</span>
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            Simple alert without a title
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h2>Icons</h2>
+        <p>
+            The <strong>info</strong>, <strong>success</strong>, <strong>warning</strong> and <strong>error</strong> type alert boxes have default icons and they are visible
+            by default. If you wish to hide those icons, use the <code>[showIcon]="false"</code> input.
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'success'"
+                            [showIcon]="false">
+                            Success alert with no icon
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'success'"
+                            [showIcon]="false">
+                            Success alert with no icon
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h2>Custom icons</h2>
+        <p>
+            All alert boxes come with custom icon support. To use a custom icon, simply use <code>fuseAlertIcon</code> attribute on an element you wish to use as the icon.
+            If there is a default icon for the alert box, custom icon will override it.
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            <mat-icon
+                                fuseAlertIcon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:lock-open'"></mat-icon>
+                            Info alert with a custom icon
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [type]="'info'">
+                            <mat-icon class="icon-size-5"
+                                      fuseAlertIcon
+                                      [svgIcon]="'heroicons_solid:lock-open'">
+                            </mat-icon>
+                            Info alert with a custom icon
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h2>Dismissible alerts</h2>
+        <p>
+            Dismissible alerts can be removed from the view by clicking their <strong>dismiss (x)</strong> button. In order to get the dismiss button visible, the
+            <code>[dismissed]</code> input must be explicitly set either to <code>true</code> or <code>false</code>. Setting the <code>[dismissed]</code> input to
+            <code>null</code> or simply removing it from the element will remove the <strong>dismiss</strong> button.
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+                <button
+                    mat-button
+                    [color]="'primary'"
+                    (click)="show('alertBox1'); show('alertBox2')">
+                    Reset
+                </button>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox1'"
+                            [type]="'success'">
+                            Your subscription model is successfully upgraded to the <b>Lifetime Pro</b>.
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox2'"
+                            [type]="'info'">
+                            This one has a lot of text so you can see how the text is going to be displayed. Also this is a dismissible alert box which can be dismissed by
+                            clicking the <b>dismiss</b> button.
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox1'"
+                            [type]="'success'">
+                            Your subscription model is successfully upgraded to the <b>Lifetime Pro</b>.
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox2'"
+                            [type]="'info'">
+                            This one has a lot of text so you can see how the text is going to be displayed.
+                            Also this is a dismissible alert box which can be dismissed by clicking the <b>dismiss</b> button.
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h2>Dismissible alerts controlled from the service</h2>
+        <p>
+            Alerts can be shown and dismissed via <code>FuseAlertService</code>.
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <button
+                            class="mr-3"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="show('alertBox3'); show('alertBox4')">
+                            Show alert boxes
+                        </button>
+
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="dismiss('alertBox3'); dismiss('alertBox4')">
+                            Dismiss alert boxes
+                        </button>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox3'"
+                            [type]="'success'">
+                            Your subscription model is successfully upgraded to the <b>Lifetime Pro</b>.
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox4'"
+                            [type]="'info'">
+                            This one has a lot of text so you can see how the text is going to be displayed. Also this is a dismissible alert box which can be dismissed by
+                            clicking the <b>close</b> button.
+                        </fuse-alert>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <button
+                            class="mr-3"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="show('alertBox3'); show('alertBox4')">
+                            Show alert boxes
+                        </button>
+
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="dismiss('alertBox3'); dismiss('alertBox4')">
+                            Dismiss alert boxes
+                        </button>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox3'"
+                            [type]="'success'">
+                            Your subscription model is successfully upgraded to the <b>Lifetime Pro</b>.
+                        </fuse-alert>
+
+                        <fuse-alert
+                            [appearance]="'soft'"
+                            [dismissible]="true"
+                            [dismissed]="false"
+                            [name]="'alertBox4'"
+                            [type]="'info'">
+                            This one has a lot of text so you can see how the text is going to be displayed.
+                            Also this is a dismissible alert box which can be dismissed by clicking the <b>close</b> button.
+                        </fuse-alert>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+                <mat-tab label="Typescript">
+
+                    <!-- @formatter:off -->
+                    <textarea fuse-highlight
+                              [lang]="'typescript'">
+
+                        /**
+                         * Constructor
+                         */
+                        constructor( private _fuseAlertService: FuseAlertService ) {}
+
+                        /**
+                         * Dismiss the alert via the service
+                         *
+                         * @param name
+                         */
+                        dismiss(name: string): void
+                        {
+                            this._fuseAlertService.dismiss(name);
+                        }
+
+                        /**
+                         * Show the alert via the service
+                         *
+                         * @param name
+                         */
+                        show(name: string): void
+                        {
+                            this._fuseAlertService.show(name);
+                        }
+
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+    </div>
+
+</div>

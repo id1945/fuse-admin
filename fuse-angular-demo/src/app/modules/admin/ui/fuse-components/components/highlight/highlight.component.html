@@ -1,0 +1,144 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Highlight
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-highlight</strong> is a syntax highlighter component to display syntax highlighted codes within the content. Internally, it uses <em>highlight.js</em>.
+        </p>
+        <p>
+            <strong>Exported as: </strong><code>fuseHighlight</code>
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseHighlightModule } from '@fuse/components/highlight';
+        </textarea>
+
+        <h2>Usage</h2>
+        <p>
+            Here's the basic usage of the <code>fuse-highlight</code>:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="html">
+            &lt;textarea fuse-highlight
+                      lang="html"&gt;
+                &lt;div&gt;Some HTML code to highlight&lt;/div&gt;
+            &lt;/textarea&gt;
+        </textarea>
+        <!-- @formatter:on -->
+        <p>
+            <code>fuse-highlight</code> doesn't have its own selector and cannot be used like any other components. It must be used with a <code>&lt;textarea&gt;</code>.
+        </p>
+        <p>
+            The main reason of this is that the Angular parses the templates before binding and running components. Because of this mechanic, anything you place into templates
+            will be taken as a literal content and parsed by Angular. Only the contents of a <code>&lt;textarea&gt;</code> can be preserved as is.
+        </p>
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>code: string</div>
+                        </td>
+                        <td>
+                            Piece of code to highlight. If <strong>code</strong> input is not provided, the actual content of the <strong>textarea</strong> will be used.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>lang: string</div>
+                        </td>
+                        <td>
+                            Which language to highlight the code. See:
+                            <a
+                                href="https://highlightjs.org/usage/"
+                                rel="noreferrer"
+                                target="_blank">https://highlightjs.org/usage/
+                            </a>
+                            for full list of supported languages.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Service</h2>
+        <p>
+            The <code>FuseHighlightService</code> can also be used to format and highlight code:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { FuseHighlightService } from '@fuse/components/highlight';
+
+            code = '<div> Some code to highlight </div>'
+
+            /**
+             * Constructor
+             */
+            constructor(private _fuseHighlightService: FuseHighlightService)
+            {
+                const highlightedCode = this._fuseHighlightService.highlight(code, 'html');
+            }
+        </textarea>
+        <!-- @formatter:on -->
+
+    </div>
+
+</div>

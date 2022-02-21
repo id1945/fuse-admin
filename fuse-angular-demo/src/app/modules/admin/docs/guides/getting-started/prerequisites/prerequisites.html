@@ -1,0 +1,84 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Getting Started</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Prerequisites
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Before you begin developing with Fuse, make sure your development environment includes Node.js, npm and Angular CLI.
+        </p>
+
+        <h2>1. Node.js</h2>
+        <p>
+            To install Node.js, go to
+            <a
+                href="https://nodejs.org/"
+                rel="noreferrer"
+                target="_blank">Node.js
+            </a>
+            and install the active LTS version.
+        </p>
+
+        <h2>2. npm</h2>
+        <p>
+            To download and install npm packages, you must have the npm package manager. This guide uses the npm client command line interface, which is installed with Node.js
+            by default. To check that you have the npm client installed, run <code>npm -v</code> in a terminal/console window.
+        </p>
+
+        <h2>3. Angular CLI</h2>
+        <p>
+            You will use the
+            <a
+                href="https://cli.angular.io/"
+                rel="noreferrer"
+                target="_blank">Angular CLI
+            </a>
+            to create projects, generate application and library code, and perform a variety of ongoing development tasks
+            such as testing, bundling, and deployment.
+        </p>
+        <p>
+            To install the CLI using npm, open a terminal/console window and enter the following command:
+        </p>
+        <textarea
+            fuse-highlight
+            lang="bash">
+            npm install -g @angular/cli
+        </textarea>
+
+    </div>
+
+</div>

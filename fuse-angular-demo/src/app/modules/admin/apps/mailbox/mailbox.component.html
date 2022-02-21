@@ -1,0 +1,29 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+
+    <mat-drawer-container class="flex-auto h-full">
+
+        <!-- Drawer -->
+        <mat-drawer
+            class="w-72 dark:bg-gray-900"
+            [mode]="drawerMode"
+            [opened]="drawerOpened"
+            #drawer>
+
+            <!-- Mailbox sidebar -->
+            <mailbox-sidebar></mailbox-sidebar>
+
+        </mat-drawer>
+
+        <!-- Drawer content -->
+        <mat-drawer-content class="flex flex-col overflow-hidden">
+
+            <!-- Main -->
+            <div class="flex flex-auto overflow-hidden">
+                <router-outlet></router-outlet>
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>

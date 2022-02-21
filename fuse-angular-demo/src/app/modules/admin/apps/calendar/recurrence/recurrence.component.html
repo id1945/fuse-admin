@@ -1,0 +1,121 @@
+<form
+    class="flex flex-col w-full"
+    [formGroup]="recurrenceForm">
+
+    <div class="text-2xl font-semibold tracking-tight">Recurrence rules</div>
+
+    <!-- Interval and frequency -->
+    <div class="flex mt-12">
+        <mat-form-field class="fuse-mat-no-subscript w-24 -mt-6">
+            <mat-label>Repeat every</mat-label>
+            <input
+                type="number"
+                matInput
+                [autocomplete]="'off'"
+                [formControlName]="'interval'"
+                [min]="1">
+        </mat-form-field>
+        <mat-form-field class="fuse-mat-no-subscript w-40 ml-4">
+            <mat-select [formControlName]="'freq'">
+                <mat-option [value]="'DAILY'">day(s)</mat-option>
+                <mat-option [value]="'WEEKLY'">week(s)</mat-option>
+                <mat-option [value]="'MONTHLY'">month(s)</mat-option>
+                <mat-option [value]="'YEARLY'">year(s)</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Weekly repeat options -->
+    <div
+        class="flex flex-col mt-6"
+        [formGroupName]="'weekly'"
+        *ngIf="recurrenceForm.get('freq').value === 'WEEKLY'">
+        <div class="font-medium">Repeat on</div>
+        <mat-button-toggle-group
+            class="mt-1.5 border-0 space-x-1"
+            [formControlName]="'byDay'"
+            [multiple]="true">
+            <ng-container *ngFor="let weekday of weekdays">
+                <mat-button-toggle
+                    class="w-10 h-10 border-0 rounded-full"
+                    [disableRipple]="true"
+                    [value]="weekday.value"
+                    [matTooltip]="weekday.label">
+                    {{weekday.abbr}}
+                </mat-button-toggle>
+            </ng-container>
+        </mat-button-toggle-group>
+    </div>
+
+    <!-- Monthly repeat options -->
+    <div
+        class="flex mt-6"
+        [formGroupName]="'monthly'"
+        *ngIf="recurrenceForm.get('freq').value === 'MONTHLY'">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+            <mat-label>Repeat on</mat-label>
+            <mat-select [formControlName]="'repeatOn'">
+                <mat-option [value]="'date'">Monthly on day {{recurrenceForm.get('monthly.date').value}}</mat-option>
+                <mat-option [value]="'nthWeekday'">Monthly on the {{nthWeekdayText}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Ends -->
+    <div
+        class="flex flex-col mt-12"
+        [formGroupName]="'end'">
+        <div class="flex items-center">
+            <mat-form-field class="fuse-mat-no-subscript w-24 -mt-6">
+                <mat-label>Ends</mat-label>
+                <mat-select [formControlName]="'type'">
+                    <mat-option [value]="'never'">Never</mat-option>
+                    <mat-option [value]="'until'">On</mat-option>
+                    <mat-option [value]="'count'">After</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field
+                class="fuse-mat-no-subscript w-40 ml-4"
+                *ngIf="recurrenceForm.get('end.type').value === 'until'">
+                <input
+                    matInput
+                    [matDatepicker]="untilDatePicker"
+                    [formControlName]="'until'">
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="untilDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #untilDatePicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field
+                class="fuse-mat-no-subscript w-40 ml-4"
+                *ngIf="recurrenceForm.get('end.type').value === 'count'">
+                <input
+                    type="number"
+                    matInput
+                    [autocomplete]="'off'"
+                    [formControlName]="'count'"
+                    [min]="1">
+                <span matSuffix>occurrence(s)</span>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="ml-auto mt-8">
+        <button
+            class="clear"
+            mat-button
+            [color]="'primary'"
+            (click)="clear()">
+            Clear
+        </button>
+        <button
+            mat-flat-button
+            [disabled]="recurrenceForm.invalid"
+            [color]="'primary'"
+            (click)="done()">
+            Done
+        </button>
+    </div>
+
+</form>

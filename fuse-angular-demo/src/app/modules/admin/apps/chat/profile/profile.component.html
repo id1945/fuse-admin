@@ -1,0 +1,80 @@
+<div class="flex flex-col flex-auto overflow-y-auto bg-card dark:bg-default">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center h-18 px-6 border-b bg-gray-50 dark:bg-transparent">
+        <button
+            mat-icon-button
+            (click)="drawer.close()">
+            <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+        </button>
+        <div class="ml-2 text-2xl font-semibold">Profile</div>
+    </div>
+
+    <div class="px-6">
+        <!-- Profile photo -->
+        <div class="group relative flex flex-0 mt-8 mx-auto w-40 h-40 rounded-full">
+            <div class="hidden group-hover:flex absolute inset-0 flex-col items-center justify-center backdrop-filter backdrop-blur bg-opacity-80 rounded-full cursor-pointer bg-gray-800">
+                <mat-icon
+                    class="text-white"
+                    [svgIcon]="'heroicons_outline:camera'"></mat-icon>
+                <div class="mt-2 mx-6 font-medium text-center text-white">Change Profile Photo</div>
+            </div>
+            <ng-container *ngIf="profile.avatar">
+                <img
+                    class="w-full h-full rounded-full object-cover"
+                    [src]="profile.avatar"
+                    [alt]="'Profile avatar'">
+            </ng-container>
+            <ng-container *ngIf="!profile.avatar">
+                <div class="flex items-center justify-center w-full h-full rounded-full text-8xl font-semibold uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                    {{profile.name.charAt(0)}}
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Profile info -->
+        <div class="flex flex-col mt-8 mx-2">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                <input
+                    matInput
+                    [ngModel]="profile.name">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                <input
+                    matInput
+                    [ngModel]="profile.email">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>About</mat-label>
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:identification'"></mat-icon>
+                <input
+                    matInput
+                    [ngModel]="profile.about">
+            </mat-form-field>
+            <div class="flex items-center justify-end mt-4">
+                <button
+                    (click)="drawer.close()"
+                    mat-button>Cancel
+                </button>
+                <button
+                    class="ml-2"
+                    mat-flat-button
+                    [color]="'primary'">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Colors
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl prose prose-sm">
+
+            <p>
+                Since Fuse uses Tailwind, all color related utilities such as <code>text-red-50</code> or <code>bg-indigo-900</code>
+                are available by default and they can be configured using Tailwind's configuration.
+            </p>
+
+            <p>
+                In addition to default Tailwind colors, Fuse also provides utilities that changes depending on the selected theme.
+                These utilities are meant to be used in places where you want to have a theme dependent colors such as buttons,
+                backgrounds or texts.
+            </p>
+
+            <h2>Primary, Accent & Warn</h2>
+            <p>
+                Fuse provides <strong>Primary</strong>, <strong>Accent</strong> and <strong>Warn</strong> utilities to go with
+                Angular Material theming. These utilities hold variable colors and they change depending on the selected theme color.
+            </p>
+            <p>
+                Having these utilities allow you to have dynamic theming throughout your application without hard coding any colors.
+                Each of these utilities also have a complementary <code>.text-on-XXX</code> utility to provide a contrasting text color.
+            </p>
+            <div class="my-8 space-y-8">
+                <div class="grid grid-cols-3 gap-4">
+                    <div
+                        class="flex flex-col flex-auto items-start justify-center p-6 rounded text-on-primary bg-primary"
+                        matRipple>
+                        <div class="font-medium">Primary</div>
+                        <div class="w-full my-4 border-b border-on-primary border-opacity-50"></div>
+                        <code class="text-on-primary">bg-primary</code>
+                        <code class="text-on-primary">text-on-primary</code>
+                    </div>
+                    <div
+                        class="flex flex-col flex-auto items-start justify-center p-6 rounded text-on-accent bg-accent"
+                        matRipple>
+                        <div class="font-medium">Accent</div>
+                        <div class="w-full my-4 border-b border-on-accent border-opacity-50"></div>
+                        <code class="text-on-accent">bg-accent</code>
+                        <code class="text-on-accent">text-on-accent</code>
+                    </div>
+                    <div
+                        class="flex flex-col flex-auto items-start justify-center p-6 rounded text-on-warn bg-warn"
+                        matRipple>
+                        <div class="font-medium">Warn</div>
+                        <div class="w-full my-4 border-b border-on-warn border-opacity-50"></div>
+                        <code class="text-on-warn">bg-warn</code>
+                        <code class="text-on-warn">text-on-warn</code>
+                    </div>
+                    <div
+                        class="flex flex-col flex-auto items-start justify-center p-6 rounded text-on-primary-200 bg-primary-200"
+                        matRipple>
+                        <div class="font-medium">Primary 200</div>
+                        <div class="w-full my-4 border-b border-on-primary-200 border-opacity-50"></div>
+                        <code class="text-on-primary-200">bg-primary-200</code>
+                        <code class="text-on-primary-200">text-on-primary-200</code>
+                    </div>
+                    <div
+                        class="flex flex-col flex-auto items-start justify-center p-6 rounded text-on-accent-300 bg-accent-300"
+                        matRipple>
+                        <div class="font-medium">Accent 300</div>
+                        <div class="w-full my-4 border-b border-on-accent-300 border-opacity-50"></div>
+                        <code class="text-on-accent-300">bg-accent-300</code>
+                        <code class="text-on-accent-300">text-on-accent-300</code>
+                    </div>
+                    <div
+                        class="flex flex-col flex-auto items-start justify-center p-6 rounded text-on-warn-400 bg-warn-400"
+                        matRipple>
+                        <div class="font-medium">Warn 400</div>
+                        <div class="w-full my-4 border-b border-on-warn-400 border-opacity-50"></div>
+                        <code class="text-on-warn-400">bg-warn-400</code>
+                        <code class="text-on-warn-400">text-on-warn-400</code>
+                    </div>
+                </div>
+            </div>
+            <p>
+                You can change the theme from the <i>Settings</i> panel to observe the primary color changing.
+            </p>
+            <p>
+                These variable colors have different hue values just like a default Tailwind color palette and
+                they are also available for other Tailwind color utilities such as <strong>border</strong>, <strong>ring</strong> and etc:
+            </p>
+            <p>
+                <code>bg-primary-50</code>, <code>text-accent-900</code>, <code>text-on-warn-500</code>, <code>border-primary</code>,
+                <code>ring-warn-600</code> ...
+            </p>
+
+
+            <h2>Text and Background colors</h2>
+            <p>
+                Fuse also provides set of utilities to have consistent text and background colors throughout your application without
+                hard coding any colors. They also allow working with dark variant of the selected theme.
+            </p>
+            <p>
+                For example, a text node with a <code>.text-secondary</code> class will have a proper lighter color compared to main text color
+                depending on the selected scheme.
+            </p>
+            <p>
+                Here's the complete list of the available text and background utilities:
+            </p>
+            <div class="flex my-8 space-x-16">
+                <div class="flex flex-col space-y-4">
+                    <div><code class="text-default">.text-default</code></div>
+                    <div><code class="text-secondary">.text-secondary</code></div>
+                    <div><code class="text-hint">.text-hint</code></div>
+                    <div><code class="text-disabled">.text-disabled</code></div>
+                    <div><code class="divider">.divider</code></div>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <div class="py-1 px-2 rounded bg-card"><code>.bg-card</code></div>
+                    <div class="py-1 px-2 rounded bg-default"><code>.bg-default</code></div>
+                    <div class="py-1 px-2 rounded bg-dialog"><code>.bg-dialog</code></div>
+                    <div class="py-1 px-2 rounded bg-hover"><code>.bg-hover</code></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

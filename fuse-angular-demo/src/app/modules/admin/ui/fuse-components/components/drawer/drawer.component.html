@@ -1,0 +1,358 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Drawer
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-drawer</strong> is a simple drawer component that can be programmed in various ways. The main difference between Angular Material's
+            <strong>mat-drawer</strong> component is that the <strong>fuse-drawer</strong> can be placed anywhere on the DOM and it doesn't have to wrap the content like
+            <strong>mat-drawer</strong>.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            Since fuse-drawer works with <em>absolute</em> positioning by default, the parent of the drawer must have
+            <code>position: relative</code> and <code>overflow-x: hidden</code> properties otherwise the drawer won't be able to work correctly.
+        </fuse-alert>
+        <p>
+            <strong>Exported as: </strong><code>fuseDrawer</code>
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseDrawerModule } from '@fuse/components/drawer';
+        </textarea>
+
+        <h2>Usage</h2>
+        <p>
+            Here's the basic usage of the <code>fuse-drawer</code>:
+        </p>
+        <!-- @formatter:off -->
+        <textarea
+            fuse-highlight
+            lang="html">
+            <fuse-drawer
+                [fixed]="true"
+                [mode]="isScreenSmall ? 'over' : 'side'"
+                [name]="'rightDrawer'"
+                [opened]="!isScreenSmall"
+                [position]="'right'"
+                [transparentOverlay]="false">
+            </fuse-drawer>
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>fixed: boolean</div>
+                        </td>
+                        <td>
+                            Whether the position of the drawer is <em>fixed</em> or <em>absolute</em>.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">false</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>mode: FuseDrawerMode</div>
+                        </td>
+                        <td>
+                            <strong>over</strong> mode can be used to place the drawer on top of the content and <strong>side</strong> mode can be used to push the content and
+                            place the drawer next to it.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">side</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div class="mb-2"><code class="text-xs font-bold">REQUIRED</code></div>
+                            <div>@Input()</div>
+                            <div>name: string</div>
+                        </td>
+                        <td>
+                            Unique name of the drawer. Required for drawer to work correctly.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>opened: boolean</div>
+                        </td>
+                        <td>
+                            Whether the drawer is opened. Only works with <strong>over</strong> mode.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">false</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>position: FuseDrawerPosition</div>
+                        </td>
+                        <td>
+                            Position of the drawer.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">left</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>transparentOverlay: boolean</div>
+                        </td>
+                        <td>
+                            Whether the overlay of the drawer is transparent. Only works with <strong>over</strong> mode.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">false</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Output()</div>
+                            <div>modeChanged: FuseNavigationMode</div>
+                        </td>
+                        <td>
+                            An event emitted after the mode of the navigation changed.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Output()</div>
+                            <div>openedChanged: boolean</div>
+                        </td>
+                        <td>
+                            An event emitted after the opened status of the drawer changed.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Output()</div>
+                            <div>positionChanged: FuseNavigationPosition</div>
+                        </td>
+                        <td>
+                            An event emitted after the position of the drawer changed.
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Type aliases</h2>
+        <!-- @formatter:off -->
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            export type FuseDrawerMode =
+                | 'over'
+                | 'side';
+        </textarea>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            export type FuseDrawerPosition =
+                | 'left'
+                | 'right';
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Service</h2>
+        <p>
+            The <code>FuseDrawerService</code> can be used to remotely accessing to drawers using their <strong>name</strong> properties to control them:
+        </p>
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="toggleDrawerMode('leftDrawer');">
+                            Toggle drawer mode
+                        </button>
+
+                        <button
+                            class="ml-4"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="toggleDrawerOpen('leftDrawer');">
+                            Toggle drawer open
+                        </button>
+
+                        <div class="relative flex overflow-hidden border mt-8 min-h-80">
+
+                            <fuse-drawer
+                                [name]="'leftDrawer'"
+                                [opened]="true"
+                                [mode]="'side'"
+                                #drawer>
+                                <div class="p-4">
+                                    Left drawer
+                                    <div>Current mode: {{drawer.mode}}</div>
+                                </div>
+                            </fuse-drawer>
+
+                            <div class="flex-auto bg-gray-100 p-4">
+                                Some content
+                            </div>
+
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <button
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="toggleDrawerMode('leftDrawer');">
+                                Toggle drawer mode
+                        </button>
+
+                        <button
+                            class="ml-4"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="toggleDrawerOpen('leftDrawer');">
+                            Toggle drawer open
+                        </button>
+
+                        <div class="relative flex overflow-hidden border mt-8 min-h-80">
+                            <fuse-drawer
+                                [name]="'leftDrawer'"
+                                [opened]="true"
+                                [mode]="'side'">
+                                <div class="p-4">
+                                    Left drawer
+                                </div>
+                            </fuse-drawer>
+
+                            <div class="flex-auto bg-gray-100 p-4">
+                                Some content
+                            </div>
+                        </div>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+                <mat-tab label="Typescript">
+
+                    <!-- @formatter:off -->
+                    <textarea fuse-highlight
+                              [lang]="'typescript'">
+
+                        /**
+                         * Toggle the drawer mode
+                         *
+                         * @param drawerName
+                         */
+                        toggleDrawerMode(drawerName): void
+                        {
+                            const drawer = this._fuseDrawerService.getComponent(drawerName);
+                            drawer.mode = drawer.mode === 'side' ? 'over' : 'side';
+                        }
+
+                        /**
+                         * Toggle the drawer open
+                         *
+                         * @param drawerName
+                         */
+                        toggleDrawerOpen(drawerName): void
+                        {
+                            const drawer = this._fuseDrawerService.getComponent(drawerName);
+                            drawer.toggle();
+                        }
+
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,117 @@
+<div class="flex flex-col flex-auto min-h-full p-8">
+    <div class="pb-6 text-4xl font-extrabold tracking-tight">Calendar</div>
+
+    <!-- Calendars -->
+    <div class="group flex items-center justify-between mb-3">
+        <span class="text-lg font-medium">Calendars</span>
+        <mat-icon
+            class="hidden group-hover:inline-flex icon-size-5 cursor-pointer"
+            [svgIcon]="'heroicons_solid:plus-circle'"
+            (click)="addCalendar()"></mat-icon>
+    </div>
+    <ng-container *ngFor="let calendar of calendars">
+        <div class="group flex items-center justify-between mt-2">
+            <div
+                class="flex items-center"
+                (click)="toggleCalendarVisibility(calendar)">
+                <mat-icon
+                    class="cursor-pointer"
+                    [svgIcon]="calendar.visible ? 'check_box' : 'check_box_outline_blank'"></mat-icon>
+                <span
+                    class="w-3 h-3 ml-2 rounded-full"
+                    [ngClass]="calendar.color"></span>
+                <span class="ml-2 leading-none">{{calendar.title}}</span>
+            </div>
+            <mat-icon
+                class="hidden group-hover:inline-flex icon-size-5 cursor-pointer"
+                [svgIcon]="'heroicons_solid:pencil-alt'"
+                (click)="openEditPanel(calendar)"></mat-icon>
+        </div>
+    </ng-container>
+
+    <!-- Settings -->
+    <div class="-mx-4 mt-auto">
+        <a
+            class="flex items-center w-full py-3 px-4 rounded-full hover:bg-hover"
+            [routerLink]="['settings']">
+            <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+            <span class="ml-2 font-medium leading-none">Settings</span>
+        </a>
+    </div>
+
+    <!-- Edit panel -->
+    <ng-template #editPanel>
+        <div class="flex flex-col w-80 p-8 shadow-2xl rounded-lg bg-card">
+            <div class="text-2xl font-semibold tracking-tight">
+                <ng-container *ngIf="!calendar.id">Add calendar</ng-container>
+                <ng-container *ngIf="calendar.id">Edit calendar</ng-container>
+            </div>
+            <div class="flex items-center mt-8">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <input
+                        matInput
+                        [(ngModel)]="calendar.title"
+                        [placeholder]="'Title'"
+                        required>
+                    <mat-select
+                        [(value)]="calendar.color"
+                        [disableOptionCentering]="true"
+                        matPrefix>
+                        <mat-select-trigger class="h-6">
+                            <mat-icon [svgIcon]="'heroicons_outline:color-swatch'"></mat-icon>
+                        </mat-select-trigger>
+                        <div class="px-4 pt-5 text-xl font-semibold">Calendar color</div>
+                        <div class="flex flex-wrap w-48 my-4 mx-3 -mr-5">
+                            <ng-container *ngFor="let color of calendarColors">
+                                <mat-option
+                                    class="relative flex w-12 h-12 p-0 cursor-pointer rounded-full bg-transparent"
+                                    [value]="color"
+                                    #matOption="matOption">
+                                    <mat-icon
+                                        class="absolute m-3 text-white"
+                                        *ngIf="matOption.selected"
+                                        [svgIcon]="'heroicons_outline:check'"></mat-icon>
+                                    <span
+                                        class="flex w-10 h-10 m-1 rounded-full"
+                                        [ngClass]="color"></span>
+                                </mat-option>
+                            </ng-container>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- Actions -->
+            <div class="ml-auto mt-8 space-x-2">
+                <button
+                    mat-button
+                    *ngIf="calendar.id"
+                    (click)="deleteCalendar(calendar)">
+                    Delete
+                </button>
+                <button
+                    mat-flat-button
+                    *ngIf="calendar.id"
+                    [color]="'primary'"
+                    [disabled]="!calendar.title"
+                    (click)="saveCalendar(calendar)">
+                    Update
+                </button>
+                <button
+                    mat-button
+                    *ngIf="!calendar.id"
+                    (click)="closeEditPanel()">
+                    Cancel
+                </button>
+                <button
+                    mat-flat-button
+                    *ngIf="!calendar.id"
+                    [color]="'primary'"
+                    [disabled]="!calendar.title"
+                    (click)="saveCalendar(calendar)">
+                    Add
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>

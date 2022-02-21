@@ -1,0 +1,215 @@
+<div class="flex flex-col flex-auto overflow-y-auto lg:overflow-hidden bg-card dark:bg-default">
+
+    <ng-container *ngIf="chat; else selectChatOrStartNew">
+
+        <mat-drawer-container
+            class="flex-auto h-full"
+            [hasBackdrop]="false">
+
+            <!-- Drawer -->
+            <mat-drawer
+                class="w-full sm:w-100 lg:border-l lg:shadow-none dark:bg-gray-900"
+                [autoFocus]="false"
+                [mode]="drawerMode"
+                [position]="'end'"
+                [(opened)]="drawerOpened"
+                #drawer>
+
+                <!-- Contact info -->
+                <chat-contact-info
+                    [drawer]="drawer"
+                    [chat]="chat"></chat-contact-info>
+            </mat-drawer>
+
+            <!-- Drawer content -->
+            <mat-drawer-content class="flex flex-col overflow-hidden">
+
+                <!-- Header -->
+                <div class="flex flex-0 items-center h-18 px-4 md:px-6 border-b bg-gray-50 dark:bg-transparent">
+
+                    <!-- Back button -->
+                    <a
+                        class="lg:hidden md:-ml-2"
+                        mat-icon-button
+                        [routerLink]="['./']"
+                        (click)="resetChat()">
+                        <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                    </a>
+
+                    <!-- Contact info -->
+                    <div
+                        class="flex items-center ml-2 lg:ml-0 mr-2 cursor-pointer"
+                        (click)="openContactInfo()">
+                        <div class="relative flex flex-0 items-center justify-center w-10 h-10">
+                            <ng-container *ngIf="chat.contact.avatar">
+                                <img
+                                    class="w-full h-full rounded-full object-cover"
+                                    [src]="chat.contact.avatar"
+                                    alt="Contact avatar"/>
+                            </ng-container>
+                            <ng-container *ngIf="!chat.contact.avatar">
+                                <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                    {{chat.contact.name.charAt(0)}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="ml-4 text-lg font-medium leading-5 truncate">{{chat.contact.name}}</div>
+                    </div>
+
+                    <button
+                        class="ml-auto"
+                        mat-icon-button
+                        [matMenuTriggerFor]="conversationHeaderMenu">
+                        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                        <mat-menu #conversationHeaderMenu>
+                            <button
+                                mat-menu-item
+                                (click)="openContactInfo()">
+                                <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+                                Contact info
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                Select messages
+                            </button>
+                            <button
+                                mat-menu-item
+                                (click)="toggleMuteNotifications()">
+                                <ng-container *ngIf="!chat.muted">
+                                    <mat-icon [svgIcon]="'heroicons_outline:volume-off'"></mat-icon>
+                                    Mute notifications
+                                </ng-container>
+                                <ng-container *ngIf="chat.muted">
+                                    <mat-icon [svgIcon]="'heroicons_outline:volume-up'"></mat-icon>
+                                    Unmute notifications
+                                </ng-container>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon [svgIcon]="'heroicons_outline:backspace'"></mat-icon>
+                                Clear messages
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                                Delete chat
+                            </button>
+                        </mat-menu>
+                    </button>
+
+                </div>
+
+                <!-- Conversation -->
+                <div class="flex overflow-y-auto flex-col-reverse">
+                    <div class="flex flex-col flex-auto flex-shrink p-6 bg-card dark:bg-transparent">
+                        <ng-container *ngFor="let message of chat.messages; let i = index; let first = first; let last = last; trackBy: trackByFn">
+                            <!-- Start of the day -->
+                            <ng-container *ngIf="first || (chat.messages[i - 1].createdAt | date:'d') !== (message.createdAt | date:'d')">
+                                <div class="flex items-center justify-center my-3 -mx-6">
+                                    <div class="flex-auto border-b"></div>
+                                    <div class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
+                                        {{message.createdAt | date: 'longDate'}}
+                                    </div>
+                                    <div class="flex-auto border-b"></div>
+                                </div>
+                            </ng-container>
+                            <div
+                                class="flex flex-col"
+                                [ngClass]="{'items-end': message.isMine,
+                                        'items-start': !message.isMine,
+                                        'mt-0.5': i > 0 && chat.messages[i - 1].isMine === message.isMine,
+                                        'mt-3': i > 0 && chat.messages[i - 1].isMine !== message.isMine}">
+                                <!-- Bubble -->
+                                <div
+                                    class="relative max-w-3/4 px-3 py-2 rounded-lg"
+                                    [ngClass]="{'bg-blue-500 text-blue-50': message.isMine,
+                                            'bg-gray-500 text-gray-50': !message.isMine}">
+                                    <!-- Speech bubble tail -->
+                                    <ng-container *ngIf="last || chat.messages[i + 1].isMine !== message.isMine">
+                                        <div
+                                            class="absolute bottom-0 w-3 transform"
+                                            [ngClass]="{'text-blue-500 -right-1 -mr-px mb-px': message.isMine,
+                                                    'text-gray-500 -left-1 -ml-px mb-px -scale-x-1': !message.isMine}">
+                                            <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                        </div>
+                                    </ng-container>
+                                    <!-- Message -->
+                                    <div
+                                        class="min-w-4 leading-5"
+                                        [innerHTML]="message.value">
+                                    </div>
+                                </div>
+                                <!-- Time -->
+                                <ng-container
+                                    *ngIf="first
+                                       || last
+                                       || chat.messages[i + 1].isMine !== message.isMine
+                                       || chat.messages[i + 1].createdAt !== message.createdAt">
+                                    <div
+                                        class="my-0.5 text-sm font-medium text-secondary"
+                                        [ngClass]="{'mr-3': message.isMine,
+                                                'ml-3': !message.isMine}">
+                                        {{message.createdAt | date:'HH:mm'}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Message field -->
+                <div class="flex items-end p-4 border-t bg-gray-50 dark:bg-transparent">
+                    <div class="flex items-center h-11 my-px">
+                        <button mat-icon-button>
+                            <mat-icon [svgIcon]="'heroicons_outline:emoji-happy'"></mat-icon>
+                        </button>
+                        <button
+                            class="ml-0.5"
+                            mat-icon-button>
+                            <mat-icon [svgIcon]="'heroicons_outline:paper-clip'"></mat-icon>
+                        </button>
+                    </div>
+                    <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded fuse-mat-bold w-full ml-4">
+                        <textarea
+                            class="min-h-5 my-0 resize-none"
+                            style="margin: 11px 0 !important; padding: 0 !important;"
+                            [rows]="1"
+                            matInput
+                            #messageInput></textarea>
+                    </mat-form-field>
+                    <div class="flex items-center h-11 my-px ml-4">
+                        <button
+                            mat-icon-button>
+                            <mat-icon
+                                class="transform rotate-90"
+                                [svgIcon]="'heroicons_outline:paper-airplane'"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+            </mat-drawer-content>
+
+        </mat-drawer-container>
+
+    </ng-container>
+
+    <!-- Select chat or start new template -->
+    <ng-template #selectChatOrStartNew>
+        <div class="flex flex-col flex-auto items-center justify-center bg-gray-100 dark:bg-transparent">
+            <mat-icon
+                class="icon-size-24"
+                [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+            <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Select a conversation or start a new chat</div>
+        </div>
+    </ng-template>
+
+    <!-- Speech bubble tail SVG -->
+    <!-- @formatter:off -->
+    <ng-template #speechBubbleExtension>
+        <svg width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path d="M1.01522827,0.516204834 C-8.83532715,54.3062744 61.7609863,70.5215302 64.8009949,64.3061218 C68.8074951,54.8859711 30.1663208,52.9997559 37.5036011,0.516204834 L1.01522827,0.516204834 Z" fill="currentColor" fill-rule="nonzero"></path>
+            </g>
+        </svg>
+    </ng-template>
+    <!-- @formatter:on -->
+
+</div>

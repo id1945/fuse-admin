@@ -1,0 +1,413 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Card
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-card</strong> is a basic card component to show any kind of information or content with features like flipping and expanding.
+        </p>
+        <p>
+            <strong>Exported as: </strong><code>fuseCard</code>
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseCardModule } from '@fuse/components/card';
+        </textarea>
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>flippable: boolean</div>
+                        </td>
+                        <td>
+                            Whether the card is flippable.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">false</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Methods</h2>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                expand(): void
+            </div>
+            <div class="p-6">
+                Expands the expansion of the card.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                collapse(): void
+            </div>
+            <div class="p-6">
+                Collapses the expansion of the card.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                toggleExpanded(): void
+            </div>
+            <div class="p-6">
+                Toggles the expanded status of the expansion.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                flip(): void
+            </div>
+            <div class="p-6">
+                Flip the card.
+            </div>
+        </div>
+
+        <h2>Usage</h2>
+        <p>
+            Just wrap the content or the information with <code>fuse-card</code> to show them within the card. <strong>fuse-card</strong> doesn't apply any kind of style to its
+            content to make customization simpler:
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="mx-auto max-w-80">
+                                <fuse-card>
+                                    This content is in the card and it doesn't have any style applied to it!
+                                </fuse-card>
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-card>
+                            This content is in the card and it doesn't have any style applied to it!
+                        </fuse-card>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h3>Expandable</h3>
+        <p>
+            Expandable <strong>fuse-card</strong> holds an extra content or information hidden in its expandable area which can be toggled by accessing the component itself
+            via a template reference:
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="mx-auto max-w-80">
+
+                                <fuse-card
+                                    class="flex flex-col px-8 py-6 pb-4"
+                                    #fuseCard>
+                                    <div class="text-lg font-bold">Title of the card</div>
+                                    <div class="mt-2">
+                                        A paragraph, an image, a form or simply anything can go here to create the content of the card.
+                                    </div>
+                                    <div class="mt-3 -mx-3">
+                                        <button
+                                            class="px-3"
+                                            mat-button
+                                            [color]="'primary'"
+                                            (click)="fuseCard.expanded = !fuseCard.expanded">
+                                            <span class="mr-1">Details</span>
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                *ngIf="!fuseCard.expanded"
+                                                [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                *ngIf="fuseCard.expanded"
+                                                [svgIcon]="'heroicons_solid:chevron-up'"></mat-icon>
+                                        </button>
+                                    </div>
+
+                                    <!-- Expansion -->
+                                    <ng-container fuseCardExpansion>
+                                        <div class="my-2">
+                                            This is the expansion and holds an extra information!
+                                        </div>
+                                    </ng-container>
+                                </fuse-card>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-card
+                            class="flex flex-col px-8 py-6 pb-4"
+                            #fuseCard>
+                            <div class="text-lg font-bold">Title of the card</div>
+                            <div class="mt-2">
+                                A paragraph, an image, a form or simply anything can go here to create the content of the card.
+                            </div>
+                            <div class="mt-3 -mx-3">
+                                <button
+                                    class="px-3"
+                                    mat-button
+                                    [color]="'primary'"
+                                    (click)="fuseCard.expanded = !fuseCard.expanded">
+                                    <span class="mr-1">Details</span>
+                                    <mat-icon
+                                        class="icon-size-5"
+                                        *ngIf="!fuseCard.expanded"
+                                        [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
+                                    <mat-icon
+                                        class="icon-size-5"
+                                        *ngIf="fuseCard.expanded"
+                                        [svgIcon]="'heroicons_solid:chevron-up'"></mat-icon>
+                                </button>
+                            </div>
+
+                            <!-- Expansion -->
+                            <ng-container fuseCardExpansion>
+                                <div class="my-2">
+                                    This is the expansion and holds an extra information!
+                                </div>
+                            </ng-container>
+                        </fuse-card>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h3>Flippable</h3>
+        <p>
+            Flippable card holds content or information on both sides and can be flipped by accessing the component itself via a template reference. The only limitation with
+            this type of cards is that the <em>back</em> of the card will share the same height as the <em>front</em> of the card. If the <em>back</em> side has more content,
+            scrollbar will appear.
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="mx-auto max-w-80">
+
+                                <fuse-card
+                                    class="flex flex-col"
+                                    [flippable]="true"
+                                    #fuseCard>
+                                    <!-- Front -->
+                                    <ng-container fuseCardFront>
+                                        <div class="flex flex-col px-8 py-6 pb-3">
+                                            <div class="text-lg font-bold">Title of the card</div>
+                                            <div class="mt-2">
+                                                A paragraph, an image, a form or simply anything can go here to create the content of the card.
+                                            </div>
+                                            <div class="mt-3 -mx-3 self-end">
+                                                <button
+                                                    mat-icon-button
+                                                    [color]="'primary'"
+                                                    (click)="fuseCard.face = 'back'">
+                                                    <mat-icon
+                                                        class="icon-size-5"
+                                                        [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                    <!-- Back -->
+                                    <ng-container fuseCardBack>
+                                        <div class="flex flex-col flex-auto px-8 py-6 pt-3">
+                                            <div class="mb-2 -mx-3">
+                                                <button
+                                                    mat-icon-button
+                                                    [color]="'primary'"
+                                                    (click)="fuseCard.face = 'front'">
+                                                    <mat-icon
+                                                        class="icon-size-5"
+                                                        [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                                                </button>
+                                            </div>
+                                            <p class="text-secondary">
+                                                This is the back of the card and holds an extra information!
+                                            </p>
+                                            <p class="text-secondary">
+                                                Also, the <em>back</em> side of the card holds more information than the <em>front</em> of the card which causes scrollbars to
+                                                appear.
+                                            </p>
+                                        </div>
+                                    </ng-container>
+                                </fuse-card>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-card
+                            class="flex flex-col"
+                            [flippable]="true"
+                            #fuseCard>
+                            <!-- Front -->
+                            <ng-container fuseCardFront>
+                                <div class="flex flex-col px-8 py-6 pb-3">
+                                    <div class="text-lg font-bold">Title of the card</div>
+                                    <div class="mt-2">
+                                        A paragraph, an image, a form or simply anything can go here to create the content of the card.
+                                    </div>
+                                    <div class="mt-3 -mx-3 self-end">
+                                        <button
+                                            mat-icon-button
+                                            [color]="'primary'"
+                                            (click)="fuseCard.face = 'back'">
+                                                <mat-icon
+                                                    class="icon-size-5"
+                                                    [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <!-- Back -->
+                            <ng-container fuseCardBack>
+                                <div class="flex flex-col flex-auto px-8 py-6 pt-3">
+                                    <div class="mb-2 -mx-3">
+                                        <button
+                                            mat-icon-button
+                                            [color]="'primary'"
+                                            (click)="fuseCard.face = 'front'">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+                                        </button>
+                                    </div>
+                                    <p class="text-secondary">
+                                        This is the back of the card and holds an extra information!
+                                    </p>
+                                    <p class="text-secondary">
+                                        Also, the <em>back</em> side of the card holds more information than the <em>front</em> of the card
+                                        which causes scrollbars to appear.
+                                    </p>
+                                </div>
+                            </ng-container>
+                        </fuse-card>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+    </div>
+
+</div>

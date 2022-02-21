@@ -1,0 +1,114 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Customization</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Splash Screen
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            The <strong>splash screen</strong> is the screen that shows up when your app is loading. It's <strong>NOT</strong> just a cosmetic screen or something that you can
+            make <em>faster</em>, it simply shows up while Angular loads and hides immediately after it finishes loading.
+        </p>
+
+        <h2>How it works?</h2>
+        <p>
+            When you first arrive your app via its website address, the <strong>index.html</strong> loads first. It has all the required scripts injected in it by the
+            AngularCLI, so as soon as it loads, it also starts loading the required script files.
+        </p>
+        <p>
+            After those required script files loaded, Angular starts the Bootstrapping progress and loads the first component (usually the <em>AppComponent</em>). Then
+            <em>AppComponent</em> takes over and loads other modules and components and your app starts running.
+        </p>
+        <p>
+            While all of these happening, you will see nothing on the screen simply because the <strong>index.html</strong> file has nothing in it except the script injections
+            and the entry point for your <em>AppComponent</em>. That's where the <strong>splash screen</strong> comes into play and hides the <em>white screen of loading</em>.
+        </p>
+
+        <h2>Customizing the screen</h2>
+        <p>
+            Splash screen content stays in the <code>index.html</code> file. The <code>fuse-splash-screen</code> dummy element holds everything related to the splash screen.
+            This element is not an actual Angular component, it's just a simple wrapper to hold everything you may want to show on the splash screen.
+        </p>
+        <p>
+            Splash screen styles are located in <code>src/assets/styles/splash-screen.css</code> file.
+        </p>
+        <p>
+            You can change the styles to modify the look of the splash screen and put anything you want into the <code>fuse-splash-screen</code> element to show on the
+            page.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            Please note, you cannot run Angular components in here. Basically, by the time you can run Angular components, you won't be needing the
+            splash screen because everything would already be loaded!
+        </fuse-alert>
+        <p>
+            If you don't want to show the splash screen and you are happy with the <em>white screen of loading</em>, then you can simply remove the
+            <code>fuse-splash-screen</code> dummy element and its content from the <strong>index.html</strong> file as well as the <code>link</code>
+            element that loads the <code>splash-screen.css</code> file:
+        </p>
+
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="html">
+        ...
+
+        <!-- Splash screen styles -->
+        <link
+              href="assets/styles/splash-screen.css"
+              rel="stylesheet">
+
+        ...
+
+        <!-- Splash screen -->
+        <fuse-splash-screen>
+            <img
+                src="assets/images/logo/logo.svg"
+                alt="Fuse logo">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </fuse-splash-screen>
+
+        ...
+        </textarea>
+        <!-- @formatter:on -->
+
+    </div>
+
+</div>

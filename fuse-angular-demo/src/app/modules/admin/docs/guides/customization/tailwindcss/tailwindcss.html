@@ -1,0 +1,90 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Customization</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    TailwindCSS
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            As per the official page of Tailwind CSS, it is a highly customizable, low-level CSS framework that gives you all of the building blocks you need to build bespoke
+            designs without any annoying opinionated styles you have to fight to override.
+        </p>
+        <p>
+            To simply put, Tailwind provides helper classes for almost every CSS rule available.
+        </p>
+        <p>
+            Fuse includes and uses Tailwind whenever it's possible. There are no traditional styles available within the Fuse, Though there are edge cases that cannot be
+            styled using Tailwind, 99% of the Fuse is styled using Tailwind.
+        </p>
+
+        <h2>Configuration</h2>
+        <p>
+            To use Tailwind, you don't need to do any setup as all Tailwind classes can be accessible from any HTML file you create by default.
+        </p>
+        <p>
+            Tailwind configuration can be found in <code>/src/tailwind.config.js</code> file. This file is used to configure the generated classes by Tailwind. We already
+            configured the Tailwind using the config file to provide sensible defaults for a web app.
+        </p>
+
+        <h2>Tailwind and Fuse</h2>
+        <p>
+            Fuse also uses Tailwind as its main configuration source for Angular Material components. Basically, some of the Tailwind configuration is exported during
+            the Tailwind's build process and made available for Fuse's internal use cases. This allows Fuse to use Tailwind's configuration as the single source of truth.
+        </p>
+        <p>
+            To summarize; if you want to add/edit/remove any color, change the font families, modify the breakpoints or change any other visual configuration, you have to do
+            that via the Tailwind's config file and they will be carried over to the Angular Material components.
+        </p>
+
+        <h2>Building Tailwind</h2>
+        <p>
+            Since Angular v11, Tailwind support has been added into the AngularCLI so you don't have to do anything to build Tailwind.
+        </p>
+
+        <h2>Official docs</h2>
+        <p>
+            Official Tailwind CSS documentation:
+            <a
+                class="link"
+                href="https://tailwindcss.com/"
+                rel="noreferrer"
+                target="_blank">https://tailwindcss.com/
+            </a>
+        </p>
+
+    </div>
+
+</div>

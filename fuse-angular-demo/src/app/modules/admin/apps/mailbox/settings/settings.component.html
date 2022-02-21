@@ -1,0 +1,123 @@
+<div class="flex flex-col flex-auto overflow-y-auto p-8">
+
+    <div class="flex items-center">
+        <!-- Sidebar toggle button -->
+        <div class="md:hidden -ml-2 mr-3">
+            <button
+                mat-icon-button
+                (click)="mailboxComponent.drawer.toggle()">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            </button>
+        </div>
+        <!-- Title -->
+        <div>
+            <div class="text-3xl font-extrabold tracking-tight">Manage Labels</div>
+            <div class="text-secondary">Create, update and delete labels</div>
+        </div>
+    </div>
+
+    <!-- Labels form -->
+    <form
+        class="mt-8"
+        [formGroup]="labelsForm">
+
+        <!-- New label -->
+        <div
+            class="flex items-center justify-start w-full max-w-80 mt-6"
+            [formGroupName]="'newLabel'">
+            <mat-form-field class="w-full">
+                <mat-label>New Label</mat-label>
+                <input
+                    matInput
+                    [formControlName]="'title'"
+                    [placeholder]="'Label title'">
+                <mat-select
+                    [formControlName]="'color'"
+                    [disableOptionCentering]="true"
+                    matPrefix>
+                    <mat-select-trigger class="h-6">
+                        <mat-icon
+                            [ngClass]="labelColorDefs[labelsForm.get('newLabel.color').value].text"
+                            [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                    </mat-select-trigger>
+                    <div class="px-4 pt-5 text-xl font-semibold">Label color</div>
+                    <div class="flex flex-wrap w-48 my-4 mx-3 -mr-5">
+                        <ng-container *ngFor="let color of labelColors">
+                            <mat-option
+                                class="relative flex w-12 h-12 p-0 cursor-pointer rounded-full bg-transparent"
+                                [value]="color"
+                                #matOption="matOption">
+                                <mat-icon
+                                    class="absolute m-3 text-white"
+                                    *ngIf="matOption.selected"
+                                    [svgIcon]="'heroicons_outline:check'"></mat-icon>
+                                <span
+                                    class="flex w-10 h-10 m-1 rounded-full"
+                                    [ngClass]="labelColorDefs[color].bg"></span>
+                            </mat-option>
+                        </ng-container>
+                    </div>
+                </mat-select>
+                <button
+                    mat-icon-button
+                    matSuffix
+                    [disabled]="!labelsForm.get('newLabel').valid || !labelsForm.get('newLabel').dirty"
+                    (click)="addLabel()">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <!-- Labels -->
+        <div
+            class="flex flex-col w-full max-w-80 mt-4"
+            [formArrayName]="'labels'">
+            <!-- Label -->
+            <ng-container *ngFor="let label of labelsForm.get('labels')['controls']">
+                <mat-form-field class="w-full">
+                    <input
+                        matInput
+                        [formControl]="label.get('title')">
+                    <mat-select
+                        [formControl]="label.get('color')"
+                        [disableOptionCentering]="true"
+                        matPrefix>
+                        <mat-select-trigger class="h-6">
+                            <mat-icon
+                                [ngClass]="labelColorDefs[label.get('color').value].text"
+                                [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                        </mat-select-trigger>
+                        <div class="px-4 pt-5 text-xl font-semibold">Label color</div>
+                        <div class="flex flex-wrap w-48 my-4 mx-3 -mr-5">
+                            <ng-container *ngFor="let color of labelColors">
+                                <mat-option
+                                    class="relative flex w-12 h-12 p-0 cursor-pointer rounded-full bg-transparent"
+                                    [value]="color"
+                                    #matOption="matOption">
+                                    <mat-icon
+                                        class="absolute m-3 text-white"
+                                        *ngIf="matOption.selected"
+                                        [svgIcon]="'heroicons_outline:check'"></mat-icon>
+                                    <span
+                                        class="flex w-10 h-10 m-1 rounded-full"
+                                        [ngClass]="labelColorDefs[color].bg"></span>
+                                </mat-option>
+                            </ng-container>
+                        </div>
+                    </mat-select>
+                    <button
+                        mat-icon-button
+                        matSuffix
+                        (click)="deleteLabel(label.get('id').value)">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                    </button>
+                </mat-form-field>
+            </ng-container>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,41 @@
+input,
+textarea {
+    background: transparent;
+
+    /* Placeholder color */
+    &::placeholder {
+        @apply text-hint;
+    }
+
+    &::-moz-placeholder {
+        @apply text-hint;
+    }
+
+    &::-webkit-input-placeholder {
+        @apply text-hint;
+    }
+
+    &:-ms-input-placeholder {
+        @apply text-hint;
+    }
+
+    &:-webkit-autofill {
+        -webkit-transition: 'background-color 9999s ease-out';
+        -webkit-transition-delay: 9999s;
+    }
+
+    &:-webkit-autofill:hover {
+        -webkit-transition: 'background-color 9999s ease-out';
+        -webkit-transition-delay: 9999s;
+    }
+
+    &:-webkit-autofill:focus {
+        -webkit-transition: 'background-color 9999s ease-out';
+        -webkit-transition-delay: 9999s;
+    }
+
+    &:-webkit-autofill:active {
+        -webkit-transition: 'background-color 9999s ease-out';
+        -webkit-transition-delay: 9999s;
+    }
+}

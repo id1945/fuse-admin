@@ -1,0 +1,95 @@
+{
+    "root": true,
+    "env": {
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "ignorePatterns": [
+        "projects/**/*"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parserOptions": {
+                "project": [
+                    "tsconfig.json"
+                ],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "plugin:@angular-eslint/ng-cli-compat",
+                "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ],
+            "rules": {
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "",
+                        "style": "kebab-case"
+                    }
+                ],
+                "@angular-eslint/directive-selector": [
+                    "error",
+                    {
+                        "type": "attribute",
+                        "prefix": "",
+                        "style": "camelCase"
+                    }
+                ],
+                "@typescript-eslint/dot-notation": "off",
+                "@typescript-eslint/explicit-function-return-type": "error",
+                "@typescript-eslint/explicit-member-accessibility": [
+                    "off",
+                    {
+                        "accessibility": "explicit"
+                    }
+                ],
+                "@typescript-eslint/no-inferrable-types": "off",
+                "arrow-parens": [
+                    "error",
+                    "as-needed",
+                    {
+                        "requireForBlockBody": true
+                    }
+                ],
+                "brace-style": [
+                    "off",
+                    "off"
+                ],
+                "import/order": "off",
+                "max-len": [
+                    "error",
+                    {
+                        "ignorePattern": "^import |^export | implements",
+                        "code": 180
+                    }
+                ],
+                "no-underscore-dangle": "off",
+                "object-shorthand": "off",
+                "quote-props": [
+                    "error",
+                    "consistent"
+                ],
+                "quotes": [
+                    "error",
+                    "single"
+                ]
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {}
+        }
+    ]
+}

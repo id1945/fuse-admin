@@ -1,0 +1,89 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Angular Material Components
+                </h2>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <a
+                mat-flat-button
+                href="https://material.angular.io/components/categories"
+                target="_blank"
+                rel="noreferrer"
+                [color]="'primary'">
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    [svgIcon]="'heroicons_solid:external-link'"></mat-icon>
+                Official docs
+            </a>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-4xl prose prose-sm">
+
+            <p>
+                Fuse uses
+                <a
+                    class="link"
+                    href="https://material.angular.io/components/categories"
+                    rel="noreferrer"
+                    target="_blank">Angular Material
+                </a>
+                as its primary user interface library. It offers form controls,
+                buttons, tabs, sidebars, icons, modals, tooltips, data tables and many more well tested and
+                widely used components.
+            </p>
+            <p>
+                Even though Fuse doesn't follow Google's Material design specifications, Angular Material
+                is one of the best Angular component libraries out there and since it's developed and maintained
+                by Google itself, it offers the best compatibility and support for Angular.
+            </p>
+            <p>
+                Fuse is 100% compatible with all Angular Material components.
+            </p>
+
+            <h2>Component examples and API documentation</h2>
+            <p>
+                Following, you can find links to the official documentation. Click on the component you want to
+                learn more about and it will redirect you to the related section of the official documentation.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 mt-8">
+            <ng-container *ngFor="let component of components">
+                <a
+                    class="flex flex-col rounded-2xl shadow overflow-hidden bg-card hover:shadow-xl transition-shadow duration-200 ease-in-out"
+                    [href]="'https://material.angular.io/components/' + component.id"
+                    target="_blank"
+                    rel="noreferrer">
+                    <img
+                        class="w-full object-cover border-b"
+                        [src]="'assets/images/ui/angular-material/scenes/' + component.id + '.scene.png'">
+                    <div class="py-4 px-5">
+                        <div class="text-xl font-semibold">{{component.name}}</div>
+                        <div class="mt-1 text-secondary">{{component.summary}}</div>
+                    </div>
+                </a>
+
+            </ng-container>
+        </div>
+
+    </div>
+
+</div>

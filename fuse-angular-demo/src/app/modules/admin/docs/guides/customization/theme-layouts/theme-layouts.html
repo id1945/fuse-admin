@@ -1,0 +1,111 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Customization</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Theme Layouts
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            As previously mentioned, Fuse comes with variety of different layouts. These layouts are on the theme level, meaning that when changed, they can completely
+            alter the look of your app.
+        </p>
+        <p>
+            By default, layouts are applied automatically via the <code>LayoutComponent</code>. The default layout is set by the <code>app.config.ts</code> file from
+            <strong>app/core/config/</strong> directory. This configuration file is supplied as the default configuration to the <code>FuseConfigService</code> which is a custom
+            made configuration service to store, write and read application wide configurations.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            More detailed information about <code>FuseConfigService</code> can be found in the
+            <a [routerLink]="['/ui/fuse-components/services/config']">
+                Fuse Components > Services > Config
+            </a>
+            section of this documentation.
+        </fuse-alert>
+        <p>
+            After the default layout is read and set from the configuration service, <code>LayoutComponent</code> will also read the current route tree, walk through it starting
+            from the root all the way to the current route and look for the <strong>layout</strong> key-value from the <em>data</em> object. If found, <code>LayoutComponent</code>
+            will switch to that layout. This is particularly useful if you want to have different layouts for different portions of your app.
+        </p>
+        <p>
+            Here's an example from <code>app.routing.ts</code> file that loads the <code>EmptyLayout</code> for <b>authentication</b> pages:
+        </p>
+        <!-- @formatter:off -->
+            <textarea fuse-highlight
+                      lang="typescript">
+                // Auth routes (guest)
+                {
+                    path: '',
+                    canActivate: [NoAuthGuard],
+                    canActivateChild: [NoAuthGuard],
+                    component: LayoutComponent,
+                    data: {
+                        layout: 'empty'
+                    },
+                    children: [
+                        {
+                            path: 'sign-in'
+                            ...
+                        },
+                    ]
+                }
+            </textarea>
+            <!-- @formatter:on -->
+        <p>
+            And here's another example that loads the <b>classic</b> layout:
+        </p>
+        <!-- @formatter:off -->
+            <textarea fuse-highlight
+                      lang="typescript">
+                {
+                    path       : 'some-path',
+                    component  : SomeComponent,
+                    data: {
+                        layout: 'classic' // Load the classic layout for this route
+                    }
+                }
+            </textarea>
+            <!-- @formatter:on -->
+        <h2>LayoutComponent</h2>
+        <p>
+            The <code>LayoutComponent</code> plays an important part for managing important things such as the <b>current layout</b> and the <b>color theme</b>. Because of it,
+            removing the <code>LayoutComponent</code> and using the individual layouts by themselves is not possible.
+        </p>
+
+    </div>
+
+</div>

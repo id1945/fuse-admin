@@ -1,0 +1,496 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Libraries</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Mock API
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>MockAPI</strong> is a helper library developed specifically for Fuse to mock API endpoints and provide data to your app without having to create an
+            actual backend application. This way, you can focus on your frontend app and once you finish with the frontend, you can create your backend application to provide
+            real API endpoints with real data.
+        </p>
+        <p>
+            This not only makes you progress faster and put together your app very quickly but you will also know exactly what you will be needing from your API.
+        </p>
+        <p>
+            While <strong>MockAPI</strong> is not suitable for every use case or for every project, there are some cases that using it would make your life easier. These cases
+            are but not limited to:
+        </p>
+        <ul>
+            <li>If you want to focus on the frontend first</li>
+            <li>If you want to create a mockup of your idea to see if it's going to work or not</li>
+            <li>If you want to create a small side project for yourself or for your colleagues/company</li>
+            <li>If you need to present your idea to your client or to your boss without spending many hours and resources</li>
+        </ul>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'warning'">
+            MockAPI is NOT a database or a backend replacement! It works on memory. As soon as you reload your app, all the changes you have made using Mock
+            API endpoints will go away and replaced with defaults.
+        </fuse-alert>
+
+        <h2>How it works?</h2>
+        <p>
+            <strong>MockAPI</strong> module provides an <em>HttpInterceptor</em> which intercepts all outgoing http requests to return a mock response based on user provided
+            callback functions. While it intercepts all requests, if the <strong>MockAPI</strong> module cannot find a callback function for the request type and url, it will
+            let the request to pass through. This way, you can use the <strong>MockAPI</strong> along with your real API endpoints.
+        </p>
+
+        <h2>FuseMockApiService</h2>
+        <p>
+            The <code>FuseMockApiService</code> is the core of the <em>MockAPI</em> module. This singleton service is used to register API endpoints and callbacks. This is the
+            only thing you will need to mock API endpoints.
+        </p>
+
+        <h3>Methods</h3>
+        <p>
+            All methods return an instance of <code>FuseMockApiHandler</code>.
+        </p>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .onGet(url: string, delay?: number): FuseMockApiHandler
+            </div>
+            <div class="p-6">
+                Registers a url for <em>GET</em> requests. <em>Delay (milliseconds)</em> can be set to delay the response.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .onPatch(url: string, delay?: number): FuseMockApiHandler
+            </div>
+            <div class="p-6">
+                Registers a url for <em>PATCH</em> requests. <em>Delay (milliseconds)</em> can be set to delay the response.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .onPost(url: string, delay?: number): FuseMockApiHandler
+            </div>
+            <div class="p-6">
+                Registers a url for <em>POST</em> requests. <em>Delay (milliseconds)</em> can be set to delay the response.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .onPut(url: string, delay?: number): FuseMockApiHandler
+            </div>
+            <div class="p-6">
+                Registers a url for <em>PUT</em> requests. <em>Delay (milliseconds)</em> can be set to delay the response.
+            </div>
+        </div>
+        <div class="bg-card rounded shadow mt-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .onDelete(url: string, delay?: number): FuseMockApiHandler
+            </div>
+            <div class="p-6">
+                Registers a url for <em>DELETE</em> requests. <em>Delay (milliseconds)</em> can be set to delay the response.
+            </div>
+        </div>
+        <h3>FuseMockApiHandler</h3>
+        <p>
+            This is the return type of all methods from the service. This class instance is not directly accessible. It can only be accessed through the
+            <code>FuseMockApiService</code> allowing method chaining. It has 2 methods:
+        </p>
+        <div class="bg-card rounded shadow mt-4 mb-4">
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .reply(callback: FuseMockApiReplyCallback): void
+            </div>
+            <div class="px-6 py-3 font-mono text-secondary border-b">
+                .replyCount(count: number): void
+            </div>
+            <div class="p-6">
+                <p>
+                    These methods can be used to register the callback function for the request. The <em>callback</em> has an access to the outgoing <em>HttpRequest</em> which
+                    can be used to access anything from the request such as form data and headers.
+                </p>
+                <p>
+                    You can limit the reply by chaining the <code>.replyCount</code> and providing the number of times this request should be handled. After the
+                    limit has reached, the request handler will throw an error and won't let the request to pass through. It can be useful for creating one-time-use
+                    endpoints to test "Reset Password" links or testing an unreachable API endpoints and etc.
+                </p>
+                <p>
+                    The callbacks must return either an array <code>[number, any | string]</code> or an observable that returns the said array. The <code>number</code>
+                    represents the
+                    <a
+                        href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"
+                        rel="noreferrer"
+                        target="_blank">HTTP status code
+                    </a>
+                    of the response while the <code>any | string</code> represents the actual response.
+                </p>
+            </div>
+        </div>
+
+        <h3>Basic usage</h3>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            this.fuseMockApiService
+                .onPut('api/navigation')
+                .reply(({request: HttpRequest<any>}) => {
+
+                    // Get the body from the request
+                    const body = request.body;
+
+                    // Do something with your data
+
+                    // Return a success code along with some data
+                    return [200, { newNavigation }];
+            })
+        </textarea>
+        <!-- @formatter:on -->
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            this.fuseMockApiService
+                .onGet('api/navigation')
+                .reply(() => {
+
+                    // Do something with your data
+
+                    // Return an observable with success code and data
+                    return of(someFunctionToCall()).pipe(map((response) => {
+
+                        // Do some stuff with the response from 'someFunctionToCall()'
+
+                        // Return a success code along with some data
+                        return [200, { newNavigation }];
+                    });
+            });
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h2>Step by step guide to start using FuseMockApi</h2>
+        <p>
+            It's pretty easy and straightforward to setup the <strong>MockAPI</strong> module for mocking API endpoints and their responses. Once you understand the underlying
+            mechanic, you will be able to mock API endpoints in no time.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            Please keep in mind that the following step-by-step guide assumes you are doing everything from scratch for the <em>MockAPI</em> like creating directories, adding
+            files, exporting via barrels etc. Majority of these already setup in both Demo and Starter apps for you so it's a bit easier to start working with the
+            <em>MockAPI</em>.
+        </fuse-alert>
+
+        <h3>1. Prepare the files</h3>
+        <p>
+            Choose a location to store your mocks. By default the Demo app uses <code>src/app/mock-api/</code> directory. You can use the same directory or choose another one.
+            For this guide, we will assume you are going to use the default directory.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            It's important to keep all mock related files in the same directory because we will create a barrel file that exports all the mock classes and provide that to the
+            <code>FuseMockApiModule</code> so it can register and use them.
+        </fuse-alert>
+        <p>
+            After choosing the location, create a sub-directory relevant to your endpoint and create 2 files in it; one for the mock class and one for the data json:
+        </p>
+        <!-- @formatter:off -->
+        <p class="bg-card p-6 mt-6 rounded shadow font-mono text-secondary">
+            src/app/mock-api/<br>
+            &nbsp;└─ navigation/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;└─ data.ts<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;└─ api.ts
+        </p>
+        <!-- @formatter:on -->
+
+        <h3>2. Create the class</h3>
+        <p>
+            Edit the <code>api.ts</code> file and inside create an injectable class.
+        </p>
+        <p>
+            The <code>FuseMockApi</code> requires one public method called <code>registerHandlers()</code> and it must be implemented. It also needs to be called within the
+            <code>constructor</code> of your mock class:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { Injectable } from '@angular/core';
+            import { FuseMockApiService } from '@fuse/lib/mock-api';
+
+            @Injectable({
+                providedIn: 'root'
+            })
+            export class NavigationMockApi
+            {
+                /**
+                 * Constructor
+                 */
+                constructor(private _fuseMockApiService: FuseMockApiService)
+                {
+                    // Register Mock API handlers
+                    this.registerHandlers();
+                }
+
+                /**
+                * Register Mock API handlers
+                */
+                registerHandlers(): void
+                {
+
+                }
+            }
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>3. Create the data</h3>
+        <p>
+            Edit the <code>data.ts</code> file and add your default data as an <strong>exported const</strong> value. You can have more than one <code>const</code> per file,
+            just remember to export all of them:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            // An array of navigation items for compact layout
+            export const compactNavigation = [ ]
+
+            // An array of navigation items for default layout
+            export const defaultNavigation = [ ]
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>3. Import the data into the Mock class</h3>
+        <p>
+            Return back to <code>api.ts</code> file, import your data and set them as class properties so they can be accessible within the class:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { Injectable } from '@angular/core';
+            import { FuseMockApiService } from '@fuse/lib/mock-api';
+            import { compactNavigation, defaultNavigation } from 'app/mock-api/navigation/data';
+
+            @Injectable({
+                providedIn: 'root'
+            })
+            export class NavigationMockApi
+            {
+                private readonly _compactNavigation: any[];
+                private readonly _defaultNavigation: any[];
+
+                /**
+                 * Constructor
+                 */
+                constructor(private _fuseMockApiService: FuseMockApiService)
+                {
+                    // Set the data
+                    this._compactNavigation = compactNavigation;
+                    this._defaultNavigation = defaultNavigation;
+
+                    // Register Mock API handlers
+                    this.registerHandlers();
+                }
+
+                /**
+                 * Register Mock API handlers
+                 */
+                registerHandlers(): void
+                {
+
+                }
+            }
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>4. Register the endpoints and callbacks</h3>
+        <p>
+            Inside the <code>registerHandlers()</code> method, define your endpoints and callbacks to provide data:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { Injectable } from '@angular/core';
+            import { cloneDeep } 'lodash-es';
+            import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
+            import { compactNavigation, defaultNavigation } from 'app/mock-api/navigation/data';
+
+            @Injectable({
+                providedIn: 'root'
+            })
+            export class NavigationMockApi
+            {
+                ...
+
+                /**
+                 * Register Mock API handlers
+                 */
+                registerHandlers(): void
+                {
+                    // Navigation - GET
+                    this._fuseMockApiService
+                        .onGet('api/navigation')
+                        .reply(() => {
+
+                        // Clone the data to preserve the originals
+                        const compactNavigation = cloneDeep(this._compactNavigation);
+                        const defaultNavigation = cloneDeep(this._defaultNavigation);
+
+                        // Do some stuff with your data
+
+                        // Return
+                        return [200, {
+                            compact: compactNavigation,
+                            default: defaultNavigation,
+                        }];
+                    })
+
+                    // Navigation - PUT
+                    this._fuseMockApiService
+                        .onPut('api/navigation')
+                        .reply(({request}) => {
+
+                        // Save the new navigation item
+                        const newNavigationItem = cloneDeep(request.body.navigationItem);
+                        newNavigationItem.id = FuseMockApiUtils.guid();
+                        this._defaultNavigation.unshift(newNavigationItem);
+
+                        // Return
+                        return [200, newNavigationItem];
+                    });
+                }
+            }
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>5. Create a barrel file and import FuseMockApiModule</h3>
+        <p>
+            Navigate back to the root of your mock data directory, by default it's the <code>src/app/mock-api/</code> directory, and create an <strong>index.ts</strong> file.
+        </p>
+        <!-- @formatter:off -->
+        <p class="bg-card p-6 mt-6 rounded shadow font-mono text-secondary">
+            src/app/mock-api/<br>
+            &nbsp;└─ auth/<br>
+            &nbsp;└─ navigation/<br>
+            &nbsp;└─ user/<br>
+            &nbsp;└─ <strong>index.ts</strong><br>
+        </p>
+        <!-- @formatter:on -->
+        <p>
+            Edit the <code>index.ts</code> file to create a barrel from the services. Only import the services and not the data files, create an array from them and then export
+            that array:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            import { AuthMockApi } from 'app/mock-api/auth';
+            import { NavigationMockApi } from 'app/mock-api/navigation';
+            import { UserMockApi } from 'app/mock-api/user';
+
+            export const mockApiServices = [
+                AuthMockApi,
+                NavigationMockApi,
+                UserMockApi
+            ];
+        </textarea>
+        <!-- @formatter:on -->
+        <p>
+            After that, head to the <code>app.module.ts</code> file, import the <code>FuseMockApiModule</code> and supply the array of services you have exported:
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            ...
+            import { FuseMockApiModule } from '@fuse/lib/mock-api';
+            import { mockApiServices } from 'app/mock-api';
+
+            @NgModule({
+                declarations: [
+                    AppComponent
+                ],
+                imports     : [
+                    ...
+                    FuseMockApiModule.forRoot(mockApiServices),
+                    ...
+                ]
+            })
+            ...
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>6. (Optional) Set a global delay</h3>
+        <p>
+            You can also set a global delay (ms) to all of your Mock API endpoints to simulate a slow connection, a server that's under attack or failing, some kind
+            of service interruption and etc.
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            ...
+            import { FuseMockApiModule } from '@fuse/lib/mock-api';
+            import { mockApiServices } from 'app/mock-api';
+
+            @NgModule({
+                declarations: [
+                    AppComponent
+                ],
+                imports     : [
+                    ...
+                    FuseMockApiModule.forRoot(mockApiServices, {delay: 2500}),
+                    ...
+                ]
+            })
+            ...
+        </textarea>
+        <!-- @formatter:on -->
+
+        <h3>7. Consume the mock API endpoints</h3>
+        <p>
+            Now you can consume your mock API endpoints anywhere from your app using Angular's <em>HttpClient</em> and the <strong>MockAPI</strong> module will catch the
+            requests. If there is a matching url and a request type, the <strong>MockAPI</strong> will provide the response from the provided callback. If there isn't one, then
+            the <strong>MockAPI</strong> will let the request to pass through allowing you to use a real API endpoints along with the mocked ones.
+        </p>
+        <!-- @formatter:off -->
+        <textarea fuse-highlight
+                  lang="typescript">
+            /**
+             * Get navigation
+             */
+            getNavigation(): Observable&lt;any&gt;
+            {
+                return this._httpClient.get<any[]>('api/navigation').pipe(
+                    tap((response: any) => {
+                        this._navigation.next(response);
+                    })
+                );
+            }
+        </textarea>
+        <!-- @formatter:on -->
+    </div>
+
+</div>

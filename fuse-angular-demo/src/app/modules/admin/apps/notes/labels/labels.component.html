@@ -1,0 +1,54 @@
+<div class="flex flex-col flex-auto w-80 min-w-80 p-2 md:p-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div class="text-2xl font-semibold">Edit labels</div>
+        <button
+            matDialogClose
+            mat-icon-button>
+            <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+    <!-- New label -->
+    <mat-form-field
+        class="fuse-mat-dense w-full mt-8"
+        [floatLabel]="'always'">
+        <input
+            name="new-label"
+            [autocomplete]="'off'"
+            [placeholder]="'Create new label'"
+            matInput
+            #newLabelInput>
+        <button
+            [class.invisible]="newLabelInput.value.trim() === ''"
+            mat-icon-button
+            (click)="addLabel(newLabelInput.value); newLabelInput.value = ''"
+            matSuffix>
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+        </button>
+    </mat-form-field>
+    <!-- Labels -->
+    <div class="flex flex-col mt-4">
+        <ng-container *ngIf="(labels$ | async) as labels">
+            <ng-container *ngFor="let label of labels; trackBy: trackByFn">
+                <mat-form-field class="fuse-mat-dense w-full">
+                    <button
+                        mat-icon-button
+                        matPrefix
+                        (click)="deleteLabel(label.id)">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                    </button>
+                    <input
+                        [autocomplete]="'off'"
+                        [(ngModel)]="label.title"
+                        (input)="updateLabel(label)"
+                        required
+                        matInput>
+                </mat-form-field>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

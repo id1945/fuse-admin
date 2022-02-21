@@ -1,0 +1,53 @@
+<div
+    class="p-3 pt-0"
+    [class.h-13]="!formVisible">
+    <div class="relative flex w-full h-full rounded-lg">
+        <button
+            class="absolute inset-0 justify-start w-full px-5 rounded-lg"
+            [ngClass]="{'opacity-0 pointer-events-none': formVisible}"
+            mat-button
+            (click)="toggleFormVisibility()"
+            disableRipple>
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+            <span class="ml-2 text-secondary">{{buttonTitle}}</span>
+        </button>
+        <form
+            class="flex flex-col items-start w-full"
+            [ngClass]="{'opacity-0': !formVisible}"
+            [formGroup]="form">
+            <div class="flex w-full p-5 rounded-lg shadow bg-card">
+                <textarea
+                    class="w-full text-lg font-medium leading-5"
+                    [spellcheck]="'off'"
+                    [formControlName]="'title'"
+                    [placeholder]="'Enter card title...'"
+                    (keydown.enter)="save()"
+                    cdkTextareaAutosize
+                    #titleInput
+                    #titleAutosize="cdkTextareaAutosize">
+                </textarea>
+            </div>
+            <div class="flex items-center mt-2">
+                <button
+                    class="h-8 min-h-8"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [type]="'button'"
+                    (click)="save()">
+                    Add card
+                </button>
+                <button
+                    class="ml-1 w-8 h-8 min-h-8"
+                    mat-icon-button
+                    [type]="'button'"
+                    (click)="toggleFormVisibility()">
+                    <mat-icon
+                        class="icon-size-4"
+                        [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

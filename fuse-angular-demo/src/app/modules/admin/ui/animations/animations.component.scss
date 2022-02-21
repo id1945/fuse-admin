@@ -1,0 +1,62 @@
+animations {
+
+    .mat-form-field {
+        width: 100%;
+        margin-top: 32px;
+    }
+
+    mat-tab-group {
+
+        .mat-tab-header {
+            padding: 24px 0;
+            border-top-width: 1px;
+        }
+
+        .mat-tab-body-wrapper {
+
+            .mat-tab-body {
+
+                &:first-child {
+
+                    .mat-tab-body-content {
+                        display: flex;
+                        justify-content: center;
+                        min-height: 200px;
+                    }
+                }
+
+                .animated-box {
+                    width: 120px;
+                    height: 120px;
+                    overflow: hidden;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    user-select: none;
+
+                    .animated-box-content {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex: 1 0 auto;
+                        height: 100%;
+                        text-align: center;
+                        font-size: 12px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .info {
+        @apply text-secondary bg-gray-400;
+    }
+
+    .animated-box {
+        @apply bg-primary shadow-md;
+
+        .animated-box-content {
+            @apply text-on-primary;
+        }
+    }
+}

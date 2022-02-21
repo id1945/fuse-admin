@@ -1,0 +1,309 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Development</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Directory Structure
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            Fuse's directory structure might look overwhelming and intimidating at first, but following this page and giving a bit time to understand it before jumping
+            right into code will help immensely.
+        </fuse-alert>
+        <p>
+            Fuse built around the idea of multi-purpose and multi-layout. You can think of Fuse as a <em>Starter kit</em> and a <em>guide</em> rather than just a simple
+            template. The purpose of Fuse is not only provide a pre-made styles for visual elements but is also be a guide to follow while building an app.
+        </p>
+        <p>
+            It's more of an answer to the questions like <strong>Where should I put this file?</strong> or <strong>Which file should I put this piece of code into?</strong>
+            rather than just a compilation of example pages and ready to use styles.
+        </p>
+        <p>
+            Here's a simplified version of the entire directory structure of the Fuse:
+        </p>
+        <div class="bg-card p-6 pl-3 mt-6 rounded shadow">
+            <mat-tree
+                [dataSource]="generalTree.dataSource"
+                [treeControl]="generalTree.treeControl">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node
+                    *matTreeNodeDef="let node"
+                    matTreeNodePaddingIndent="32"
+                    matTreeNodePadding>
+                    <div class="flex items-center font-mono">
+                        <div
+                            class="flex items-center justify-center w-8 h-8 mr-2 text-hint"
+                            *ngIf="!node.last">├─
+                        </div>
+                        <div
+                            class="flex items-center justify-center w-8 h-8 mr-2 text-hint"
+                            *ngIf="node.last">└─
+                        </div>
+                        <span>
+                            {{node.name}}
+                        </span>
+                    </div>
+                </mat-tree-node>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-tree-node
+                    *matTreeNodeDef="let node; when: hasChild"
+                    matTreeNodePaddingIndent="32"
+                    matTreeNodePadding>
+                    <button
+                        mat-icon-button
+                        matTreeNodeToggle
+                        [attr.aria-label]="'toggle ' + node.name">
+                        <mat-icon class="icon-size-4">
+                            {{generalTree.treeControl.isExpanded(node) ? 'remove' : 'add'}}
+                        </mat-icon>
+                    </button>
+                    <span class="font-mono">
+                        {{node.name}}
+                    </span>
+                </mat-tree-node>
+            </mat-tree>
+        </div>
+
+        <h2>@fuse/</h2>
+        <p>
+            This is the core directory of the Fuse. It includes components, directives, services, pipes, custom validators, animations, base styles and much more.
+        </p>
+        <p>
+            Modifications on this directory is <strong>NOT</strong> recommended. Since majority of changes happen within this directory on updates, any modifications to this
+            directory and its content will make the updating process complex and time consuming.
+        </p>
+
+        <h2>app/</h2>
+        <p>
+            This directory contains all application related codes. This is where you put your code.
+        </p>
+        <p>
+            Fuse provides a sensible default directory structure within the <strong>app</strong> directory. You can of course completely remove everything from it and
+            design your own structure but the provided structure is designed to handle applications from <em>small</em> to <em>enterprise</em> grade:
+        </p>
+        <div class="bg-card p-6 pl-3 mt-6 rounded shadow">
+            <mat-tree
+                [dataSource]="appTree.dataSource"
+                [treeControl]="appTree.treeControl">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node
+                    *matTreeNodeDef="let node"
+                    matTreeNodePaddingIndent="32"
+                    matTreeNodePadding>
+                    <div class="flex items-center font-mono">
+                        <div
+                            class="flex items-center justify-center w-8 h-8 mr-2"
+                            *ngIf="!node.last">├─
+                        </div>
+                        <div
+                            class="flex items-center justify-center w-8 h-8 mr-2"
+                            *ngIf="node.last">└─
+                        </div>
+                        <span>
+                            {{node.name}}
+                        </span>
+                    </div>
+                </mat-tree-node>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-tree-node
+                    *matTreeNodeDef="let node; when: hasChild"
+                    matTreeNodePaddingIndent="32"
+                    matTreeNodePadding>
+                    <button
+                        mat-icon-button
+                        matTreeNodeToggle
+                        [attr.aria-label]="'toggle ' + node.name">
+                        <mat-icon class="icon-size-4">
+                            {{appTree.treeControl.isExpanded(node) ? 'remove' : 'add'}}
+                        </mat-icon>
+                    </button>
+                    <span class="font-mono">
+                        {{node.name}}
+                    </span>
+                </mat-tree-node>
+            </mat-tree>
+        </div>
+
+        <h3>app/core/</h3>
+        <p>
+            This directory is designed to contain your application's core; Singleton services, default configurations, default states and likes. It's
+            <strong>NOT</strong> recommended to put any components, directives, pipes or simply anything has a template or related to templates in here.
+        </p>
+        <p>
+            Example files that can go into this directory includes, but not limited to:
+        </p>
+        <ul>
+            <li>
+                <p><strong>Singleton services:</strong></p>
+                <p>Auth service</p>
+                <p>Logger service</p>
+                <p>SplashScreen service</p>
+            </li>
+            <li>
+                <p><strong>Guards</strong></p>
+                <p>Auth guard</p>
+                <p>NoAuth guard</p>
+            </li>
+            <li>
+                <p><strong>Defaults</strong></p>
+                <p>Default configurations</p>
+                <p>Default state</p>
+            </li>
+            <li>
+                <p><strong>Custom validators</strong></p>
+                <p>Phone number validator</p>
+                <p>Confirm validator</p>
+            </li>
+        </ul>
+        <p>and etc...</p>
+
+        <h3>app/mock-api/</h3>
+        <p>
+            This directory is designed to contain data services for custom made MockAPI library. Detailed information about this directory and the MockAPI library can be found
+            in the
+            <a [routerLink]="['/ui/fuse-components/libraries/mock-api']">Fuse Components > Libraries > MockAPI</a>
+            section of this documentation.
+        </p>
+
+        <h3>app/layout/</h3>
+        <p>
+            This directory designed to contain everything related to the layout of your app. By default, Fuse provides variety of different layout options for you to use.
+        </p>
+        <p>
+            The <code>LayoutComponent</code> is an entry component and it provides an easy way of switching between different layouts. More information about how the
+            <code>LayoutComponent</code> works can be found in the
+            <a [routerLink]="['../../customization/theme-layouts']">Customization > Theme layouts</a>
+            section of this documentation.
+        </p>
+        <p>
+            The <strong>app/layout/common/</strong> folder includes common components for layouts such as:
+        </p>
+        <ul>
+            <li>Messages</li>
+            <li>Notifications</li>
+            <li>Search</li>
+            <li>Shortcuts</li>
+            <li>User Menu</li>
+        </ul>
+        <p>
+            These components are being used across different layouts, so if you use multiple layouts and want to create a component, directive or a pipe for using within your
+            layouts, you can put them inside the <strong>common</strong> folder.
+        </p>
+
+        <h3>app/modules/</h3>
+        <p>
+            This directory is designed to contain your application's feature modules.
+        </p>
+        <p>
+            For example; Authentication related pages such as Sign In, Sign Up, Lost Password and etc. can be grouped into <strong>auth/</strong> directory while your
+            main admin components and modules grouped into <strong>admin/</strong> directory.
+        </p>
+        <p>
+            If you use SSR (Server Side Rendering) you can even include your <strong>landing</strong> page as one of the modules and keep everything in a single app.
+        </p>
+
+        <h3>app/shared/</h3>
+        <p>
+            This directory is designed to contain anything re-usable such as components, directives and pipes. By default, it doesn't include any of them but when you create
+            one for your app, you can put it here.
+        </p>
+        <p>
+            The only file here is the <code>shared.module.ts</code> file which simply imports and exports some of the common Angular modules so you don't have to import them
+            one by one. You can just import the <code>shared.module.ts</code> into your module whenever you need one of those common modules.
+        </p>
+        <p>
+            Currently it imports and exports:
+        </p>
+        <ul>
+            <li>
+                <p><strong>CommonModule</strong></p>
+                <p>Required for common directives such as *ngIf and *ngFor</p>
+            </li>
+            <li>
+                <p><strong>FormsModule</strong></p>
+                <p>Required for form directives</p>
+            </li>
+            <li>
+                <p><strong>ReactiveFormsModule</strong></p>
+                <p>Required for reactive form directives</p>
+            </li>
+        </ul>
+        <p>
+            You can add/remove anything to/from the <code>shared.module.ts</code> file and use the module to import commonly used modules without needing to remember them
+            one by one.
+        </p>
+
+        <h2>assets/</h2>
+        <p>
+            Default Angular assets folder.
+        </p>
+
+        <h2>environments/</h2>
+        <p>
+            Default Angular environments folder.
+        </p>
+
+        <h2>styles/</h2>
+        <p>
+            This folder contains 4 different scss files:
+        </p>
+        <ul>
+            <li>
+                <p><strong>styles.scss</strong></p>
+                <p>This file is for adding/importing global styles to the app.</p>
+            </li>
+            <li>
+                <p><strong>tailwind.scss</strong></p>
+                <p>This is the main Tailwind file for Tailwind utilities.</p>
+            </li>
+            <li>
+                <p><strong>vendors.scss</strong></p>
+                <p>
+                    This file is designed to import 3rd party library css/scss files into the project. Any style here can be overridden by <em>styles.scss</em> file
+                    allowing you to overwrite/modify 3rd party library styles and make them visually compatible with your app.
+                </p>
+                <p>
+                    For example, let's say you use <strong>FullCalendar</strong> 3rd party library. You use the <em>vendors.scss</em> file to import default styles
+                    of the FullCalendar into your project so it looks and works correctly. Then, you can add custom styles to the <em>styles.scss</em> file to overwrite those
+                    default styles to make FullCalendar compatible with your app's design.
+                </p>
+            </li>
+        </ul>
+
+    </div>
+
+</div>

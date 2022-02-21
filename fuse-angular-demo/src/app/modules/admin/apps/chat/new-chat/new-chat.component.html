@@ -1,0 +1,51 @@
+<div class="flex flex-col flex-auto h-full overflow-hidden bg-card dark:bg-default">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center h-18 -mb-px px-6 bg-gray-50 dark:bg-transparent">
+        <button
+            mat-icon-button
+            (click)="drawer.close()">
+            <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+        </button>
+        <div class="ml-2 text-2xl font-semibold">New chat</div>
+    </div>
+
+    <div class="relative overflow-y-auto">
+        <ng-container *ngIf="contacts.length; else noContacts">
+            <ng-container *ngFor="let contact of contacts; let i = index; trackBy: trackByFn">
+                <!-- Group -->
+                <ng-container *ngIf="i === 0 || contact.name.charAt(0) !== contacts[i - 1].name.charAt(0)">
+                    <div class="z-10 sticky top-0 -mt-px px-6 py-1 md:px-8 border-t border-b font-medium uppercase text-secondary bg-gray-100 dark:bg-gray-900">
+                        {{contact.name.charAt(0)}}
+                    </div>
+                </ng-container>
+                <!-- Contact -->
+                <div class="z-20 flex items-center px-6 py-4 md:px-8 cursor-pointer border-b hover:bg-gray-100 dark:hover:bg-hover">
+                    <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
+                        <ng-container *ngIf="contact.avatar">
+                            <img
+                                class="object-cover w-full h-full"
+                                [src]="contact.avatar"
+                                alt="Contact avatar"/>
+                        </ng-container>
+                        <ng-container *ngIf="!contact.avatar">
+                            <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                {{contact.name.charAt(0)}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="min-w-0 ml-4">
+                        <div class="font-medium leading-5 truncate">{{contact.name}}</div>
+                        <div class="leading-5 truncate text-secondary">{{contact.about}}</div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+
+    <!-- No contacts -->
+    <ng-template #noContacts>
+        <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">There are no contacts!</div>
+    </ng-template>
+
+</div>

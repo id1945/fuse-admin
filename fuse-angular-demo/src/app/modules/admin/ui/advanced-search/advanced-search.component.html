@@ -1,0 +1,114 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Advanced Search
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl">
+            <div class="max-w-3xl prose prose-sm">
+                <p>
+                    This page demonstrates a query parameters based search using Angular's built-in <code>routerLink</code> directive and its
+                    <code>queryParams</code> input.
+                </p>
+                <p>
+                    Fill the form, hit the <strong>Search</strong> button and then observe the address bar of your browser. If you reload the
+                    page with the parameters, you will see that the form will be populated automatically. We also added an output window so
+                    you can observe the query parameters object.
+                </p>
+                <p>
+                    This method can be used for implementing <em>Advanced search</em> mechanics as well as <em>Filtering</em> similar to the
+                    products filtering that you can find in most eCommerce websites.
+                </p>
+            </div>
+
+            <!-- Advanced search form -->
+            <form
+                class="flex flex-col items-start w-full max-w-3xl mt-8 p-8 space-y-8 rounded-2xl shadow overflow-hidden bg-card"
+                [formGroup]="searchForm">
+
+                <!-- Keywords -->
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Keywords</mat-label>
+                    <input
+                        [autocomplete]="'off'"
+                        [formControlName]="'keywords'"
+                        matInput>
+                </mat-form-field>
+
+                <!-- Type -->
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Type</mat-label>
+                    <mat-select [formControlName]="'type'">
+                        <mat-option [value]="'any'">Any</mat-option>
+                        <mat-option [value]="'files'">Files</mat-option>
+                        <mat-option [value]="'folders'">Folders</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="flex items-center space-x-8">
+                    <!-- In trash -->
+                    <mat-checkbox
+                        [color]="'primary'"
+                        [formControlName]="'isTrashed'">
+                        In trash
+                    </mat-checkbox>
+
+                    <!-- Archived -->
+                    <mat-checkbox
+                        [color]="'primary'"
+                        [formControlName]="'isArchived'">
+                        Archived
+                    </mat-checkbox>
+
+                    <!-- Starred -->
+                    <mat-checkbox
+                        [color]="'primary'"
+                        [formControlName]="'isStarred'">
+                        Starred
+                    </mat-checkbox>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center justify-end w-full mt-8">
+                    <button
+                        (click)="reset()"
+                        type="button"
+                        mat-button>Reset
+                    </button>
+                    <button
+                        class="ml-2"
+                        (click)="search()"
+                        [color]="'primary'"
+                        type="button"
+                        mat-flat-button>Search
+                    </button>
+                </div>
+            </form>
+
+            <!-- Query params as json -->
+            <div class="dark w-full mt-8 p-4 rounded-2xl overflow-hidden">
+                <textarea
+                    fuse-highlight
+                    [code]="queryParams | json"
+                    [lang]="'json'"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

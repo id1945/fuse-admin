@@ -1,0 +1,163 @@
+<div class="w-full max-w-3xl">
+
+    <!-- Form -->
+    <form [formGroup]="planBillingForm">
+
+        <!-- Section -->
+        <div class="w-full">
+            <div class="text-xl">Change your plan</div>
+            <div class="text-secondary">Upgrade or downgrade your current plan.</div>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6 w-full mt-8">
+            <!-- Plan -->
+            <div class="sm:col-span-3">
+                <fuse-alert
+                    [appearance]="'outline'"
+                    [type]="'info'">
+                    Changing the plan will take effect immediately. You will be charged for the rest of the current month.
+                </fuse-alert>
+            </div>
+            <mat-radio-group
+                class="invisible absolute w-0 h-0 pointer-events-none"
+                [formControlName]="'plan'"
+                #planRadioGroup="matRadioGroup">
+                <ng-container *ngFor="let plan of plans; trackBy: trackByFn">
+                    <mat-radio-button [value]="plan.value"></mat-radio-button>
+                </ng-container>
+            </mat-radio-group>
+            <ng-container *ngFor="let plan of plans; trackBy: trackByFn">
+                <div
+                    class="relative flex flex-col items-start justify-start p-6 rounded-md shadow cursor-pointer bg-card"
+                    [ngClass]="{'ring ring-inset ring-primary': planRadioGroup.value === plan.value}"
+                    (click)="planRadioGroup.value = plan.value">
+                    <ng-container *ngIf="planRadioGroup.value === plan.value">
+                        <mat-icon
+                            class="absolute top-0 right-0 mt-3 mr-3 icon-size-7 text-primary"
+                            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                    </ng-container>
+                    <div class="font-medium">{{plan.label}}</div>
+                    <div class="mt-1 whitespace-normal text-secondary">{{plan.details}}</div>
+                    <div class="flex-auto"></div>
+                    <div class="mt-8 text-lg">
+                        <span>{{plan.price | currency:'USD':'symbol':'1.0'}}</span>
+                        <span class="text-secondary"> / month</span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Divider -->
+        <div class="mt-12 mb-10 border-t"></div>
+
+        <!-- Section -->
+        <div class="w-full">
+            <div class="text-xl">Payment Details</div>
+            <div class="text-secondary">Update your billing information. Make sure to set your location correctly as it could affect your tax rates.</div>
+        </div>
+        <div class="grid grid-cols-4 gap-6 w-full mt-8">
+            <!-- Card holder -->
+            <div class="col-span-4">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Card holder</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:user'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'cardHolder'"
+                        matInput>
+                </mat-form-field>
+            </div>
+            <!-- Card number -->
+            <div class="col-span-4 sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Card number</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:credit-card'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'cardNumber'"
+                        matInput>
+                </mat-form-field>
+            </div>
+            <!-- Card expiration -->
+            <div class="col-span-2 sm:col-span-1">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full"
+                    [floatLabel]="'always'">
+                    <mat-label>Expiration date</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:calendar'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'cardExpiration'"
+                        [placeholder]="'MM / YY'"
+                        matInput>
+                </mat-form-field>
+            </div>
+            <!-- Card CVC -->
+            <div class="col-span-2 sm:col-span-1">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>CVC / CVC2</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:lock-closed'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'cardCVC'"
+                        matInput>
+                </mat-form-field>
+            </div>
+            <!-- Country -->
+            <div class="col-span-4 sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Country</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:location-marker'"
+                        matPrefix></mat-icon>
+                    <mat-select [formControlName]="'country'">
+                        <mat-option [value]="'usa'">United States</mat-option>
+                        <mat-option [value]="'canada'">Canada</mat-option>
+                        <mat-option [value]="'mexico'">Mexico</mat-option>
+                        <mat-option [value]="'france'">France</mat-option>
+                        <mat-option [value]="'germany'">Germany</mat-option>
+                        <mat-option [value]="'italy'">Italy</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- ZIP -->
+            <div class="col-span-4 sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>ZIP / Postal code</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:hashtag'"
+                        matPrefix></mat-icon>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="mt-11 mb-10 border-t"></div>
+
+        <!-- Actions -->
+        <div class="flex items-center justify-end">
+            <button
+                mat-stroked-button
+                type="button">
+                Cancel
+            </button>
+            <button
+                class="ml-4"
+                mat-flat-button
+                type="button"
+                [color]="'primary'">Save
+            </button>
+        </div>
+    </form>
+
+</div>

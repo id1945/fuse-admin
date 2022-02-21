@@ -1,0 +1,89 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Guides</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Getting Started</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Introduction
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <h2>Thank you for choosing Fuse.</h2>
+        <p>
+            Fuse is a multi-purpose, multi-layout Angular admin template featuring custom made Application and Page layouts, UI elements and UX best practices.
+        </p>
+        <p>
+            In this documentation, you will find starter guides and API documentation of the custom made Fuse components.
+        </p>
+
+        <hr>
+        <h2>Main libraries</h2>
+        <p>
+            Fuse powered by 3 main libraries; <strong>Angular</strong>, <strong>Angular Material</strong> and <strong>TailwindCSS</strong>:
+        </p>
+        <ul>
+            <li>
+                <a
+                    href="https://angular.io/"
+                    rel="noreferrer"
+                    target="_blank">Angular
+                </a>
+                <p>
+                    It is the core of the Fuse. This version only works with Angular.
+                </p>
+            </li>
+            <li>
+                <a
+                    href="https://material.angular.io/components"
+                    rel="noreferrer"
+                    target="_blank">Angular Material
+                </a>
+                <p>
+                    Provides the main UI components such as Buttons, Form fields, Tabs, Progress bars and more.
+                </p>
+            </li>
+            <li>
+                <a
+                    href="https://tailwindcss.com/"
+                    rel="noreferrer"
+                    target="_blank">TailwindCSS
+                </a>
+                <p>
+                    It is the core of the style configuration and it provides utility classes for almost every CSS rule available.
+                </p>
+            </li>
+        </ul>
+
+    </div>
+
+</div>

@@ -1,0 +1,334 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Components</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Masonry
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            <strong>fuse-masonry</strong> is a basic Masonry layout component to show items in Masonry grid layout. Since it doesn't use any other third party library or complex calculations to
+            keep everything smooth and fast;
+        </p>
+        <ul>
+            <li>It does NOT work with elements with different widths
+            <li>It does NOT sort items based on their heights (This here is the real performance killer)</li>
+        </ul>
+        <p>
+            If you don't need to mix and match different width items and don't need to sort items based on their heights, <strong>fuse-masonry</strong> will do the job for you and it will do it very smoothly.
+        </p>
+        <p>
+            <strong>Exported as: </strong><code>fuseMasonry</code>
+        </p>
+
+        <h2>Module</h2>
+        <textarea
+            fuse-highlight
+            lang="typescript">
+            import { FuseMasonry } from '@fuse/components/masonry';
+        </textarea>
+
+        <h2>Properties</h2>
+        <div class="bg-card py-3 px-6 rounded shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>columnsTemplate: TemplateRef</div>
+                        </td>
+                        <td>
+                            Column template for masonry component to lay out.
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">undefined</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>columns: number</div>
+                        </td>
+                        <td>
+                            Number of columns to create
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">undefined</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-mono text-md text-secondary">
+                            <div>@Input()</div>
+                            <div>items: any[]</div>
+                        </td>
+                        <td>
+                            Items to distribute into columns
+                        </td>
+                        <td>
+                            <code class="whitespace-nowrap">[]</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Methods</h2>
+        <p>This component doesn't have any public methods.</p>
+
+        <h2>Usage</h2>
+        <p>
+            <strong>fuse-masonry</strong> doesn't provide a default template or styling to the items. You can think of it as a helper function but in a component form:
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="mx-auto max-w-80">
+                                <fuse-masonry
+                                    class="-mx-2"
+                                    [items]="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                                    [columns]="4"
+                                    [columnsTemplate]="columnsTemplate">
+                                </fuse-masonry>
+                                <ng-template
+                                    #columnsTemplate
+                                    let-columns>
+                                    <ng-container *ngFor="let column of columns">
+                                        <!-- Column -->
+                                        <div class="flex-1 mx-2 p-2 border rounded space-y-2">
+                                            <ng-container *ngFor="let item of column.items">
+                                                <!-- Item -->
+                                                <div class="p-2 text-center rounded bg-primary text-on-primary">
+                                                    {{item}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-masonry
+                            class="-mx-2"
+                            [items]="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                            [columns]="4"
+                            [columnsTemplate]="columnsTemplate">
+                        </fuse-masonry>
+
+                        <ng-template
+                            #columnsTemplate
+                            let-columns>
+                            <ng-container *ngFor="let column of columns">
+                                <!-- Column -->
+                                <div class="flex-1 mx-2 p-2 border rounded space-y-2">
+                                    <ng-container *ngFor="let item of column.items">
+                                        <!-- Item -->
+                                        <div class="p-2 text-center rounded bg-primary text-on-primary">
+                                            ITEM CONTENT
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </ng-template>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+        <h3>Responsive</h3>
+        <p>
+            <strong>fuse-masonry</strong> doesn't provide a way of changing the column count depending on breakpoints but this can easily be handled by
+            combining <code>fuse-masonry</code> with <code>FuseMediaWatcherService</code>:
+        </p>
+
+        <div class="example-viewer">
+
+            <div class="title">
+                <h6>Example</h6>
+            </div>
+
+            <mat-tab-group [animationDuration]="'0ms'">
+
+                <mat-tab label="Preview">
+
+                    <ng-template matTabContent>
+
+                        <div class="bg-gray-100 p-4">
+                            <div class="mx-auto max-w-80">
+
+                                <fuse-masonry
+                                    class="-mx-2"
+                                    [items]="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+                                    [columns]="columns"
+                                    [columnsTemplate]="columnsTemplate">
+                                </fuse-masonry>
+                                <ng-template
+                                    #columnsTemplate
+                                    let-columns>
+                                    <ng-container *ngFor="let column of columns">
+                                        <!-- Column -->
+                                        <div class="flex-1 mx-2 p-2 border rounded space-y-2">
+                                            <ng-container *ngFor="let item of column.items">
+                                                <!-- Item -->
+                                                <div class="p-2 text-center rounded bg-primary text-on-primary">
+                                                    {{item}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </ng-template>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+
+                </mat-tab>
+
+                <mat-tab label="HTML">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'html'">
+                        <fuse-masonry
+                            class="-mx-2"
+                            [items]="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+                            [columns]="columns"
+                            [columnsTemplate]="columnsTemplate">
+                        </fuse-masonry>
+
+                        <ng-template
+                            #columnsTemplate
+                            let-columns>
+                            <ng-container *ngFor="let column of columns">
+                                <!-- Column -->
+                                <div class="flex-1 mx-2 p-2 border rounded space-y-2">
+                                    <ng-container *ngFor="let item of column.items">
+                                        <!-- Item -->
+                                        <div class="p-2 text-center rounded bg-primary text-on-primary">
+                                            ITEM CONTENT
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </ng-template>
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+                <mat-tab label="TypeScript">
+
+                    <!-- @formatter:off -->
+                    <textarea
+                        fuse-highlight
+                        [lang]="'ts'">
+                        columns: number = 4;
+
+                        // Subscribe to media changes
+                        this._fuseMediaWatcherService.onMediaChange$
+                            .pipe(takeUntil(this._unsubscribeAll))
+                            .subscribe(({matchingAliases}) => {
+
+                                // Set the masonry columns
+                                //
+                                // This if block structured in a way so that only the
+                                // biggest matching alias will be used to set the column
+                                // count.
+                                if ( matchingAliases.includes('xl') )
+                                {
+                                    this.columns = 5;
+                                }
+                                else if ( matchingAliases.includes('lg') )
+                                {
+                                    this.columns = 4;
+                                }
+                                else if ( matchingAliases.includes('md') )
+                                {
+                                    this.columns = 3;
+                                }
+                                else if ( matchingAliases.includes('sm') )
+                                {
+                                    this.columns = 2;
+                                }
+                                else
+                                {
+                                    this.columns = 1;
+                                }
+                            });
+                    </textarea>
+                    <!-- @formatter:on -->
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,2018 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">User Interface</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Animations
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl prose prose-sm">
+
+            <p>
+                Fuse provides set of ready-to-use animations for convenience. You can access them by importing the <code>FuseAnimations</code> and set it as the
+                <em>animations</em> property of the <em>@Component</em> metadata.
+            </p>
+
+            <h2>Module</h2>
+            <textarea
+                fuse-highlight
+                lang="typescript">
+                import { FuseAnimations } from '@fuse/animations';
+            </textarea>
+
+            <h2>Usage</h2>
+            <!-- @formatter:off -->
+            <textarea fuse-highlight
+                      lang="typescript">
+                @Component({
+                    selector   : 'my-component',
+                    templateUrl: './my-component.component.html',
+                    styleUrls  : ['./my-component.component.scss'],
+                    animations : FuseAnimations
+                })
+                export class MyComponent { }
+            </textarea>
+            <!-- @formatter:on -->
+
+            <h2>Animations</h2>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Expand / Collapse -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3>Expand / Collapse</h3>
+
+            <p>
+                This animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@expandCollapse]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'collapsed'</code> and <code>'expanded'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@expandCollapse</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@expandCollapse]="false"</code>
+            </p>
+
+            <div class="example-viewer">
+
+                <div class="title">
+                    <h6>Expand / Collapse</h6>
+                    <div class="controls">
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="animationStates.expandCollapse === 'expanded' ? animationStates.expandCollapse = 'collapsed' : animationStates.expandCollapse = 'expanded'">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="visibilityStates.expandCollapse = !visibilityStates.expandCollapse;
+                                     animationStates.expandCollapse === 'expanded' ? animationStates.expandCollapse = 'collapsed' : animationStates.expandCollapse = 'expanded'">
+                            Toggle *ngIf
+                        </button>
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div
+                                class="animated-box"
+                                *ngIf="visibilityStates.expandCollapse"
+                                [@expandCollapse]="animationStates.expandCollapse">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@expandCollapse]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @expandCollapse>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Shake -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Shake</h3>
+            <p>
+                This animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@shake]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>false</code> and <code>true</code> manually.
+                </li>
+                <li>
+                    Adding <code>@shake</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@shake]="false"</code>
+            </p>
+
+            <div class="example-viewer">
+
+                <div class="title">
+                    <h6>Shake</h6>
+                    <div class="controls">
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('shake.shake', false, true, 150)">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('shake.shake')">
+                            Toggle *ngIf
+                        </button>
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.shake.shake"
+                                    [@shake]="animationStates.shake.shake">
+                                    <div class="animated-box-content">
+                                        Animated box
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@shake]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @shake>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Fade In -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Fade In</h3>
+            <p>
+                <b>Fade In</b> animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@fadeIn]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'void'</code> and <code>'*'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@fadeIn</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@fadeIn]="false"</code>
+            </p>
+            <mat-form-field class="fuse-mat-no-subscript">
+                <mat-label>Direction</mat-label>
+                <mat-select
+                    [value]="'in'"
+                    #fadeInSelect>
+                    <mat-option [value]="'in'">In</mat-option>
+                    <mat-option [value]="'top'">Top</mat-option>
+                    <mat-option [value]="'bottom'">Bottom</mat-option>
+                    <mat-option [value]="'left'">Left</mat-option>
+                    <mat-option [value]="'right'">Right</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- In -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeInSelect.value === 'in'">
+
+                <div class="title">
+                    <h6>Fade In</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeIn.in', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeIn.in')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeIn.in"
+                                    [@fadeIn]="animationStates.fadeIn.in">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeIn]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeIn>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Top -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeInSelect.value === 'top'">
+
+                <div class="title">
+                    <h6>Fade In Top</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeIn.top', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeIn.top')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeIn.top"
+                                    [@fadeInTop]="animationStates.fadeIn.top">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeInTop]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeInTop>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Bottom -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeInSelect.value === 'bottom'">
+
+                <div class="title">
+                    <h6>Fade In Bottom</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeIn.bottom', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeIn.bottom')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeIn.bottom"
+                                    [@fadeInBottom]="animationStates.fadeIn.bottom">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeInBottom]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeInBottom>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Left -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeInSelect.value === 'left'">
+
+                <div class="title">
+                    <h6>Fade In Left</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeIn.left', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeIn.left')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeIn.left"
+                                    [@fadeInLeft]="animationStates.fadeIn.left">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeInLeft]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeInLeft>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Right -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeInSelect.value === 'right'">
+
+                <div class="title">
+                    <h6>Fade In Right</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeIn.right', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeIn.right')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeIn.right"
+                                    [@fadeInRight]="animationStates.fadeIn.right">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeInRight]="state">
+                                <div class="animated-box-content">
+                                Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeInRight>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Fade Out -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Fade Out</h3>
+            <p>
+                <b>Fade Out</b> animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@fadeOut]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'void'</code> and <code>'*'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@fadeOut</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@fadeOut]="false"</code>
+            </p>
+            <mat-form-field class="fuse-mat-no-subscript">
+                <mat-label>Direction</mat-label>
+                <mat-select
+                    [value]="'out'"
+                    #fadeOutSelect>
+                    <mat-option [value]="'out'">Out</mat-option>
+                    <mat-option [value]="'top'">Top</mat-option>
+                    <mat-option [value]="'bottom'">Bottom</mat-option>
+                    <mat-option [value]="'left'">Left</mat-option>
+                    <mat-option [value]="'right'">Right</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Out -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeOutSelect.value === 'out'">
+
+                <div class="title">
+                    <h6>Fade Out</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeOut.out', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeOut.out')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeOut.out"
+                                    [@fadeOut]="animationStates.fadeOut.out">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeOut]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeOut>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Top -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeOutSelect.value === 'top'">
+
+                <div class="title">
+                    <h6>Fade Out Top</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeOut.top', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeOut.top')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeOut.top"
+                                    [@fadeOutTop]="animationStates.fadeOut.top">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeOutTop]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeOutTop>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Bottom -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeOutSelect.value === 'bottom'">
+
+                <div class="title">
+                    <h6>Fade Out Bottom</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeOut.bottom', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeOut.bottom')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeOut.bottom"
+                                    [@fadeOutBottom]="animationStates.fadeOut.bottom">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeOutBottom]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeOutBottom>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Left -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeOutSelect.value === 'left'">
+
+                <div class="title">
+                    <h6>Fade Out Left</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeOut.left', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeOut.left')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeOut.left"
+                                    [@fadeOutLeft]="animationStates.fadeOut.left">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeOutLeft]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeOutLeft>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Right -->
+            <div
+                class="example-viewer"
+                *ngIf="fadeOutSelect.value === 'right'">
+
+                <div class="title">
+                    <h6>Fade Out Right</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('fadeOut.right', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('fadeOut.right')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.fadeOut.right"
+                                    [@fadeOutRight]="animationStates.fadeOut.right">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@fadeOutRight]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @fadeOutRight>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Slide In -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Slide In</h3>
+            <p>
+                <b>Slide In</b> animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@slideIn]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'void'</code> and <code>'*'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@slideIn</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@slideIn]="false"</code>
+            </p>
+            <mat-form-field class="fuse-mat-no-subscript">
+                <mat-label>Direction</mat-label>
+                <mat-select
+                    [value]="'top'"
+                    #slideInSelect>
+                    <mat-option [value]="'top'">Top</mat-option>
+                    <mat-option [value]="'bottom'">Bottom</mat-option>
+                    <mat-option [value]="'left'">Left</mat-option>
+                    <mat-option [value]="'right'">Right</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Top -->
+            <div
+                class="example-viewer"
+                *ngIf="slideInSelect.value === 'top'">
+
+                <div class="title">
+                    <h6>Slide In Top</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideIn.top', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideIn.top')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideIn.top"
+                                    [@slideInTop]="animationStates.slideIn.top">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideInTop]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideInTop>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Bottom -->
+            <div
+                class="example-viewer"
+                *ngIf="slideInSelect.value === 'bottom'">
+
+                <div class="title">
+                    <h6>Slide In Bottom</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideIn.bottom', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideIn.bottom')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideIn.bottom"
+                                    [@slideInBottom]="animationStates.slideIn.bottom">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideInBottom]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideInBottom>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Left -->
+            <div
+                class="example-viewer"
+                *ngIf="slideInSelect.value === 'left'">
+
+                <div class="title">
+                    <h6>Slide In Left</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideIn.left', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideIn.left')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideIn.left"
+                                    [@slideInLeft]="animationStates.slideIn.left">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideInLeft]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideInLeft>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Right -->
+            <div
+                class="example-viewer"
+                *ngIf="slideInSelect.value === 'right'">
+
+                <div class="title">
+                    <h6>Slide In Right</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideIn.right', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideIn.right')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideIn.right"
+                                    [@slideInRight]="animationStates.slideIn.right">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideInRight]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideInRight>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Slide Out -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Slide Out</h3>
+            <p>
+                <b>Slide Out</b> animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@slideOut]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'void'</code> and <code>'*'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@slideOut</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@slideOut]="false"</code>
+            </p>
+            <mat-form-field class="fuse-mat-no-subscript">
+                <mat-label>Direction</mat-label>
+                <mat-select
+                    [value]="'top'"
+                    #slideOutSelect>
+                    <mat-option [value]="'top'">Top</mat-option>
+                    <mat-option [value]="'bottom'">Bottom</mat-option>
+                    <mat-option [value]="'left'">Left</mat-option>
+                    <mat-option [value]="'right'">Right</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Top -->
+            <div
+                class="example-viewer"
+                *ngIf="slideOutSelect.value === 'top'">
+
+                <div class="title">
+                    <h6>Slide Out Top</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideOut.top', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideOut.top')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideOut.top"
+                                    [@slideOutTop]="animationStates.slideOut.top">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideOutTop]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideOutTop>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Bottom -->
+            <div
+                class="example-viewer"
+                *ngIf="slideOutSelect.value === 'bottom'">
+
+                <div class="title">
+                    <h6>Slide Out Bottom</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideOut.bottom', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideOut.bottom')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideOut.bottom"
+                                    [@slideOutBottom]="animationStates.slideOut.bottom">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideOutBottom]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideOutBottom>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Left -->
+            <div
+                class="example-viewer"
+                *ngIf="slideOutSelect.value === 'left'">
+
+                <div class="title">
+                    <h6>Slide Out Left</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideOut.left', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideOut.left')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideOut.left"
+                                    [@slideOutLeft]="animationStates.slideOut.left">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideOutLeft]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideOutLeft>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- Right -->
+            <div
+                class="example-viewer"
+                *ngIf="slideOutSelect.value === 'right'">
+
+                <div class="title">
+                    <h6>Slide Out Right</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('slideOut.right', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('slideOut.right')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.slideOut.right"
+                                    [@slideOutRight]="animationStates.slideOut.right">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@slideOutRight]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @slideOutRight>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Zoom In -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Zoom In</h3>
+            <p>
+                <b>Zoom In</b> animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@zoomIn]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'void'</code> and <code>'*'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@zoomIn</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@zoomIn]="false"</code>
+            </p>
+
+            <div class="example-viewer">
+
+                <div class="title">
+                    <h6>Zoom In</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('zoomIn.in', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('zoomIn.in')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.zoomIn.in"
+                                    [@zoomIn]="animationStates.zoomIn.in">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@zoomIn]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @zoomIn>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <!-- @ Zoom Out -->
+            <!-- ----------------------------------------------------------------------------------------------- -->
+            <h3 class="mt-16">Zoom Out</h3>
+            <p>
+                <b>Zoom Out</b> animation can be triggered in two ways;
+            </p>
+            <ol>
+                <li>
+                    Adding <code>[@zoomOut]="state"</code> to the element and toggling the <code>state</code>
+                    between the <code>'void'</code> and <code>'*'</code> strings manually.
+                </li>
+                <li>
+                    Adding <code>@zoomOut</code> to the element and using <code>*ngIf</code> to toggle the
+                    element.
+                </li>
+            </ol>
+            <p>
+                The animation can be disabled by setting the state to <b>false</b>; <code>[@zoomOut]="false"</code>
+            </p>
+
+            <div class="example-viewer">
+
+                <div class="title">
+                    <h6>Zoom Out</h6>
+                    <div class="controls">
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleAnimationState('zoomOut.out', 'void', '*')">
+                            Toggle state
+                        </button>
+
+                        <button
+                            mat-button
+                            [color]="'primary'"
+                            (click)="toggleVisibilityState('zoomOut.out')">
+                            Toggle *ngIf
+                        </button>
+
+                    </div>
+                </div>
+
+                <mat-tab-group [animationDuration]="'0ms'">
+
+                    <mat-tab label="Preview">
+
+                        <ng-template matTabContent>
+
+                            <div class="centered">
+
+                                <div
+                                    class="animated-box"
+                                    *ngIf="visibilityStates.zoomOut.out"
+                                    [@zoomOut]="animationStates.zoomOut.out">
+                                    <div class="animated-box-content">Animated box</div>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+                    </mat-tab>
+
+                    <mat-tab label="HTML">
+
+                        <!-- @formatter:off -->
+                        <textarea
+                            fuse-highlight
+                            [lang]="'html'">
+                            <!-- Using state -->
+                            <div
+                                class="animated-box"
+                                [@zoomOut]="state">
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+
+                            <!-- Using *ngIf -->
+                            <div
+                                class="animated-box"
+                                *ngIf="visible"
+                                @zoomOut>
+                                <div class="animated-box-content">
+                                    Animated box
+                                </div>
+                            </div>
+                        </textarea>
+                        <!-- @formatter:on -->
+
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

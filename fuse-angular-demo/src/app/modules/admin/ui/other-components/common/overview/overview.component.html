@@ -1,0 +1,86 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Other Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Common</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Overview
+                </h2>
+            </div>
+        </div>
+        <button
+            class="-ml-3 sm:ml-0 mb-2 sm:mb-0 order-first sm:order-last"
+            mat-icon-button
+            (click)="toggleDrawer()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+        </button>
+    </div>
+
+    <div class="flex-auto max-w-3xl p-6 sm:p-10 prose prose-sm">
+
+        <p>
+            Common components are custom made components that could require heavy modifications depending on the project. These components are mostly related with the layout
+            therefore they are located in the <code>src/app/layout/common/</code> directory. You can modify them without touching the <code>@fuse</code> directory.
+        </p>
+        <fuse-alert
+            [appearance]="'border'"
+            [type]="'info'">
+            These components are not very complex and they only provide some basic features. If you wish them to do more, you have to customize them, and that's exactly why
+            they are not located in the <code>@fuse</code> directory like other components.
+        </fuse-alert>
+        <fuse-alert
+            class="mt-4"
+            [appearance]="'border'"
+            [type]="'info'">
+            We may add more features and more custom components in the future if they will be beneficial for everyone. Components that are too specific to a project won't be
+            included as custom components into Fuse!
+        </fuse-alert>
+        <p>
+            Currently, there are five common components;
+        </p>
+        <ul>
+            <li>
+                <p><strong>Messages</strong></p>
+                <p>A panel to show latest messages.</p>
+            </li>
+            <li>
+                <p><strong>Notifications</strong></p>
+                <p>A panel to show latest notifications.</p>
+            </li>
+            <li>
+                <p><strong>Search</strong></p>
+                <p>An autocomplete search box with proper API endpoint setup.</p>
+            </li>
+            <li>
+                <p><strong>Shortcuts</strong></p>
+                <p>A user customizable panel to show shortcuts to internal/external pages.</p>
+            </li>
+            <li>
+                <p><strong>User</strong></p>
+                <p>A user avatar and menu component to show user related information and actions.</p>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
